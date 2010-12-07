@@ -18,7 +18,7 @@ namespace tinyweb.framework.tests
         public void FindAll_WhenCalled_FindsThreeHandlers()
         {
             var handlers = defaultHandlerScanner.FindAll();
-            Assert.That(handlers.Count(), Is.EqualTo(4));
+            Assert.That(handlers.Count(), Is.EqualTo(5));
         }
 
         [Test]
@@ -61,6 +61,20 @@ namespace tinyweb.framework.tests
         {
             var handlers = defaultHandlerScanner.FindAll();
             Assert.That(handlers.Single(h => h.Type == new Resource3Handler().GetType()).Uri == "resource3");
+        }
+
+        [Test]
+        public void FindAll_WhenCalled_FourthHandlerTypeIsConventionHandler()
+        {
+            var handlers = defaultHandlerScanner.FindAll();
+            Assert.That(handlers.Any(h => h.Type == new ConventionHandler().GetType()));
+        }
+
+        [Test]
+        public void FindAll_WhenCalled_FourthHandlerUriIsCorrect()
+        {
+            var handlers = defaultHandlerScanner.FindAll();
+            Assert.That(handlers.Single(h => h.Type == new ConventionHandler().GetType()).Uri == "Convention");
         }
     }
 }

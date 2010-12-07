@@ -8,7 +8,7 @@ namespace tinyweb.sample
     {
         protected void Application_Start(object sender, EventArgs e)
         {
-            Tinyweb.Initialise();
+            Tinyweb.Init();
         }
     }
 }

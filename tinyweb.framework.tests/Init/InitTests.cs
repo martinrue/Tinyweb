@@ -4,18 +4,18 @@ using NUnit.Framework;
 namespace tinyweb.framework.tests
 {
     [TestFixture]
-    public class TinywebTests
+    public class InitTests
     {
         [SetUp]
         public void Setup()
         {
-            Tinyweb.Initialise();
+            Tinyweb.Init();
         }
 
         [Test]
-        public void Initialise_WithThreeHandlers_ReturnsCorrectNumberOfHandlers()
+        public void Initialise_WithFourHandlers_ReturnsCorrectNumberOfHandlers()
         {
-            Assert.That(Tinyweb.Handlers.Count(), Is.EqualTo(4));
+            Assert.That(Tinyweb.Handlers.Count(), Is.EqualTo(5));
         }
 
         [Test]
@@ -50,12 +50,12 @@ namespace tinyweb.framework.tests
         }
 
         [Test]
-        public void Initialise_WithNoDefaultCtorHandler_CorrectUriConfigured()
+        public void Initialise_WithInvokeHandler_CorrectUriConfigured()
         {
-            var handler = Tinyweb.Handlers.SingleOrDefault(h => h.Type == typeof(NoDefaultCtorHandler));
+            var handler = Tinyweb.Handlers.SingleOrDefault(h => h.Type == typeof(InvokeHandler));
 
             Assert.That(handler, Is.Not.Null);
-            Assert.That(handler.Uri.ToLower(), Is.EqualTo("nodefaultctor"));
+            Assert.That(handler.Uri.ToLower(), Is.EqualTo("invoke"));
             Assert.That(handler.DefaultRouteValues, Is.Null);
         }
     }

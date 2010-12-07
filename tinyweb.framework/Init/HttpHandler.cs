@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Linq;
+using System.Web;
 using System.Web.Routing;
 
 namespace tinyweb.framework
@@ -22,7 +23,16 @@ namespace tinyweb.framework
             var result = HandlerInvoker.Current.Execute(handler, requestContext);
 
             context.Response.ContentType = result.ContentType;
-            context.Response.Write(result.GetResult());
+            result.CustomHeaders.ForEach(header => context.Response.AddHeader(header.Key, header.Value));
+       
+            if (result.IsFileResult)
+            {
+                context.Response.WriteFile(result.GetResult());
+            }
+            else
+            {
+                context.Response.Write(result.GetResult());
+            }
         }
     }
 }

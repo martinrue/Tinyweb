@@ -7,7 +7,7 @@ namespace tinyweb.framework.tests
 {
     public static class MvcMockHelpers
     {
-        public static HttpContextBase FakeHttpContext()
+        public static HttpContextBase FakeHttpContext(NameValueCollection queryString = null, NameValueCollection formData = null)
         {
             var context = new Mock<HttpContextBase>();
             var request = new Mock<HttpRequestBase>();
@@ -19,6 +19,9 @@ namespace tinyweb.framework.tests
             context.Setup(p => p.Response).Returns(response.Object);
             context.Setup(p => p.Session).Returns(session.Object);
             context.Setup(p => p.Server).Returns(server.Object);
+
+            context.Setup(p => p.Request.QueryString).Returns(queryString != null ? new NameValueCollection(queryString) : new NameValueCollection());
+            context.Setup(p => p.Request.Form).Returns(formData != null ? new NameValueCollection(formData) : new NameValueCollection());
 
             return context.Object;
         }

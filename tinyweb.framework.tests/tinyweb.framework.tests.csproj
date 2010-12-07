@@ -46,8 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\TinywebTests.cs" />
+    <Compile Include="HandlerResult\SparkResultTests.cs" />
+    <Compile Include="HandlerResult\FileResultTests.cs" />
+    <Compile Include="HandlerResult\JsonResultTests.cs" />
     <Compile Include="HandlerResult\HtmlResultTests.cs" />
+    <Compile Include="Init\InitTests.cs" />
+    <Compile Include="HandlerInvoker\MethodInvokerTests.cs" />
+    <Compile Include="HandlerResult\StringResultTests.cs" />
     <Compile Include="HandlerInvoker\DefaultHandlerInvokerTests.cs" />
     <Compile Include="HandlerInvoker\HandlerInvokerTests.cs" />
     <Compile Include="Extensions\ExtensionsTests.cs" />
@@ -59,13 +64,15 @@
     <Compile Include="Test Data\HandlerFactories\CustomHandlerFactory.cs" />
     <Compile Include="Test Data\HandlerInvoker\CustomHandlerInvoker.cs" />
     <Compile Include="Test Data\HandlerScanners\CustomHandlerScanner.cs" />
+    <Compile Include="Test Data\Handlers\InvokeHandler.cs" />
     <Compile Include="Test Data\Handlers\NoDefaultCtorHandler.cs" />
-    <Compile Include="Test Data\Handlers\MissingUriHandler.cs" />
+    <Compile Include="Test Data\Handlers\ConventionHandler.cs" />
     <Compile Include="Test Data\Handlers\Resource3Handler.cs" />
     <Compile Include="Test Data\Handlers\Resource2Handler.cs" />
     <Compile Include="Test Data\Handlers\Resource1Handler.cs" />
     <Compile Include="HandlerScanner\DefaultHandlerScannerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test Data\HandlerResult\Json\CustomType.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -76,7 +83,11 @@
       <Name>tinyweb.framework</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Test Data\HandlerResult\Files\Download.txt" />
+    <None Include="Test Data\HandlerResult\Files\Download.unknown" />
+    <Content Include="Test Data\HandlerResult\Views\View.html" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

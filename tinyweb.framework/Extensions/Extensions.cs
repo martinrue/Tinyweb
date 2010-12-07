@@ -37,7 +37,7 @@ namespace tinyweb.framework
 
         public static RouteValueDictionary ToRouteValueDictionary(this NameValueCollection collection)
         {
-            RouteValueDictionary routeValueDictionary = new RouteValueDictionary();
+            var routeValueDictionary = new RouteValueDictionary();
 
             foreach (var key in collection.AllKeys)
             {
@@ -45,6 +45,11 @@ namespace tinyweb.framework
             }
 
             return routeValueDictionary;
+        }
+
+        public static bool IsEmpty(this string input)
+        {
+            return String.IsNullOrEmpty(input);
         }
     }
 }

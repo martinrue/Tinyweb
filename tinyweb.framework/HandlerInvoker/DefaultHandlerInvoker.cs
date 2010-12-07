@@ -42,7 +42,7 @@ namespace tinyweb.framework
                     continue;
                 }
 
-                if (parameter.ParameterType.IsValueType)  
+                if (parameter.ParameterType.IsValueType || parameter.ParameterType == typeof(String))  
                 {
                     var value = getValueFromRequest(requestContext, parameter.Name.ToLower(), parameter.ParameterType);
 

@@ -9,14 +9,14 @@ namespace tinyweb.framework
     {
         public IEnumerable<HandlerData> FindAll()
         {
-            var types = this.findHandlers();
+            var types = findHandlers();
 
-            return types.Where(t => t.GetCustomAttributes(typeof(Accept), false).Length == 1)
-                        .Select(type => new HandlerData
-                        {  
-                            Type = type,
-                            Uri = (type.GetCustomAttributes(typeof(Accept), false).First() as Accept).AcceptUri,
-                            DefaultRouteValues = getDefaultRouteValues(type)
+            return types.Select(type => new { Route = getRoute(type), Type = type })
+                        .Select(t => new HandlerData
+                        {
+                            Type = t.Type,
+                            Uri = t.Route.RouteUri,
+                            DefaultRouteValues = t.Route.Defaults
                         });
         }
 
@@ -26,23 +26,42 @@ namespace tinyweb.framework
 
             AppDomain.CurrentDomain.GetAssemblies().ForEach(assembly =>
             {
-                typesFound.AddRange(assembly.GetTypes().Where(t => t.Name.ToLower().EndsWith("handler")));
+                typesFound.AddRange(assembly.GetTypes().Where(t => t.Name.ToLower().EndsWith("handler") && handlerIsValid(t)));
             });
 
             return typesFound;
         }
 
-        private object getDefaultRouteValues(Type type)
+        private bool handlerIsValid(Type type)
         {
-            var field = type.GetField("defaults", BindingFlags.Instance | BindingFlags.NonPublic);
+            var allowedMethods = new[] { "get", "post", "put", "delete" };
+            return type.GetMethods().Any(method => allowedMethods.Contains(method.Name.ToLower()));
+        }
 
-            if (field != null)
+        private Route getRoute(Type type)
+        {
+            var handler = HandlerFactory.Current.Create(new HandlerData { Type = type });
+            var routeProperty = handler.GetType().GetField("route", BindingFlags.NonPublic | BindingFlags.Instance);
+
+            if (routeProperty == null)
             {
-                var handlerInstace = HandlerFactory.Current.Create(new HandlerData { Type = type });
-                return field.GetValue(handlerInstace);
+                return new Route(getRouteUriByConvention(type));
             }
 
-            return null;
+            var route = routeProperty.GetValue(handler) as Route;
+
+            if (route.RouteUri.IsEmpty())
+            {
+                route.RouteUri = getRouteUriByConvention(type);
+            }
+
+            return route;
+        }
+
+        private string getRouteUriByConvention(Type type)
+        {
+            var handlerStart = type.Name.ToLower().IndexOf("handler");
+            return type.Name.Substring(0, handlerStart);
         }
     }
 }

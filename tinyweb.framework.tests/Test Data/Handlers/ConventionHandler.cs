@@ -1,9 +1,7 @@
 ﻿namespace tinyweb.framework.tests
 {
-    public class Resource2Handler
+    public class ConventionHandler
     {
-        Route route = new Route("resource2");
-    
         public StringResult Get()
         {
             return "";

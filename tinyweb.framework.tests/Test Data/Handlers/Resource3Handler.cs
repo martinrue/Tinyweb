@@ -1,8 +1,12 @@
 ﻿namespace tinyweb.framework.tests
 {
-    [Accept("resource3")]
     public class Resource3Handler
     {
+        Route route = new Route("resource3");
 
+        public StringResult Get()
+        {
+            return "";
+        }
     }
 }

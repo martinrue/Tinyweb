@@ -77,5 +77,17 @@ namespace tinyweb.framework.tests
             Assert.That(HttpVerb.PUT.CastInt(), Is.EqualTo(2));
             Assert.That(HttpVerb.DELETE.CastInt(), Is.EqualTo(3));
         }
+
+        [Test]
+        public void IsEmpty_WithNonEmptyString_ReturnsFalse()
+        {
+            Assert.That("Non-empty".IsEmpty(), Is.False);
+        }
+
+        [Test]
+        public void IsEmpty_WithEmptyString_ReturnsTrue()
+        {
+            Assert.That("".IsEmpty(), Is.True);
+        }
     }
 }

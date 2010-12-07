@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.IO;
+using NUnit.Framework;
 
 namespace tinyweb.framework.tests
 {
@@ -6,24 +7,26 @@ namespace tinyweb.framework.tests
     public class HtmlResultTests
     {
         [Test]
-        public void GetResult_WhenCreatedWithNewString_ReturnsString()
+        public void GetResult_WhenCreatedWithNonExistentPath_ThrowsFileNotFoundException()
         {
-            var result = new HtmlResult("test data");
-            Assert.That(result.GetResult(), Is.EqualTo("test data"));
+            var exception = Assert.Throws<FileNotFoundException>(() => new HtmlResult("c:\\fakepath"));
+            Assert.That(exception.Message, Is.EqualTo("The view at c:\\fakepath could not be found"));
         }
 
         [Test]
-        public void GetResult_WhenCreated_ContentTypeIsTextHtml()
+        public void GetResult_WhenCreatedWithExistingPath_ReturnsViewData()
         {
-            var result = new HtmlResult("test data");
+            var result = new HtmlResult("..\\..\\Test Data\\HandlerResult\\Views\\View.html");
             Assert.That(result.ContentType, Is.EqualTo("text/html"));
+            Assert.That(result.GetResult(), Is.EqualTo("<h1>View</h1>"));
         }
 
         [Test]
-        public void GetResult_WhenCreatedWithImplicitConversion_ReturnsString()
+        public void GetResult_WhenCreatedWithImplicitConversion_ReturnsViewData()
         {
-            HtmlResult result = "test data";
-            Assert.That(result.GetResult(), Is.EqualTo("test data"));
+            HtmlResult result = "..\\..\\Test Data\\HandlerResult\\Views\\View.html";
+            Assert.That(result.ContentType, Is.EqualTo("text/html"));
+            Assert.That(result.GetResult(), Is.EqualTo("<h1>View</h1>"));
         }
     }
 }

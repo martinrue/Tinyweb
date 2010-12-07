@@ -49,7 +49,5 @@ namespace tinyweb.framework.tests
             var exception = Assert.Throws<HttpException>(() => defaultHandlerInvoker.Execute(new Resource1Handler(), requestContext));
             Assert.That(exception.Message, Is.EqualTo("The request could not be completed because the resource does not support DELETE"));
         }
-
-        //TODO: more tests for parameter binding
     }
 }
