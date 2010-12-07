@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Spark, Version=1.1.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Spark.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -43,6 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HandlerResult\Factory\Result.cs" />
+    <Compile Include="HandlerResult\SparkResult.cs" />
+    <Compile Include="HandlerResult\Spark\SparkCompiler.cs" />
+    <Compile Include="HandlerResult\Spark\SparkView.cs" />
     <Compile Include="Init\Route.cs" />
     <Compile Include="HandlerResult\FileResult.cs" />
     <Compile Include="HandlerResult\JsonResult.cs" />

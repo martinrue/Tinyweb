@@ -63,6 +63,7 @@
     <Compile Include="Helpers\ObjectHelper.cs" />
     <Compile Include="Test Data\HandlerFactories\CustomHandlerFactory.cs" />
     <Compile Include="Test Data\HandlerInvoker\CustomHandlerInvoker.cs" />
+    <Compile Include="Test Data\HandlerResult\Views\Models\UserModel.cs" />
     <Compile Include="Test Data\HandlerScanners\CustomHandlerScanner.cs" />
     <Compile Include="Test Data\Handlers\InvokeHandler.cs" />
     <Compile Include="Test Data\Handlers\NoDefaultCtorHandler.cs" />
@@ -86,8 +87,12 @@
   <ItemGroup>
     <Content Include="Test Data\HandlerResult\Files\Download.txt" />
     <None Include="Test Data\HandlerResult\Files\Download.unknown" />
+    <Content Include="Test Data\HandlerResult\Views\Spark\View.spark" />
     <Content Include="Test Data\HandlerResult\Views\View.html" />
+    <Content Include="Test Data\HandlerResult\Views\Spark\Shared\Partial.spark" />
+    <Content Include="Test Data\HandlerResult\Views\Spark\Simple.spark" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
