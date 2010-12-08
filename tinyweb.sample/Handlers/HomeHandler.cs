@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using tinyweb.framework;
 
-namespace tinyweb.sample.Handlers
+namespace tinyweb.samples.spark
 {
     public class HomeHandler
     {
