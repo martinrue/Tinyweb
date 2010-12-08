@@ -17,7 +17,6 @@ namespace tinyweb.framework.tests
         [Test]
         public void GetResult_WhenRequestedWithNoModel_ReturnsViewData()
         {
-            var model = new UserModel { ID = 42, Username = "Username" };
             var result = new SparkResult("..\\..\\Test Data\\HandlerResult\\Views\\Spark\\Simple.spark");
 
             Assert.That(result.ContentType, Is.EqualTo("text/html"));
@@ -43,6 +42,15 @@ namespace tinyweb.framework.tests
 
             Assert.That(result.ContentType, Is.EqualTo("text/html"));
             Assert.That(result.GetResult(), Contains.Substring("<span>partial</span>"));
+        }
+
+        [Test]
+        public void GetResult_WhenRequestedWithSparkUsingMaster_ReturnsCombinedView()
+        {
+            var result = new SparkResult("..\\..\\Test Data\\HandlerResult\\Views\\Spark\\Child.spark", "Master.spark");
+
+            Assert.That(result.ContentType, Is.EqualTo("text/html"));
+            Assert.That(result.GetResult(), Contains.Substring("<h1>hello world</h1>"));
         }
     }
 }

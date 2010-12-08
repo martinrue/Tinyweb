@@ -91,6 +91,8 @@
     <Content Include="Test Data\HandlerResult\Views\View.html" />
     <Content Include="Test Data\HandlerResult\Views\Spark\Shared\Partial.spark" />
     <Content Include="Test Data\HandlerResult\Views\Spark\Simple.spark" />
+    <Content Include="Test Data\HandlerResult\Views\Spark\Child.spark" />
+    <Content Include="Test Data\HandlerResult\Views\Spark\Master.spark" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

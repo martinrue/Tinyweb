@@ -3,13 +3,13 @@ using tinyweb.framework;
 
 namespace tinyweb.sample.Handlers
 {
-    public class FamilyHandler
+    public class HomeHandler
     {
         public IHandlerResult Get()
         {
-            var model = new List<string> { "Homer", "Marge", "Bart", "Lisa", "Grandpa" };
+            var model = new List<string> { "item 1", "item 2", "item 3", "item 4", "item 5" };
 
-            return Result.Spark(model, "Views\\Index.spark");
+            return Result.Spark(model, "Views\\Index.spark", "Master.spark");
         }
     }
 }

@@ -9,6 +9,7 @@ namespace tinyweb.framework
         T model;
         string templatePath;
         string templateName;
+        string master;
 
         public IDictionary<string, string> CustomHeaders
         {
@@ -25,7 +26,7 @@ namespace tinyweb.framework
             get { return false; }
         }
 
-        public SparkResult(T model, string templatesPath)
+        public SparkResult(T model, string templatesPath, string master = null)
         {           
             var relativePath = Path.GetDirectoryName(templatesPath);
             var templateName = Path.GetFileName(templatesPath);
@@ -41,11 +42,12 @@ namespace tinyweb.framework
             this.model = model;
             this.templatePath = templatePath;
             this.templateName = templateName;
+            this.master = master;
         }
 
         public string GetResult()
         {
-            return SparkCompiler.Compile(model, templatePath, templateName);
+            return SparkCompiler.Compile(model, templatePath, templateName, master);
         }
     }
 
@@ -53,6 +55,7 @@ namespace tinyweb.framework
     {
         string templatePath;
         string templateName;
+        string master;
 
         public IDictionary<string, string> CustomHeaders
         {
@@ -69,7 +72,7 @@ namespace tinyweb.framework
             get { return false; }
         }
 
-        public SparkResult(string templatesPath)
+        public SparkResult(string templatesPath, string master = null)
         {
             var relativePath = Path.GetDirectoryName(templatesPath);
             var templateName = Path.GetFileName(templatesPath);
@@ -84,6 +87,7 @@ namespace tinyweb.framework
 
             this.templatePath = templatePath;
             this.templateName = templateName;
+            this.master = master;
         }
 
         public static implicit operator SparkResult(string templateName)
@@ -93,7 +97,7 @@ namespace tinyweb.framework
 
         public string GetResult()
         {
-            return SparkCompiler.Compile<Object>(null, templatePath, templateName);
+            return SparkCompiler.Compile<Object>(null, templatePath, templateName, master);
         }
     }
 }

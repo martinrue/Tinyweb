@@ -22,14 +22,14 @@
             return new StringResult(data);
         }
 
-        public static SparkResult<T> Spark<T>(T model, string templatePath)
+        public static SparkResult<T> Spark<T>(T model, string templatePath, string master = null)
         {
-            return new SparkResult<T>(model, templatePath);
+            return new SparkResult<T>(model, templatePath, master);
         }
 
-        public static SparkResult Spark(string templatePath)
+        public static SparkResult Spark(string templatePath, string master = null)
         {
-            return new SparkResult(templatePath);
+            return new SparkResult(templatePath, master);
         }
     }
 }

@@ -1,17 +1,19 @@
 ﻿<viewdata model="List<string>" />
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Family</title>
-</head>
-<body>
+<content name="header">
 
-    <h1>Family Members</h1>
+    Tinyweb Spark Demo
+
+</content>
+
+<content name="data">
+
+    <h2>Items</h2>
 
     <ul>
-        <li each="var member in Model">${member}</li>
+    
+        <li each="var item in Model">${item}</li>
+    
     </ul>
 
-</body>
-</html>
+</content>

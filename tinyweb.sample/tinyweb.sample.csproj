@@ -50,7 +50,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Style.css" />
     <Content Include="Global.asax" />
+    <None Include="Views\Master.spark" />
     <None Include="Views\Index.spark" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -73,6 +75,7 @@
       <Name>tinyweb.framework</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>

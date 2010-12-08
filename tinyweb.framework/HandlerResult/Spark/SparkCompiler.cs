@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Spark;
 using Spark.FileSystem;
 
@@ -7,14 +6,13 @@ namespace tinyweb.framework
 {
     public static class SparkCompiler
     {
-        public static string Compile<T>(T model, string templatesPath, string templateName)
+        public static string Compile<T>(T model, string templatesPath, string templateName, string master)
         {
             var fullTemplatePath = Path.Combine(templatesPath, templateName);
             var templateFilename = Path.GetFileName(fullTemplatePath);
 
             var viewFolder = new FileSystemViewFolder(templatesPath);
-            viewFolder.Append(new SubViewFolder(viewFolder, "Shared"));
-
+            
             var settings = new SparkSettings()
                 .AddNamespace("System")
                 .AddNamespace("System.Collections.Generic")
@@ -32,6 +30,11 @@ namespace tinyweb.framework
             }
 
             var descriptor = new SparkViewDescriptor().AddTemplate(templateFilename);
+
+            if (!master.IsEmpty())
+            {
+                descriptor.AddTemplate(master);
+            }
 
             var view = sparkEngine.CreateInstance(descriptor);
 
