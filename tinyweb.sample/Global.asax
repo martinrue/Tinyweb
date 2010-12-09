@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="tinyweb.sample.Global" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="tinyweb.samples.spark.Global" Language="C#" %>

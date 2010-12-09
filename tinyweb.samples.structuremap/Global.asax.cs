@@ -8,10 +8,7 @@ namespace tinyweb.samples.structuremap
     {
         protected void Application_Start(object sender, EventArgs e)
         {
-            Bootstrapper.ConfigureStructureMap();
-            HandlerFactory.SetHandlerFactory(new StructureMapHandlerFactory());
-
-            Tinyweb.Init();
+            Tinyweb.Init(new ServiceRegistry());
         }
     }
 }

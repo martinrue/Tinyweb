@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using StructureMap;
+using NUnit.Framework;
 
 namespace tinyweb.framework.tests
 {
@@ -40,12 +41,10 @@ namespace tinyweb.framework.tests
         [Test]
         public void Create_WithNoDefaultCtorHandlerRequest_ThrowsNoParameterlessConstructorException()
         {
-            var exception = Assert.Throws<NoParameterlessConstructorException>(() => 
+            Assert.Throws<StructureMapException>(() => 
             {
                 defaultHandlerFactory.Create(new HandlerData { Type = typeof(NoDefaultCtorHandler) });
             });
-
-            StringAssert.AreEqualIgnoringCase("No parameterless constructor found for type tinyweb.framework.tests.NoDefaultCtorHandler", exception.Message);
         }
     }
 }

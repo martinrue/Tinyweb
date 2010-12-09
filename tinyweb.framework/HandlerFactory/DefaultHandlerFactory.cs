@@ -1,4 +1,4 @@
-﻿using System;
+﻿using StructureMap;
 
 namespace tinyweb.framework
 {
@@ -6,14 +6,7 @@ namespace tinyweb.framework
     {
         public object Create(HandlerData handlerData)
         {
-            try
-            {
-                return Activator.CreateInstance(handlerData.Type);
-            }
-            catch (MissingMethodException)
-            {
-                throw new NoParameterlessConstructorException(String.Format("No parameterless constructor found for type {0}", handlerData.Type.ToString()));
-            }
+            return ObjectFactory.GetInstance(handlerData.Type);
         }
     }
 }

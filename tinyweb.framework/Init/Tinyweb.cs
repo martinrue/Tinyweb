@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Routing;
+using StructureMap;
+using StructureMap.Configuration.DSL;
 
 namespace tinyweb.framework
 {
@@ -17,6 +19,13 @@ namespace tinyweb.framework
             Handlers.ForEach(handler => RouteTable.Routes.Add(new System.Web.Routing.Route(handler.Uri, new RouteValueDictionary(handler.DefaultRouteValues), new RouteHandler(handler))));
 
             return Handlers.Count();
+        }
+
+        public static int Init(Registry registry)
+        {
+            ObjectFactory.Initialize(x => x.AddRegistry(registry));
+
+            return Init();
         }
 
         public static string WhatHaveIGot()

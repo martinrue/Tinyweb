@@ -35,6 +35,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Spark.dll</HintPath>
     </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\lib\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
