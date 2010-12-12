@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tinyweb.samples.formpost", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{8C95564A-19F1-444C-B831-CBBBE5C40379}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tinyweb.samples.prg", "tinyweb.samples.prg\tinyweb.samples.prg.csproj", "{E4299504-D385-406D-9591-94C0878ECFEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,13 +41,18 @@ Global
 		{48594A4F-DA1A-410A-A1C9-E7C030A820A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48594A4F-DA1A-410A-A1C9-E7C030A820A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48594A4F-DA1A-410A-A1C9-E7C030A820A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4299504-D385-406D-9591-94C0878ECFEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4299504-D385-406D-9591-94C0878ECFEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4299504-D385-406D-9591-94C0878ECFEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4299504-D385-406D-9591-94C0878ECFEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DD975FBE-69B5-4D6E-BE5E-EE6E9C314727} = {8C95564A-19F1-444C-B831-CBBBE5C40379}
-		{F46CF6D4-BD6A-4A97-AB4D-D804713AD6DC} = {8C95564A-19F1-444C-B831-CBBBE5C40379}
 		{48594A4F-DA1A-410A-A1C9-E7C030A820A0} = {8C95564A-19F1-444C-B831-CBBBE5C40379}
+		{F46CF6D4-BD6A-4A97-AB4D-D804713AD6DC} = {8C95564A-19F1-444C-B831-CBBBE5C40379}
+		{E4299504-D385-406D-9591-94C0878ECFEA} = {8C95564A-19F1-444C-B831-CBBBE5C40379}
 	EndGlobalSection
 EndGlobal

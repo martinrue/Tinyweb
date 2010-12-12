@@ -31,5 +31,15 @@
         {
             return new SparkResult(templatePath, master);
         }
+
+        public static RedirectResult<T> Redirect<T>()
+        {
+            return new RedirectResult<T>();
+        }
+
+        public static RedirectResult Redirect(string uri)
+        {
+            return new RedirectResult(uri);
+        }
     }
 }
