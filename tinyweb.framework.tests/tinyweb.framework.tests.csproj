@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HandlerResult\RedirectResultTests.cs" />
     <Compile Include="HandlerResult\SparkResultTests.cs" />
     <Compile Include="HandlerResult\FileResultTests.cs" />
     <Compile Include="HandlerResult\JsonResultTests.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Test Data\HandlerInvoker\CustomHandlerInvoker.cs" />
     <Compile Include="Test Data\HandlerResult\Views\Models\UserModel.cs" />
     <Compile Include="Test Data\HandlerScanners\CustomHandlerScanner.cs" />
+    <Compile Include="Test Data\Handlers\InvalidHandler.cs" />
     <Compile Include="Test Data\Handlers\InvokeHandler.cs" />
     <Compile Include="Test Data\Handlers\NoDefaultCtorHandler.cs" />
     <Compile Include="Test Data\Handlers\ConventionHandler.cs" />

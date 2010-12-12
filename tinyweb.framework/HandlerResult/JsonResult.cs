@@ -8,6 +8,11 @@ namespace tinyweb.framework
     {
         object data;
 
+        public HandlerResultType ResultType
+        {
+            get { return HandlerResultType.Render; }
+        }
+
         public IDictionary<string, string> CustomHeaders
         {
             get { return new Dictionary<string, string>(); }
@@ -16,11 +21,6 @@ namespace tinyweb.framework
         public string ContentType
         {
             get { return "text/json"; }
-        }
-
-        public bool IsFileResult
-        {
-            get { return false; }
         }
 
         public JsonResult(object data)
@@ -32,8 +32,7 @@ namespace tinyweb.framework
         {
             if (data != null)
             {
-                var serialiser = new JavaScriptSerializer();
-                return serialiser.Serialize(this.data);
+                return new JavaScriptSerializer().Serialize(this.data);
             }
 
             return String.Empty;

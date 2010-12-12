@@ -10,7 +10,7 @@ namespace tinyweb.framework
 {
     public static class Tinyweb
     {
-        public static IEnumerable<HandlerData> Handlers { get; private set; }
+        public static IEnumerable<HandlerData> Handlers { get; set; }
 
         public static int Init()
         {

@@ -21,16 +21,28 @@ namespace tinyweb.framework
             var handler = HandlerFactory.Current.Create(handlerData);
             var result = HandlerInvoker.Current.Execute(handler, requestContext);
 
-            context.Response.ContentType = result.ContentType;
             result.CustomHeaders.ForEach(header => context.Response.AddHeader(header.Key, header.Value));
-       
-            if (result.IsFileResult)
+            context.Response.ContentType = result.ContentType;
+
+            switch (result.ResultType)
             {
-                context.Response.WriteFile(result.GetResult());
-            }
-            else
-            {
-                context.Response.Write(result.GetResult());
+                case HandlerResultType.Render:
+                {
+                    context.Response.Write(result.GetResult());
+                }
+                break;
+
+                case HandlerResultType.Download:
+                {
+                    context.Response.WriteFile(result.GetResult());    
+                }
+                break;
+
+                case HandlerResultType.Redirect:
+                {
+                    context.Response.Redirect(result.GetResult(), true);
+                }
+                break;
             }
         }
     }

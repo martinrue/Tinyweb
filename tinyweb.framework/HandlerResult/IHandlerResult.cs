@@ -4,9 +4,9 @@ namespace tinyweb.framework
 {
     public interface IHandlerResult
     {
+        HandlerResultType ResultType { get; }
         IDictionary<string, string> CustomHeaders { get; }
         string ContentType { get; }
-        bool IsFileResult { get; }
         string GetResult();
     }
 }

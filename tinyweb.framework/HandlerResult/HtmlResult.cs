@@ -8,6 +8,11 @@ namespace tinyweb.framework
     {
         string filepath;
 
+        public HandlerResultType ResultType
+        {
+            get { return HandlerResultType.Render; }
+        }
+
         public IDictionary<string, string> CustomHeaders
         {
             get { return new Dictionary<string, string>(); }
@@ -16,11 +21,6 @@ namespace tinyweb.framework
         public string ContentType
         {
             get { return "text/html"; }
-        }
-
-        public bool IsFileResult
-        {
-            get { return false; }
         }
 
         public HtmlResult(string filepath)

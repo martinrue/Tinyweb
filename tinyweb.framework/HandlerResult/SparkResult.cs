@@ -11,6 +11,11 @@ namespace tinyweb.framework
         string templateName;
         string master;
 
+        public HandlerResultType ResultType
+        {
+            get { return HandlerResultType.Render; }
+        }
+
         public IDictionary<string, string> CustomHeaders
         {
             get { return new Dictionary<string, string>(); }
@@ -19,11 +24,6 @@ namespace tinyweb.framework
         public string ContentType
         {
             get { return "text/html"; }
-        }
-
-        public bool IsFileResult
-        {
-            get { return false; }
         }
 
         public SparkResult(T model, string templatesPath, string master = null)
@@ -57,6 +57,11 @@ namespace tinyweb.framework
         string templateName;
         string master;
 
+        public HandlerResultType ResultType
+        {
+            get { return HandlerResultType.Render; }
+        }
+
         public IDictionary<string, string> CustomHeaders
         {
             get { return new Dictionary<string, string>(); }
@@ -65,11 +70,6 @@ namespace tinyweb.framework
         public string ContentType
         {
             get { return "text/html"; }
-        }
-
-        public bool IsFileResult
-        {
-            get { return false; }
         }
 
         public SparkResult(string templatesPath, string master = null)

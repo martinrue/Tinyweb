@@ -50,7 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HandlerResult\RedirectResult.cs" />
     <Compile Include="HandlerResult\Factory\Result.cs" />
+    <Compile Include="HandlerResult\HandlerResultType.cs" />
     <Compile Include="HandlerResult\SparkResult.cs" />
     <Compile Include="HandlerResult\Spark\SparkCompiler.cs" />
     <Compile Include="HandlerResult\Spark\SparkView.cs" />

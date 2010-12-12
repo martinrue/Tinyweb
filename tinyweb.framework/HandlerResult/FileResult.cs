@@ -9,6 +9,11 @@ namespace tinyweb.framework
     {
         string filepath;
 
+        public HandlerResultType ResultType
+        {
+            get { return HandlerResultType.Download; }
+        }
+
         public IDictionary<string, string> CustomHeaders
         {
             get
@@ -33,11 +38,6 @@ namespace tinyweb.framework
 
                 return "application/unknown";
             }
-        }
-
-        public bool IsFileResult
-        {
-            get { return true; }
         }
 
         public FileResult(string filepath)
