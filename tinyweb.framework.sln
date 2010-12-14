@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tinyweb.framework", "tinywe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tinyweb.framework.tests", "tinyweb.framework.tests\tinyweb.framework.tests.csproj", "{87A2D951-4CD1-4689-A962-2F17B8216598}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tinyweb.samples.spark", "tinyweb.sample\tinyweb.samples.spark.csproj", "{F46CF6D4-BD6A-4A97-AB4D-D804713AD6DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tinyweb.samples.spark", "tinyweb.samples.spark\tinyweb.samples.spark.csproj", "{F46CF6D4-BD6A-4A97-AB4D-D804713AD6DC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tinyweb.samples.structuremap", "tinyweb.samples.structuremap\tinyweb.samples.structuremap.csproj", "{DD975FBE-69B5-4D6E-BE5E-EE6E9C314727}"
 EndProject
