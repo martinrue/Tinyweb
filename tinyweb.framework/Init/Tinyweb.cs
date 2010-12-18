@@ -12,20 +12,18 @@ namespace tinyweb.framework
     {
         public static IEnumerable<HandlerData> Handlers { get; set; }
 
-        public static int Init()
+        public static int Init(params Registry[] registries)
         {
+            ObjectFactory.Initialize(x =>
+            {
+                registries.ForEach(r => x.AddRegistry(r));
+            });
+
             Handlers = HandlerScanner.Current.FindAll();
 
             Handlers.ForEach(handler => RouteTable.Routes.Add(new System.Web.Routing.Route(handler.Uri, new RouteValueDictionary(handler.DefaultRouteValues), new RouteHandler(handler))));
 
             return Handlers.Count();
-        }
-
-        public static int Init(Registry registry)
-        {
-            ObjectFactory.Initialize(x => x.AddRegistry(registry));
-
-            return Init();
         }
 
         public static string WhatHaveIGot()
