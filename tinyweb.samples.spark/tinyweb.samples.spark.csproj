@@ -52,8 +52,8 @@
   <ItemGroup>
     <Content Include="Content\Style.css" />
     <Content Include="Global.asax" />
-    <None Include="Views\Master.spark" />
-    <None Include="Views\Index.spark" />
+    <Content Include="Views\Master.spark" />
+    <Content Include="Views\Index.spark" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
