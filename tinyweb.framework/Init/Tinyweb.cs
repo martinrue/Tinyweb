@@ -16,7 +16,7 @@ namespace tinyweb.framework
         {
             ObjectFactory.Initialize(x =>
             {
-                registries.ForEach(r => x.AddRegistry(r));
+                registries.ForEach(x.AddRegistry);
             });
 
             Handlers = HandlerScanner.Current.FindAll();

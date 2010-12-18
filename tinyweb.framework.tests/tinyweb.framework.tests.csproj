@@ -67,8 +67,8 @@
     <Compile Include="Helpers\ContextHelpers.cs" />
     <Compile Include="Helpers\ObjectHelper.cs" />
     <Compile Include="Init\InitWithRegistriesTests.cs" />
-    <Compile Include="Test Data\BarRepository.cs" />
-    <Compile Include="Test Data\FooRepository.cs" />
+    <Compile Include="Test Data\Init\BarRepository.cs" />
+    <Compile Include="Test Data\Init\FooRepository.cs" />
     <Compile Include="Test Data\HandlerFactories\CustomHandlerFactory.cs" />
     <Compile Include="Test Data\HandlerInvoker\CustomHandlerInvoker.cs" />
     <Compile Include="Test Data\HandlerResult\Views\Models\UserModel.cs" />
@@ -83,10 +83,10 @@
     <Compile Include="HandlerScanner\DefaultHandlerScannerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test Data\HandlerResult\Json\CustomType.cs" />
-    <Compile Include="Test Data\IBarRepository.cs" />
-    <Compile Include="Test Data\IFooRepository.cs" />
-    <Compile Include="Test Data\StructureMap\BarRegistry.cs" />
-    <Compile Include="Test Data\StructureMap\FooRegistry.cs" />
+    <Compile Include="Test Data\Init\IBarRepository.cs" />
+    <Compile Include="Test Data\Init\IFooRepository.cs" />
+    <Compile Include="Test Data\Init\StructureMap\BarRegistry.cs" />
+    <Compile Include="Test Data\Init\StructureMap\FooRegistry.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
