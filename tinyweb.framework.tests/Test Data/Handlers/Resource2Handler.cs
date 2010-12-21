@@ -4,9 +4,9 @@
     {
         Route route = new Route("resource2");
     
-        public StringResult Get()
+        public IHandlerResult Get()
         {
-            return "";
+            return new StringResult("");
         }
     }
 }

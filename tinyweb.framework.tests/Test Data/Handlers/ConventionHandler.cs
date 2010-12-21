@@ -2,9 +2,9 @@
 {
     public class ConventionHandler
     {
-        public StringResult Get()
+        public IHandlerResult Get()
         {
-            return "";
+            return new StringResult("");
         }
     }
 }

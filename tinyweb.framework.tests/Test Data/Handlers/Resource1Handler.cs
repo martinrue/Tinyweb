@@ -4,14 +4,14 @@
     {
         Route route = new Route("resource1", new { route1 = "default1", route2 = "default2" });
 
-        public StringResult Get()
+        public IHandlerResult Get()
         {
-            return "Get";
+            return new StringResult("Get");
         }
 
-        public StringResult Post()
+        public IHandlerResult Post()
         {
-            return "Post";
+            return new StringResult("Post");
         }
     }
 }
