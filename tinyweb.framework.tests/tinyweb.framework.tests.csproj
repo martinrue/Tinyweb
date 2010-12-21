@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HandlerResult\NHamlResultTests.cs" />
     <Compile Include="HandlerResult\RedirectResultTests.cs" />
     <Compile Include="HandlerResult\SparkResultTests.cs" />
     <Compile Include="HandlerResult\FileResultTests.cs" />
@@ -106,6 +107,8 @@
     <Content Include="Test Data\HandlerResult\Views\Spark\Simple.spark" />
     <Content Include="Test Data\HandlerResult\Views\Spark\Child.spark" />
     <Content Include="Test Data\HandlerResult\Views\Spark\Master.spark" />
+    <None Include="Test Data\HandlerResult\Views\NHaml\Hello.haml" />
+    <None Include="Test Data\HandlerResult\Views\NHaml\View.haml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

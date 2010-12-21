@@ -32,6 +32,16 @@
             return new SparkResult(templatePath, master);
         }
 
+        public static NHamlResult<T> NHaml<T>(T model, params string[] templates)
+        {
+            return new NHamlResult<T>(model, templates);
+        }
+
+        public static NHamlResult NHaml(params string[] templates)
+        {
+            return new NHamlResult(templates);
+        }
+
         public static RedirectResult<T> Redirect<T>()
         {
             return new RedirectResult<T>();

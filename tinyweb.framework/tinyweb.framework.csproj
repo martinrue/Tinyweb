@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NHaml">
+      <HintPath>..\lib\NHaml.dll</HintPath>
+    </Reference>
     <Reference Include="Spark, Version=1.1.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Spark.dll</HintPath>
@@ -50,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HandlerResult\NHamlResult.cs" />
+    <Compile Include="HandlerResult\NHaml\NHamlView.cs" />
+    <Compile Include="HandlerResult\NHaml\NHamlCompiler.cs" />
     <Compile Include="HandlerResult\RedirectResult.cs" />
     <Compile Include="HandlerResult\Factory\Result.cs" />
     <Compile Include="HandlerResult\HandlerResultType.cs" />
