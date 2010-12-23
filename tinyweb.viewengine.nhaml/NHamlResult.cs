@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using tinyweb.framework;
 
-namespace tinyweb.framework
+namespace tinyweb.viewengine.nhaml
 {
     public class NHamlResult<T> : IHandlerResult
     {
@@ -27,13 +28,13 @@ namespace tinyweb.framework
 
         public NHamlResult(T model, params string[] templates)
         {  
-            var fullTemplates = templates.Select(t =>
+            var fullTemplates = templates.Select(template =>
             {
-                var fullTemplatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, t);
+                var fullTemplatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, template);
 
                 if (!File.Exists(fullTemplatePath))
                 {
-                    throw new FileNotFoundException(String.Format("The spark view at {0} could not be found", fullTemplatePath));
+                    throw new FileNotFoundException(String.Format("The haml view at {0} could not be found", fullTemplatePath));
                 }
 
                 return fullTemplatePath;
@@ -71,13 +72,13 @@ namespace tinyweb.framework
 
         public NHamlResult(params string[] templates)
         {
-            var fullTemplates = templates.Select(t =>
+            var fullTemplates = templates.Select(template =>
             {
-                var fullTemplatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, t);
+                var fullTemplatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, template);
 
                 if (!File.Exists(fullTemplatePath))
                 {
-                    throw new FileNotFoundException(String.Format("The spark view at {0} could not be found", fullTemplatePath));
+                    throw new FileNotFoundException(String.Format("The haml view at {0} could not be found", fullTemplatePath));
                 }
 
                 return fullTemplatePath;

@@ -26,11 +26,6 @@ namespace tinyweb.framework
             this.data = data;
         }
 
-        public static implicit operator StringResult(string input)
-        {
-            return new StringResult(input);
-        }
-
         public string GetResult()
         {
             return data;

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4FEB7B17-C089-48A3-BA86-D70B24CCEB9B}</ProjectGuid>
+    <ProjectGuid>{01FF632C-154F-49B2-A98C-7C2977C24370}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>tinyweb.framework</RootNamespace>
-    <AssemblyName>tinyweb.framework</AssemblyName>
+    <RootNamespace>tinyweb.viewengine.nhaml</RootNamespace>
+    <AssemblyName>tinyweb.viewengine.nhaml</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,14 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="StructureMap">
-      <HintPath>..\lib\StructureMap.dll</HintPath>
+    <Reference Include="NHaml">
+      <HintPath>..\lib\NHaml.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,34 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HandlerResult\RedirectResult.cs" />
-    <Compile Include="HandlerResult\Factory\Result.cs" />
-    <Compile Include="HandlerResult\Interface\HandlerResultType.cs" />
-    <Compile Include="Init\Route.cs" />
-    <Compile Include="HandlerResult\FileResult.cs" />
-    <Compile Include="HandlerResult\JsonResult.cs" />
-    <Compile Include="HandlerResult\StringResult.cs" />
-    <Compile Include="Init\Tinyweb.cs" />
-    <Compile Include="Enums\HttpVerb.cs" />
-    <Compile Include="Exceptions\NoParameterlessConstructor.cs" />
-    <Compile Include="HandlerFactory\DefaultHandlerFactory.cs" />
-    <Compile Include="HandlerFactory\HandlerFactory.cs" />
-    <Compile Include="Init\HttpHandler.cs" />
-    <Compile Include="Init\RouteHandler.cs" />
-    <Compile Include="Extensions\Extensions.cs" />
-    <Compile Include="HandlerFactory\IHandlerFactory.cs" />
-    <Compile Include="HandlerInvoker\DefaultHandlerInvoker.cs" />
-    <Compile Include="HandlerInvoker\HandlerInvoker.cs" />
-    <Compile Include="HandlerInvoker\IHandlerInvoker.cs" />
-    <Compile Include="HandlerResult\Interface\IHandlerResult.cs" />
-    <Compile Include="HandlerResult\HtmlResult.cs" />
-    <Compile Include="HandlerScanner\DefaultHandlerScanner.cs" />
-    <Compile Include="HandlerScanner\HandlerScanner.cs" />
-    <Compile Include="HandlerScanner\Models\HandlerData.cs" />
-    <Compile Include="HandlerScanner\IHandlerScanner.cs" />
+    <Compile Include="NHamlCompiler.cs" />
+    <Compile Include="NHamlResult.cs" />
+    <Compile Include="NHamlView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\tinyweb.framework\tinyweb.framework.csproj">
+      <Project>{4FEB7B17-C089-48A3-BA86-D70B24CCEB9B}</Project>
+      <Name>tinyweb.framework</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

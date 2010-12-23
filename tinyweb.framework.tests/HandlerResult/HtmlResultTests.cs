@@ -20,13 +20,5 @@ namespace tinyweb.framework.tests
             Assert.That(result.ContentType, Is.EqualTo("text/html"));
             Assert.That(result.GetResult(), Is.EqualTo("<h1>View</h1>"));
         }
-
-        [Test]
-        public void GetResult_WhenCreatedWithImplicitConversion_ReturnsViewData()
-        {
-            HtmlResult result = "..\\..\\Test Data\\HandlerResult\\Views\\View.html";
-            Assert.That(result.ContentType, Is.EqualTo("text/html"));
-            Assert.That(result.GetResult(), Is.EqualTo("<h1>View</h1>"));
-        }
     }
 }

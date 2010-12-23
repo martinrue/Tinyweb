@@ -77,6 +77,10 @@
       <Project>{4FEB7B17-C089-48A3-BA86-D70B24CCEB9B}</Project>
       <Name>tinyweb.framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\tinyweb.viewengine.nhaml\tinyweb.viewengine.nhaml.csproj">
+      <Project>{01FF632C-154F-49B2-A98C-7C2977C24370}</Project>
+      <Name>tinyweb.viewengine.nhaml</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\Index.haml" />

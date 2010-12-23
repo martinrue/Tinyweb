@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using tinyweb.framework;
+using tinyweb.viewengine.nhaml;
 
 namespace tinyweb.samples.nhaml
 {
@@ -9,7 +10,7 @@ namespace tinyweb.samples.nhaml
         {
             var model = new List<string> { "item 1", "item 2", "item 3", "item 4", "item 5" };
 
-            return Result.NHaml(model, "Views\\Index.haml");
+            return View.NHaml(model, "Views\\Index.haml");
         }
     }
 }

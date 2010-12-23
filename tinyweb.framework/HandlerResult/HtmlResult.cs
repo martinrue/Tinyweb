@@ -33,11 +33,6 @@ namespace tinyweb.framework
             }
         }
 
-        public static implicit operator HtmlResult(string filepath)
-        {
-            return new HtmlResult(filepath);
-        }
-
         public string GetResult()
         {
             return File.ReadAllText(this.filepath);

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using tinyweb.framework;
 
-namespace tinyweb.framework
+namespace tinyweb.viewengine.spark
 {
     public class SparkResult<T> : IHandlerResult
     {
@@ -28,9 +29,8 @@ namespace tinyweb.framework
 
         public SparkResult(T model, string templatesPath, string master = null)
         {           
-            var relativePath = Path.GetDirectoryName(templatesPath);
             var templateName = Path.GetFileName(templatesPath);
-            var templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
+            var templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetDirectoryName(templatesPath));
 
             var fullTemplatePath = Path.Combine(templatePath, templateName);
 
@@ -74,9 +74,8 @@ namespace tinyweb.framework
 
         public SparkResult(string templatesPath, string master = null)
         {
-            var relativePath = Path.GetDirectoryName(templatesPath);
             var templateName = Path.GetFileName(templatesPath);
-            var templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
+            var templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetDirectoryName(templatesPath));
 
             var fullTemplatePath = Path.Combine(templatePath, templateName);
 

@@ -78,6 +78,10 @@
       <Project>{4FEB7B17-C089-48A3-BA86-D70B24CCEB9B}</Project>
       <Name>tinyweb.framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\tinyweb.viewengine.spark\tinyweb.viewengine.spark.csproj">
+      <Project>{1BE68BD1-5AE8-4900-B3C5-C792EB76BF3F}</Project>
+      <Name>tinyweb.viewengine.spark</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

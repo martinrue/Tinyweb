@@ -1,8 +1,9 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Spark;
 using Spark.FileSystem;
 
-namespace tinyweb.framework
+namespace tinyweb.viewengine.spark
 {
     public static class SparkCompiler
     {
@@ -26,12 +27,12 @@ namespace tinyweb.framework
 
             if (model != null)
             {
-                sparkEngine.DefaultPageBaseType = "tinyweb.framework.SparkView";
+                sparkEngine.DefaultPageBaseType = "tinyweb.viewengine.spark.SparkView";
             }
 
             var descriptor = new SparkViewDescriptor().AddTemplate(templateFilename);
 
-            if (!master.IsEmpty())
+            if (!String.IsNullOrEmpty(master))
             {
                 descriptor.AddTemplate(master);
             }

@@ -22,26 +22,6 @@
             return new StringResult(data);
         }
 
-        public static SparkResult<T> Spark<T>(T model, string templatePath, string master = null)
-        {
-            return new SparkResult<T>(model, templatePath, master);
-        }
-
-        public static SparkResult Spark(string templatePath, string master = null)
-        {
-            return new SparkResult(templatePath, master);
-        }
-
-        public static NHamlResult<T> NHaml<T>(T model, params string[] templates)
-        {
-            return new NHamlResult<T>(model, templates);
-        }
-
-        public static NHamlResult NHaml(params string[] templates)
-        {
-            return new NHamlResult(templates);
-        }
-
         public static RedirectResult<T> Redirect<T>()
         {
             return new RedirectResult<T>();

@@ -18,12 +18,5 @@ namespace tinyweb.framework.tests
             var result = new StringResult("test data");
             Assert.That(result.ContentType, Is.EqualTo("text/html"));
         }
-
-        [Test]
-        public void GetResult_WhenCreatedWithImplicitConversion_ReturnsString()
-        {
-            StringResult result = "test data";
-            Assert.That(result.GetResult(), Is.EqualTo("test data"));
-        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using NHaml;
 
-namespace tinyweb.framework
+namespace tinyweb.viewengine.nhaml
 {
     public class NHamlView<T> : Template
     {

@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace tinyweb.framework
+namespace tinyweb.viewengine.spark
 {
     public abstract class SparkView<T> : Spark.AbstractSparkView
     {

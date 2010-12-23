@@ -34,7 +34,10 @@
     <Reference Include="Moq">
       <HintPath>..\lib\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
+    <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap, Version=2.5.2.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\StructureMap.dll</HintPath>
@@ -50,9 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HandlerResult\NHamlResultTests.cs" />
     <Compile Include="HandlerResult\RedirectResultTests.cs" />
-    <Compile Include="HandlerResult\SparkResultTests.cs" />
     <Compile Include="HandlerResult\FileResultTests.cs" />
     <Compile Include="HandlerResult\JsonResultTests.cs" />
     <Compile Include="HandlerResult\HtmlResultTests.cs" />
@@ -72,7 +73,6 @@
     <Compile Include="Test Data\Init\FooRepository.cs" />
     <Compile Include="Test Data\HandlerFactories\CustomHandlerFactory.cs" />
     <Compile Include="Test Data\HandlerInvoker\CustomHandlerInvoker.cs" />
-    <Compile Include="Test Data\HandlerResult\Views\Models\UserModel.cs" />
     <Compile Include="Test Data\HandlerScanners\CustomHandlerScanner.cs" />
     <Compile Include="Test Data\Handlers\InvalidHandler.cs" />
     <Compile Include="Test Data\Handlers\InvokeHandler.cs" />
@@ -101,14 +101,7 @@
   <ItemGroup>
     <Content Include="Test Data\HandlerResult\Files\Download.txt" />
     <None Include="Test Data\HandlerResult\Files\Download.unknown" />
-    <Content Include="Test Data\HandlerResult\Views\Spark\View.spark" />
     <Content Include="Test Data\HandlerResult\Views\View.html" />
-    <Content Include="Test Data\HandlerResult\Views\Spark\Shared\Partial.spark" />
-    <Content Include="Test Data\HandlerResult\Views\Spark\Simple.spark" />
-    <Content Include="Test Data\HandlerResult\Views\Spark\Child.spark" />
-    <Content Include="Test Data\HandlerResult\Views\Spark\Master.spark" />
-    <None Include="Test Data\HandlerResult\Views\NHaml\Hello.haml" />
-    <None Include="Test Data\HandlerResult\Views\NHaml\View.haml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,5 @@
 ﻿using tinyweb.framework;
+using tinyweb.viewengine.spark;
 
 namespace tinyweb.samples.formpost.Handlers
 {
@@ -8,12 +9,12 @@ namespace tinyweb.samples.formpost.Handlers
 
         public IHandlerResult Get()
         {
-            return Result.Spark("Views\\Register.spark", "Master.spark");
+            return View.Spark("Views\\Register.spark", "Master.spark");
         }
 
         public IHandlerResult Post(UserRegistrationModel model)
         {
-            return Result.Spark(model, "Views\\Complete.spark", "Master.spark");
+            return View.Spark(model, "Views\\Complete.spark", "Master.spark");
         }
     }
 }

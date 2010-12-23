@@ -50,11 +50,6 @@ namespace tinyweb.framework
             }
         }
 
-        public static implicit operator FileResult(string filepath)
-        {
-            return new FileResult(filepath);
-        }
-
         public string GetResult()
         {
             return this.filepath;
