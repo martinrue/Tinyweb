@@ -25,7 +25,7 @@ namespace tinyweb.framework.tests
         }
 
         [Test]
-        public void GetResult_WhenRequestedWithExistingPath_ReturnsViewData()
+        public void GetResult_WhenRequestedWithModel_ReturnsViewData()
         {
             var model = new UserModel { ID = 42, Username = "Username" };
             var result = new SparkResult<UserModel>(model, "..\\..\\Test Data\\Views\\Spark\\View.spark");
@@ -36,7 +36,7 @@ namespace tinyweb.framework.tests
         }
 
         [Test]
-        public void GetResult_WhenRequestedWithSparkUsingPartial_ReturnsCombinedView()
+        public void GetResult_WhenRequestedWithModelUsingPartial_ReturnsCombinedView()
         {
             var model = new UserModel { ID = 42, Username = "Username" };
             var result = new SparkResult<UserModel>(model, "..\\..\\Test Data\\Views\\Spark\\View.spark");
@@ -46,7 +46,7 @@ namespace tinyweb.framework.tests
         }
 
         [Test]
-        public void GetResult_WhenRequestedWithSparkUsingMaster_ReturnsCombinedView()
+        public void GetResult_WhenRequestedWithModelUsingMaster_ReturnsCombinedView()
         {
             var result = new SparkResult("..\\..\\Test Data\\Views\\Spark\\Child.spark", "Master.spark");
 
