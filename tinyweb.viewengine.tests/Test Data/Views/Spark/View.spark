@@ -1,6 +1,0 @@
-﻿<viewdata model="tinyweb.framework.tests.UserModel" />
-
-<h1>${Model.ID}</h1>
-<h2>${Model.Username}</h2>
-
-<use file="Shared/Partial.spark" />

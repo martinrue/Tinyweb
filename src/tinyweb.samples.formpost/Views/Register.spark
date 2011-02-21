@@ -1,0 +1,37 @@
+﻿<content name="header">
+
+    Tinyweb Form Post Demo
+
+</content>
+
+<content name="data">
+
+    <form method="post" action="/users/register">
+
+        <p>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" />
+        </p>
+
+        <p>
+            <label for="email">Email Address</label>
+            <input type="text" id="email" name="email" />
+        </p>
+
+        <p>
+            <label for="age">Age</label>
+            <input type="text" id="age" name="age" />
+        </p>
+
+        <p>
+            <label for="wantsspam">Spam Me</label>
+            <input type="checkbox" id="wantsspam" name="wantsspam" />
+        </p>
+
+        <p>
+            <input type="submit" value="Register" />        
+        </p>
+
+    </form>    
+
+</content>

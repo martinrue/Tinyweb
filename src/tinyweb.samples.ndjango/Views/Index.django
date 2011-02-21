@@ -1,0 +1,24 @@
+﻿{% extends "Views/Master.django" %}
+{% model Model:System.Collections.Generic.List<string> %}
+
+{% block header %}
+
+    Tinyweb NDjango Demo
+
+{% endblock %}
+
+{% block data %}
+
+<h2>Items</h2>
+
+    <ul>
+    
+        {% for item in Model %}
+
+            <li>{{ item }}</li>
+    
+        {% endfor %}
+
+    </ul>
+
+{% endblock %}

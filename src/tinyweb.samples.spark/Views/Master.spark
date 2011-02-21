@@ -1,0 +1,23 @@
+﻿﻿<html>
+<head>
+
+    <title>Tinyweb Spark Demo</title>
+    <link rel="stylesheet" href="/Content/Style.css" />
+
+</head>
+<body>
+    
+    <div class="header">
+            
+        <use content="header" />
+
+    </div>
+
+    <div class="data">
+            
+        <use content="data" />
+
+    </div>
+
+</body>
+</html>
