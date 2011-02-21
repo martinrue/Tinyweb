@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using tinyweb.viewengine.nhaml;
 
-namespace tinyweb.framework.tests
+namespace tinyweb.viewengine.tests
 {
     [TestFixture]
     public class NHamlResultTests

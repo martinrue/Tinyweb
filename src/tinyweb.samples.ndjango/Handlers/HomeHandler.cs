@@ -10,7 +10,7 @@ namespace tinyweb.samples.ndjango.Handlers
         {
             var model = new List<string> { "item 1", "item 2", "item 3", "item 4", "item 5" };
 
-            return View.NDjango(model, "Views\\Index.django");
+            return View.NDjango(model, "Views/Index.django");
         }
     }
 }

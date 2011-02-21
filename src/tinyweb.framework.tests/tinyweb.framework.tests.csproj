@@ -68,6 +68,7 @@
     <Compile Include="Helpers\ContextHelpers.cs" />
     <Compile Include="Helpers\ObjectHelper.cs" />
     <Compile Include="Init\InitWithRegistriesTests.cs" />
+    <Compile Include="Test Data\Handlers\PascalConventionHandler.cs" />
     <Compile Include="Test Data\Init\BarRepository.cs" />
     <Compile Include="Test Data\Init\FooRepository.cs" />
     <Compile Include="Test Data\HandlerFactories\CustomHandlerFactory.cs" />

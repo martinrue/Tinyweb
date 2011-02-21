@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using tinyweb.viewengine.ndjango;
 
-namespace tinyweb.framework.tests
+namespace tinyweb.viewengine.tests
 {
     [TestFixture]
     public class NDjangoResultTests

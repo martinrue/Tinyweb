@@ -89,5 +89,42 @@ namespace tinyweb.framework.tests
         {
             Assert.That("".IsEmpty(), Is.True);
         }
+
+        [Test]
+        public void PascalSplit_WithEmptyString_ReturnsEmptyCollection()
+        {
+            Assert.That("".PascalSplit(), Is.Empty);
+        }
+
+        [Test]
+        public void PascalSplit_WithSingleWord_ReturnsCollectionWithSingleWord()
+        {
+            var values = "Word".PascalSplit();
+
+            Assert.That(values.Length, Is.EqualTo(1));
+            Assert.That(values[0], Is.EqualTo("Word"));
+        }
+
+        [Test]
+        public void PascalSplit_WithTwoWords_ReturnsCollectionWithBothWords()
+        {
+            var values = "Word1Word2".PascalSplit();
+
+            Assert.That(values.Length, Is.EqualTo(2));
+            Assert.That(values[0], Is.EqualTo("Word1"));
+            Assert.That(values[1], Is.EqualTo("Word2"));
+        }
+
+        [Test]
+        public void PascalSplit_WithFullSentence_ReturnsCollectionOfAllWords()
+        {
+            var values = "UsersRegisterAddNew".PascalSplit();
+
+            Assert.That(values.Length, Is.EqualTo(4));
+            Assert.That(values[0], Is.EqualTo("Users"));
+            Assert.That(values[1], Is.EqualTo("Register"));
+            Assert.That(values[2], Is.EqualTo("Add"));
+            Assert.That(values[3], Is.EqualTo("New"));
+        }
     }
 }

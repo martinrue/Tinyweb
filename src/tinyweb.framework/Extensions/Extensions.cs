@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Text.RegularExpressions;
 using System.Web.Routing;
 
 namespace tinyweb.framework
@@ -50,6 +51,11 @@ namespace tinyweb.framework
         public static bool IsEmpty(this string input)
         {
             return String.IsNullOrEmpty(input);
+        }
+
+        public static string[] PascalSplit(this string input)
+        {
+            return input.IsEmpty() ? new string[0] : Regex.Replace(input, "(\\B[A-Z])", " $1").Split(' ');
         }
     }
 }

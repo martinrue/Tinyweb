@@ -1,4 +1,4 @@
-﻿<viewdata model="tinyweb.framework.tests.UserModel" />
+﻿<viewdata model="tinyweb.viewengine.tests.UserModel" />
 
 <h1>${Model.ID}</h1>
 <h2>${Model.Username}</h2>

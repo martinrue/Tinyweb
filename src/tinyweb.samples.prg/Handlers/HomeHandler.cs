@@ -6,7 +6,7 @@ namespace tinyweb.samples.prg.Handlers
     {
         public IHandlerResult Get()
         {
-            return Result.Html("Views\\Post.html");
+            return Result.Html("Views/Post.html");
         }
 
         public IHandlerResult Post()

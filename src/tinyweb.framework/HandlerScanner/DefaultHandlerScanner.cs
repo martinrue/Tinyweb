@@ -61,7 +61,9 @@ namespace tinyweb.framework
         private string getRouteUriByConvention(Type type)
         {
             var handlerStart = type.Name.ToLower().IndexOf("handler");
-            return type.Name.Substring(0, handlerStart);
+            var pascalConvention = type.Name.Substring(0, handlerStart);
+
+            return String.Join("/", pascalConvention.PascalSplit());
         }
     }
 }

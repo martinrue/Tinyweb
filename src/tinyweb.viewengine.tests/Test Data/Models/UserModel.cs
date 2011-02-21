@@ -1,4 +1,4 @@
-﻿namespace tinyweb.framework.tests
+﻿namespace tinyweb.viewengine.tests
 {
     public class UserModel
     {

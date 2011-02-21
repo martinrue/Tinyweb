@@ -3,18 +3,16 @@ using tinyweb.viewengine.spark;
 
 namespace tinyweb.samples.formpost.Handlers
 {
-    public class UserRegistrationHandler
+    public class UsersRegisterHandler
     {
-        Route route = new Route("users/register");
-
         public IHandlerResult Get()
         {
-            return View.Spark("Views\\Register.spark", "Master.spark");
+            return View.Spark("Views/Register.spark", "Master.spark");
         }
 
         public IHandlerResult Post(UserRegistrationModel model)
         {
-            return View.Spark(model, "Views\\Complete.spark", "Master.spark");
+            return View.Spark(model, "Views/Complete.spark", "Master.spark");
         }
     }
 }

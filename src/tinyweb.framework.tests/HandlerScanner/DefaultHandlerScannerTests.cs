@@ -15,10 +15,10 @@ namespace tinyweb.framework.tests
         }
 
         [Test]
-        public void FindAll_WhenCalled_FindsThreeHandlers()
+        public void FindAll_WhenCalled_FindsAllHandlers()
         {
             var handlers = defaultHandlerScanner.FindAll();
-            Assert.That(handlers.Count(), Is.EqualTo(5));
+            Assert.That(handlers.Count(), Is.EqualTo(6));
         }
 
         [Test]
@@ -75,6 +75,20 @@ namespace tinyweb.framework.tests
         {
             var handlers = defaultHandlerScanner.FindAll();
             Assert.That(handlers.Single(h => h.Type == new ConventionHandler().GetType()).Uri == "Convention");
+        }
+
+        [Test]
+        public void FindAll_WhenCalled_PascalConventionHandlerHasBeenLocated()
+        {
+            var handlers = defaultHandlerScanner.FindAll();
+            Assert.That(handlers.Any(h => h.Type == new PascalConventionHandler().GetType()));
+        }
+
+        [Test]
+        public void FindAll_WhenCalled_PascalConventionHandlerHasCorrectUri()
+        {
+            var handlers = defaultHandlerScanner.FindAll();
+            Assert.That(handlers.Single(h => h.Type == new PascalConventionHandler().GetType()).Uri, Is.EqualTo("Pascal/Convention"));
         }
     }
 }

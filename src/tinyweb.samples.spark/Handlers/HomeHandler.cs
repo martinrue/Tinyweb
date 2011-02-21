@@ -10,7 +10,7 @@ namespace tinyweb.samples.spark
         {
             var model = new List<string> { "item 1", "item 2", "item 3", "item 4", "item 5" };
 
-            return View.Spark(model, "Views\\Index.spark", "Master.spark");
+            return View.Spark(model, "Views/Index.spark", "Master.spark");
         }
     }
 }

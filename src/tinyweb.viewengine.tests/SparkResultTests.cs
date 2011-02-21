@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using tinyweb.viewengine.spark;
 
-namespace tinyweb.framework.tests
+namespace tinyweb.viewengine.tests
 {
     [TestFixture]
     public class SparkResultTests
