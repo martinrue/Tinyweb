@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NHaml">
-      <HintPath>..\lib\NHaml.dll</HintPath>
+      <HintPath>..\..\lib\NHaml.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

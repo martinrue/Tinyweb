@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Spark">
-      <HintPath>..\lib\Spark.dll</HintPath>
+      <HintPath>..\..\lib\Spark.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

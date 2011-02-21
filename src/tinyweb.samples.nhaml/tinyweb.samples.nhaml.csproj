@@ -34,10 +34,10 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NHaml">
-      <HintPath>..\lib\NHaml.dll</HintPath>
+      <HintPath>..\..\lib\NHaml.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap">
-      <HintPath>..\lib\StructureMap.dll</HintPath>
+      <HintPath>..\..\lib\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
