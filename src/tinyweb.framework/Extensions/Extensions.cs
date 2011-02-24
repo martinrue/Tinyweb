@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Routing;
 
 namespace tinyweb.framework
@@ -56,6 +57,11 @@ namespace tinyweb.framework
         public static string[] PascalSplit(this string input)
         {
             return input.IsEmpty() ? new string[0] : Regex.Replace(input, "(\\B[A-Z])", " $1").Split(' ');
+        }
+
+        public static string UrlEncode(this string input)
+        {
+            return HttpUtility.UrlEncode(input);
         }
     }
 }

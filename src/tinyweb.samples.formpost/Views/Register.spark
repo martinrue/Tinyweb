@@ -1,4 +1,7 @@
-﻿<content name="header">
+﻿<use namespace="tinyweb.framework.Helpers" />
+<use namespace="tinyweb.samples.formpost.Handlers" />
+
+<content name="header">
 
     Tinyweb Form Post Demo
 
@@ -6,7 +9,7 @@
 
 <content name="data">
 
-    <form method="post" action="/users/register">
+    <form method="post" action="${Url.For<UsersRegisterHandler>()}">
 
         <p>
             <label for="name">Name</label>

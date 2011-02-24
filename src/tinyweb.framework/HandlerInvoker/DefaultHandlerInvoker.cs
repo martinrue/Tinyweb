@@ -20,10 +20,8 @@ namespace tinyweb.framework
                 var arguments = buildArgumentList(method.GetParameters(), requestContext);
                 return (IHandlerResult) method.Invoke(handler, arguments);
             }
-            else
-            {
-                throw new HttpException(HttpStatusCode.NotImplemented.CastInt(), "The request could not be completed because the resource does not support {0}".With(httpVerb.Name()));
-            }
+            
+            throw new HttpException(HttpStatusCode.NotImplemented.CastInt(), "The request could not be completed because the resource does not support {0}".With(httpVerb.Name()));
         }
 
         private MethodInfo getMethod(object handler, HttpVerb verb)
@@ -102,7 +100,7 @@ namespace tinyweb.framework
 
         private object getValueFromRequest(RequestContext requestContext, string requestedName, Type requestedType)
         {
-            object value = findValue(requestContext.RouteData.Values, requestedName, requestedType);
+            var value = findValue(requestContext.RouteData.Values, requestedName, requestedType);
 
             if (value == null)
             {

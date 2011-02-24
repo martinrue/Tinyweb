@@ -49,6 +49,7 @@
     <Compile Include="HandlerResult\RedirectResult.cs" />
     <Compile Include="HandlerResult\Factory\Result.cs" />
     <Compile Include="HandlerResult\Interface\HandlerResultType.cs" />
+    <Compile Include="Helpers\Url.cs" />
     <Compile Include="Init\Route.cs" />
     <Compile Include="HandlerResult\FileResult.cs" />
     <Compile Include="HandlerResult\JsonResult.cs" />

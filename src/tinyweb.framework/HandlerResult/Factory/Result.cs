@@ -22,9 +22,9 @@
             return new StringResult(data);
         }
 
-        public static RedirectResult<T> Redirect<T>()
+        public static RedirectResult<T> Redirect<T>(object arguments = null)
         {
-            return new RedirectResult<T>();
+            return new RedirectResult<T>(arguments);
         }
 
         public static RedirectResult Redirect(string uri)

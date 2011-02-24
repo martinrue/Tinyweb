@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using tinyweb.framework.Helpers;
 
 namespace tinyweb.framework
 {
@@ -8,17 +8,9 @@ namespace tinyweb.framework
     {
         string handlerUri;
 
-        public RedirectResult()
+        public RedirectResult(object arguments = null)
         {
-            var handler = Tinyweb.Handlers.SingleOrDefault(h => h.Type == typeof(T));
-
-            if (handler == null)
-            {
-                throw new Exception("The handler {0} was not found".With(typeof(T).Name));
-            }
-
-            // todo: the handler uri could have route value placeholders and need to be replaced
-            handlerUri = handler.Uri;
+            handlerUri = Url.For<T>(arguments);
         }
 
         public HandlerResultType ResultType

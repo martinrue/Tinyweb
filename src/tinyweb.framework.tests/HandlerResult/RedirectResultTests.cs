@@ -29,7 +29,7 @@ namespace tinyweb.framework.tests
             Tinyweb.Handlers = new[] { new HandlerData { Type = typeof(Resource1Handler), Uri = "uri" } };
 
             var result = new RedirectResult<Resource1Handler>();
-            Assert.That(result.GetResult(), Is.EqualTo("uri"));
+            Assert.That(result.GetResult(), Is.EqualTo("/uri"));
         }
 
         [Test]

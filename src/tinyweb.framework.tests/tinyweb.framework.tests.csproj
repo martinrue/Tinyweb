@@ -56,6 +56,7 @@
     <Compile Include="HandlerResult\FileResultTests.cs" />
     <Compile Include="HandlerResult\JsonResultTests.cs" />
     <Compile Include="HandlerResult\HtmlResultTests.cs" />
+    <Compile Include="Helpers\UrlTests.cs" />
     <Compile Include="Init\InitTests.cs" />
     <Compile Include="HandlerInvoker\MethodInvokerTests.cs" />
     <Compile Include="HandlerResult\StringResultTests.cs" />
@@ -65,8 +66,8 @@
     <Compile Include="HandlerFactory\HandlerFactoryTests.cs" />
     <Compile Include="HandlerFactory\DefaultHandlerFactoryTests.cs" />
     <Compile Include="HandlerScanner\HandlerScannerTests.cs" />
-    <Compile Include="Helpers\ContextHelpers.cs" />
-    <Compile Include="Helpers\ObjectHelper.cs" />
+    <Compile Include="TestHelpers\ContextHelpers.cs" />
+    <Compile Include="TestHelpers\ObjectHelper.cs" />
     <Compile Include="Init\InitWithRegistriesTests.cs" />
     <Compile Include="Test Data\Handlers\PascalConventionHandler.cs" />
     <Compile Include="Test Data\Init\BarRepository.cs" />

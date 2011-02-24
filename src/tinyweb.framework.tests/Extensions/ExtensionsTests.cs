@@ -126,5 +126,17 @@ namespace tinyweb.framework.tests
             Assert.That(values[2], Is.EqualTo("Add"));
             Assert.That(values[3], Is.EqualTo("New"));
         }
+
+        [Test]
+        public void UrlEncode_WithAlpanumericString_ReturnsUnmodifiedString()
+        {
+            Assert.That("Hello123".UrlEncode(), Is.EqualTo("Hello123"));
+        }
+
+        [Test]
+        public void UrlEncode_WithStringWithASpace_ReturnsEncodedString()
+        {
+            Assert.That("Hello World".UrlEncode(), Is.EqualTo("Hello+World"));
+        }
     }
 }
