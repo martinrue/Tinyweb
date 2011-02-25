@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>Tinyweb</id>
+    <version>1.0</version>
+    <title>Tinyweb</title>
+    <authors>Martin Rue</authors>
+    <owners>Martin Rue</owners>
+    <description>Tinyweb is a lightweight web framework for ASP.NET that embraces HTTP and aims to be ridiculously simple. Tinyweb moves away from the MVC pattern for developing web applications. Instead, you start with separate addressable resources that respond directly to the HTTP method that was used to access the resource. Every resource is a class and every implemented HTTP method (get, post, put, delete) is a method on the class. With Tinyweb, you're writing code that is conceptually close to the way HTTP actually works.</description>
+    <summary>Tinyweb is a lightweight web framework for ASP.NET that embraces HTTP and aims to be ridiculously simple.</summary>
+    <projectUrl>http://github.com/martinrue/Tinyweb</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <tags>asp.net tinyweb web framework rest http easy tiny</tags>
+    <dependencies>
+      <dependency id="structuremap" version="2.6.2" />
+      <dependency id="spark" version="1.5" />
+    </dependencies> 
+  </metadata>
+  <files xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <file src="tinyweb.framework\bin\Release\tinyweb.framework.dll" target="lib\" />
+    <file src="tinyweb.viewengine.spark\bin\Release\tinyweb.viewengine.spark.dll" target="lib\" />
+    <file src="tinyweb.viewengine.ndjango\bin\Release\tinyweb.viewengine.ndjango.dll" target="lib\" />
+    <file src="tinyweb.viewengine.nhaml\bin\Release\tinyweb.viewengine.nhaml.dll" target="lib\" />
+    <file src="..\lib\FSharp.PowerPack.Compatibility.dll" target="lib\" />
+    <file src="..\lib\FSharp.PowerPack.dll" target="lib\" />
+    <file src="..\lib\NDjango.Core40.dll" target="lib\" />
+    <file src="..\lib\NHaml.dll" target="lib\" />
+  </files>
+</package>

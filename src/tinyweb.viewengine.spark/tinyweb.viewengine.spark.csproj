@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Spark">
-      <HintPath>..\..\lib\Spark.dll</HintPath>
+      <HintPath>..\..\lib\Spark.1.5\lib\.NetFramework 4.0\Spark.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,6 +55,9 @@
       <Project>{4FEB7B17-C089-48A3-BA86-D70B24CCEB9B}</Project>
       <Name>tinyweb.framework</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

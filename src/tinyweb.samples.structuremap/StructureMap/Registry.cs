@@ -5,15 +5,13 @@ namespace tinyweb.samples.structuremap
 {
     public class ServiceRegistry : Registry
     {
-        protected override void configure()
+        public ServiceRegistry()
         {
             Scan(x =>
             {
                 x.TheCallingAssembly();
                 x.With<DefaultConventionScanner>();
             });
-
-            base.configure();
         }
     }
 }

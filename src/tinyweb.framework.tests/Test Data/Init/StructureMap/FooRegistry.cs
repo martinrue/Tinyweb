@@ -4,11 +4,9 @@ namespace tinyweb.framework.tests
 {
     public class FooRegistry : Registry
     {
-        protected override void configure()
+        public FooRegistry()
         {
-            ForRequestedType<IFooRepository>().AddConcreteType<FooRepository>();
-
-            base.configure();
+            For<IFooRepository>().Add<FooRepository>();
         }
     }
 }

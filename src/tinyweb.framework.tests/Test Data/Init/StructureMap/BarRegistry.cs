@@ -4,11 +4,9 @@ namespace tinyweb.framework.tests
 {
     public class BarRegistry : Registry
     {
-        protected override void configure()
+        public BarRegistry()
         {
-            ForRequestedType<IBarRepository>().AddConcreteType<BarRepository>();
-
-            base.configure();
+            For<IBarRepository>().Add<BarRepository>();
         }
     }
 }
