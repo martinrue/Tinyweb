@@ -1,5 +1,4 @@
 ﻿using StructureMap.Configuration.DSL;
-using StructureMap.Graph;
 
 namespace tinyweb.samples.structuremap
 {
@@ -10,7 +9,7 @@ namespace tinyweb.samples.structuremap
             Scan(x =>
             {
                 x.TheCallingAssembly();
-                x.With<DefaultConventionScanner>();
+                x.WithDefaultConventions();
             });
         }
     }
