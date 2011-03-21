@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HandlerResult\XmlResult.cs" />
     <Compile Include="HandlerResult\RedirectResult.cs" />
     <Compile Include="HandlerResult\Factory\Result.cs" />
     <Compile Include="HandlerResult\Interface\HandlerResultType.cs" />

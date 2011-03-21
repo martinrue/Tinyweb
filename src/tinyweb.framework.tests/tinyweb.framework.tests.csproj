@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HandlerResult\XmlResultTests.cs" />
     <Compile Include="HandlerResult\RedirectResultTests.cs" />
     <Compile Include="HandlerResult\FileResultTests.cs" />
     <Compile Include="HandlerResult\JsonResultTests.cs" />

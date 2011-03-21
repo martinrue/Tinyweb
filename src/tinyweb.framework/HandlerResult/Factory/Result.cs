@@ -2,6 +2,11 @@
 {
     public static class Result
     {
+        public static StringResult String(string data)
+        {
+            return new StringResult(data);
+        }
+
         public static HtmlResult Html(string filepath)
         {
             return new HtmlResult(filepath);
@@ -17,9 +22,9 @@
             return new JsonResult(data);
         }
 
-        public static StringResult String(string data)
+        public static XmlResult Xml(object data)
         {
-            return new StringResult(data);
+            return new XmlResult(data);
         }
 
         public static RedirectResult<T> Redirect<T>(object arguments = null)
