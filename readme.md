@@ -46,6 +46,8 @@ Links to blogs and other resources about Tinyweb:
 
 [Tinyweb on OS X & Mono](http://invalidcast.com/2011/01/tinyweb-does-mono)
 
+[ASP.NET - Thinking In Resources](http://invalidcast.com/2011/03/asp-net-thinking-in-resources)
+
 ## NuGet
 
 The easiest way to get started with Tinyweb is to NuGet it:
