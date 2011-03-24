@@ -50,7 +50,7 @@ Links to blogs and other resources about Tinyweb:
 
 ## NuGet
 
-The easiest way to get started with Tinyweb is to NuGet it:
+The easiest way to get started with Tinyweb is to [NuGet it](http://nuget.org/List/Packages/Tinyweb):
 
     Install-Package Tinyweb
 
