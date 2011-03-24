@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using tinyweb.framework;
@@ -8,23 +7,8 @@ namespace tinyweb.viewengine.nhaml
 {
     public class NHamlResult<T> : IHandlerResult
     {
-        T model;
-        string[] templates;
-
-        public HandlerResultType ResultType
-        {
-            get { return HandlerResultType.Render; }
-        }
-
-        public IDictionary<string, string> CustomHeaders
-        {
-            get { return new Dictionary<string, string>(); }
-        }
-
-        public string ContentType
-        {
-            get { return "text/html"; }
-        }
+        T _model;
+        string[] _templates;
 
         public NHamlResult(T model, params string[] templates)
         {  
@@ -41,34 +25,20 @@ namespace tinyweb.viewengine.nhaml
 
             }).ToArray();
 
-            this.templates = fullTemplates;
-            this.model = model;
+            _templates = fullTemplates;
+            _model = model;
         }
 
-        public string GetResult()
+        public void ProcessResult(IRequestContext request, IResponseContext response)
         {
-            return NHamlCompiler.Compile(model, templates);
+            response.ContentType = "text/html";
+            response.Write(NHamlCompiler.Compile(_model, _templates));
         }
     }
 
     public class NHamlResult : IHandlerResult
     {
-        string[] templates;
-
-        public HandlerResultType ResultType
-        {
-            get { return HandlerResultType.Render; }
-        }
-
-        public IDictionary<string, string> CustomHeaders
-        {
-            get { return new Dictionary<string, string>(); }
-        }
-
-        public string ContentType
-        {
-            get { return "text/html"; }
-        }
+        string[] _templates;
 
         public NHamlResult(params string[] templates)
         {
@@ -85,12 +55,13 @@ namespace tinyweb.viewengine.nhaml
 
             }).ToArray();
 
-            this.templates = fullTemplates;
+            _templates = fullTemplates;
         }
 
-        public string GetResult()
+        public void ProcessResult(IRequestContext request, IResponseContext response)
         {
-            return NHamlCompiler.Compile<Object>(null, templates);
+            response.ContentType = "text/html";
+            response.Write(NHamlCompiler.Compile<Object>(null, _templates));
         }
     }
 }

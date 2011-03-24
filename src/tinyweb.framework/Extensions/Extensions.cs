@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Routing;
@@ -62,6 +63,26 @@ namespace tinyweb.framework
         public static string UrlEncode(this string input)
         {
             return HttpUtility.UrlEncode(input);
+        }
+
+        public static Dictionary<string, double> ParseAcceptHeader(this string acceptHeader)
+        {
+            var mimeTypes = new Dictionary<string, double>();
+
+            foreach (var token in acceptHeader.Split(',').Select(x => x.Trim()))
+            {
+                if (token.Contains(";"))
+                {
+                    var preferenceParts = token.Split(';').Select(x => x.Trim());
+                    mimeTypes.Add(preferenceParts.ElementAt(0), Convert.ToDouble(preferenceParts.ElementAt(1).Substring(2)));
+                }
+                else
+                {
+                    mimeTypes.Add(token, 1);
+                }
+            }
+
+            return mimeTypes.OrderByDescending(x => x.Value).ToDictionary(k => k.Key, v => v.Value);
         }
     }
 }

@@ -1,42 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using tinyweb.framework.Helpers;
 
 namespace tinyweb.framework
 {
     public class RedirectResult<T> : IHandlerResult
     {
-        string handlerUri;
+        string _uri;
 
         public RedirectResult(object arguments = null)
         {
-            handlerUri = Url.For<T>(arguments);
+            _uri = Url.For<T>(arguments);
         }
 
-        public HandlerResultType ResultType
+        public void ProcessResult(IRequestContext request, IResponseContext response)
         {
-            get { return HandlerResultType.Redirect; }
-        }
-
-        public IDictionary<string, string> CustomHeaders
-        {
-            get { return new Dictionary<string, string>(); }
-        }
-
-        public string ContentType
-        {
-            get { return "text/html"; }
-        }
-    
-        public string GetResult()
-        {
-            return handlerUri;
+            response.ContentType = "text/html";
+            response.Redirect(_uri);
         }
     }
 
     public class RedirectResult : IHandlerResult
     {
-        string uri;
+        string _uri;
 
         public RedirectResult(string uri)
         {
@@ -45,27 +30,13 @@ namespace tinyweb.framework
                 throw new Exception("The specified redirect uri is invalid");
             }
 
-            this.uri = uri;
+            _uri = uri;
         }
 
-        public HandlerResultType ResultType
+        public void ProcessResult(IRequestContext request, IResponseContext response)
         {
-            get { return HandlerResultType.Redirect; }
-        }
-
-        public IDictionary<string, string> CustomHeaders
-        {
-            get { return new Dictionary<string, string>(); }
-        }
-
-        public string ContentType
-        {
-            get { return "text/html"; }
-        }
-
-        public string GetResult()
-        {
-            return uri;
+            response.ContentType = "text/html";
+            response.Redirect(_uri);
         }
     }
 }

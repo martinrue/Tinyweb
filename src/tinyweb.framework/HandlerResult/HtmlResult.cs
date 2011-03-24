@@ -1,41 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace tinyweb.framework
 {
     public class HtmlResult : IHandlerResult
     {
-        string filepath;
-
-        public HandlerResultType ResultType
-        {
-            get { return HandlerResultType.Render; }
-        }
-
-        public IDictionary<string, string> CustomHeaders
-        {
-            get { return new Dictionary<string, string>(); }
-        }
-
-        public string ContentType
-        {
-            get { return "text/html"; }
-        }
+        string _filepath;
 
         public HtmlResult(string filepath)
         {
-            this.filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filepath);
+            _filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filepath);
 
-            if (!File.Exists(this.filepath))
+            if (!File.Exists(_filepath))
             {
-                throw new FileNotFoundException(String.Format("The view at {0} could not be found", this.filepath));
+                throw new FileNotFoundException(String.Format("The view at {0} could not be found", _filepath));
             }
         }
 
-        public string GetResult()
+        public void ProcessResult(IRequestContext request, IResponseContext response)
         {
-            return File.ReadAllText(this.filepath);
+            response.ContentType = "text/html";
+            response.Write(File.ReadAllText(_filepath));
         }
     }
 }

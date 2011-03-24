@@ -5,6 +5,7 @@ using System.Text;
 using System.Web.Routing;
 using StructureMap;
 using StructureMap.Configuration.DSL;
+using SWR = System.Web.Routing;
 
 namespace tinyweb.framework
 {
@@ -14,14 +15,10 @@ namespace tinyweb.framework
 
         public static int Init(params Registry[] registries)
         {
-            ObjectFactory.Initialize(x =>
-            {
-                registries.ForEach(x.AddRegistry);
-            });
-
+            ObjectFactory.Initialize(x => registries.ForEach(x.AddRegistry));
+            
             Handlers = HandlerScanner.Current.FindAll();
-
-            Handlers.ForEach(handler => RouteTable.Routes.Add(new System.Web.Routing.Route(handler.Uri, new RouteValueDictionary(handler.DefaultRouteValues), new RouteHandler(handler))));
+            Handlers.ForEach(handler => RouteTable.Routes.Add(new SWR.Route(handler.Uri, new RouteValueDictionary(handler.DefaultRouteValues), new RouteHandler(handler))));
 
             return Handlers.Count();
         }

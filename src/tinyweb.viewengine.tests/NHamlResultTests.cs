@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using NUnit.Framework;
+using tinyweb.framework;
 using tinyweb.viewengine.nhaml;
 
 namespace tinyweb.viewengine.tests
@@ -8,7 +9,7 @@ namespace tinyweb.viewengine.tests
     public class NHamlResultTests
     {
         [Test]
-        public void GetResult_WhenRequestedWithNonExistentPath_ThrowsFileNotFoundException()
+        public void ProcessResult_WhenRequestedWithNonExistentPath_ThrowsFileNotFoundException()
         {
             var exception = Assert.Throws<FileNotFoundException>(() => new NHamlResult("c:\\fakepath"));
 
@@ -16,28 +17,33 @@ namespace tinyweb.viewengine.tests
         }
 
         [Test]
-        public void GetResult_WhenRequestedWithNoModel_ReturnsViewData()
+        public void ProcessResult_WhenRequestedWithNoModel_ReturnsViewData()
         {
+            var response = new FakeResponseContext();
             var result = new NHamlResult("..\\..\\Test Data\\Views\\NHaml\\View.haml");
 
-            Assert.That(result.ContentType, Is.EqualTo("text/html"));
-            Assert.That(result.GetResult(), Contains.Substring("<h1>testing</h1>"));
+            result.ProcessResult(null, response);
+
+            Assert.That(response.ContentType, Is.EqualTo("text/html"));
+            Assert.That(response.Response, Contains.Substring("<h1>testing</h1>"));
         }
 
         [Test]
-        public void GetResult_WhenRequestedWithModel_ReturnsViewData()
+        public void ProcessResult_WhenRequestedWithModel_ReturnsViewData()
         {
+            var response = new FakeResponseContext();
             var model = new UserModel {ID = 42, Username = "Username"};
             var result = new NHamlResult<UserModel>(model, "..\\..\\Test Data\\Views\\NHaml\\Hello.haml");
-            var output = result.GetResult();
 
-            Assert.That(result.ContentType, Is.EqualTo("text/html"));
-            Assert.That(output, Contains.Substring("<h1>"));
-            Assert.That(output, Contains.Substring("42"));
-            Assert.That(output, Contains.Substring("</h1>"));
-            Assert.That(output, Contains.Substring("<h2>"));
-            Assert.That(output, Contains.Substring("Username"));
-            Assert.That(output, Contains.Substring("</h2>"));
+            result.ProcessResult(null, response);
+
+            Assert.That(response.ContentType, Is.EqualTo("text/html"));
+            Assert.That(response.Response, Contains.Substring("<h1>"));
+            Assert.That(response.Response, Contains.Substring("42"));
+            Assert.That(response.Response, Contains.Substring("</h1>"));
+            Assert.That(response.Response, Contains.Substring("<h2>"));
+            Assert.That(response.Response, Contains.Substring("Username"));
+            Assert.That(response.Response, Contains.Substring("</h2>"));
         }
     }
 }

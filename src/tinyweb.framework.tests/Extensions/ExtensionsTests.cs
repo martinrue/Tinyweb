@@ -138,5 +138,29 @@ namespace tinyweb.framework.tests
         {
             Assert.That("Hello World".UrlEncode(), Is.EqualTo("Hello+World"));
         }
+
+        [Test]
+        public void ParseAcceptHeader_WithCatchAll_FindsOneAcceptTypeWithPriority1()
+        {
+            var headers = "*/*".ParseAcceptHeader();
+            Assert.That(headers["*/*"], Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ParseAcceptHeader_SingleTypeAndPriority_FindsCorrectTypeAndPriority()
+        {
+            var headers = "application/xml; p=0.9".ParseAcceptHeader();
+            Assert.That(headers["application/xml"], Is.EqualTo(0.9));
+        }
+
+        [Test]
+        public void ParseAcceptHeader_MultipleTypesAndPriorities_FindsCorrectTypesAndPriorities()
+        {
+            var headers = "application/xml,application/json,text/html;p=0.8,text/plain; p=0.7".ParseAcceptHeader();
+            Assert.That(headers["application/xml"], Is.EqualTo(1));
+            Assert.That(headers["application/json"], Is.EqualTo(1));
+            Assert.That(headers["text/html"], Is.EqualTo(0.8));
+            Assert.That(headers["text/plain"], Is.EqualTo(0.7));
+        }
     }
 }

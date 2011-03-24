@@ -59,15 +59,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HandlerResult\XmlResultTests.cs" />
-    <Compile Include="HandlerResult\RedirectResultTests.cs" />
-    <Compile Include="HandlerResult\FileResultTests.cs" />
-    <Compile Include="HandlerResult\JsonResultTests.cs" />
-    <Compile Include="HandlerResult\HtmlResultTests.cs" />
+    <Compile Include="HandlerResult\JsonOrXmlResultTests.cs" />
+    <Compile Include="HandlerResult\FileResultTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HandlerResult\HtmlResultTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HandlerResult\JsonResultTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HandlerResult\RedirectResultTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HandlerResult\StringResultTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HandlerResult\XmlResultTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Helpers\UrlTests.cs" />
     <Compile Include="Init\InitTests.cs" />
     <Compile Include="HandlerInvoker\MethodInvokerTests.cs" />
-    <Compile Include="HandlerResult\StringResultTests.cs" />
     <Compile Include="HandlerInvoker\DefaultHandlerInvokerTests.cs" />
     <Compile Include="HandlerInvoker\HandlerInvokerTests.cs" />
     <Compile Include="Extensions\ExtensionsTests.cs" />

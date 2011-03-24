@@ -1,34 +1,18 @@
-﻿using System.Collections.Generic;
-
-namespace tinyweb.framework
+﻿namespace tinyweb.framework
 {
     public class StringResult : IHandlerResult
     {
-        string data;
-
-        public HandlerResultType ResultType
-        {
-            get { return HandlerResultType.Render; }
-        }
-
-        public IDictionary<string, string> CustomHeaders
-        {
-            get { return new Dictionary<string, string>(); }
-        }
-
-        public string ContentType
-        {
-            get { return "text/html"; }
-        }
+        string _data;
 
         public StringResult(string data)
         {
-            this.data = data;
+            _data = data;
         }
 
-        public string GetResult()
+        public void ProcessResult(IRequestContext request, IResponseContext response)
         {
-            return data;
+            response.ContentType = "text/html";
+            response.Write(_data);
         }
     }
 }

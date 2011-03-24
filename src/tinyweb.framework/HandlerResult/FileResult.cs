@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using Microsoft.Win32;
 
@@ -7,52 +6,35 @@ namespace tinyweb.framework
 {
     public class FileResult : IHandlerResult
     {
-        string filepath;
-
-        public HandlerResultType ResultType
-        {
-            get { return HandlerResultType.Download; }
-        }
-
-        public IDictionary<string, string> CustomHeaders
-        {
-            get
-            {
-                return new Dictionary<string, string> 
-                { 
-                    {"Content-Disposition", String.Format("attachment; filename={0}", Path.GetFileName(this.filepath))} 
-                };
-            }
-        }
-
-        public string ContentType
-        {
-            get 
-            {
-                var key = Registry.ClassesRoot.OpenSubKey(Path.GetExtension(this.filepath).ToLower());
-
-                if (key != null && key.GetValue("Content Type") != null)
-                {
-                    return key.GetValue("Content Type").ToString();
-                }
-
-                return "application/unknown";
-            }
-        }
-
+        string _filepath;
+        
         public FileResult(string filepath)
         {
-            this.filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filepath);
+            _filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filepath);
 
-            if (!File.Exists(this.filepath))
+            if (!File.Exists(_filepath))
             {
-                throw new FileNotFoundException(String.Format("The file at {0} could not be found", this.filepath));
+                throw new FileNotFoundException(String.Format("The file at {0} could not be found", _filepath));
             }
         }
 
-        public string GetResult()
+        public void ProcessResult(IRequestContext request, IResponseContext response)
         {
-            return this.filepath;
-        }       
+            response.AddHeader("Content-Disposition", String.Format("attachment; filename={0}", Path.GetFileName(_filepath)));
+            response.ContentType = getContentType();
+            response.WriteFile(_filepath);
+        }
+
+        private string getContentType()
+        {
+            var key = Registry.ClassesRoot.OpenSubKey(Path.GetExtension(_filepath).ToLower());
+
+            if (key != null && key.GetValue("Content Type") != null)
+            {
+                return key.GetValue("Content Type").ToString();
+            }
+
+            return "application/unknown";   
+        }
     }
 }

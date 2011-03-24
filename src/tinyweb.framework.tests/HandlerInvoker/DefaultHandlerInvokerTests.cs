@@ -15,8 +15,7 @@ namespace tinyweb.framework.tests
         {
             defaultHandlerInvoker = new DefaultHandlerInvoker();
 
-            requestContext = new RequestContext();
-            requestContext.HttpContext = MvcMockHelpers.FakeHttpContext();
+            requestContext = new RequestContext { HttpContext = MvcMockHelpers.FakeHttpContext() };
         }
 
         [Test]
@@ -24,10 +23,13 @@ namespace tinyweb.framework.tests
         {
             requestContext.HttpContext.Request.SetHttpMethodResult("GET");
 
+            var response = new FakeResponseContext();
             var result = defaultHandlerInvoker.Execute(new Resource1Handler(), requestContext);
 
-            Assert.That(result.ContentType, Is.EqualTo("text/html"));
-            Assert.That(result.GetResult(), Is.EqualTo("Get"));
+            result.ProcessResult(null, response);
+
+            Assert.That(response.ContentType, Is.EqualTo("text/html"));
+            Assert.That(response.Response, Is.EqualTo("Get"));
         }
 
         [Test]
@@ -35,10 +37,13 @@ namespace tinyweb.framework.tests
         {
             requestContext.HttpContext.Request.SetHttpMethodResult("POST");
 
+            var response = new FakeResponseContext();
             var result = defaultHandlerInvoker.Execute(new Resource1Handler(), requestContext);
 
-            Assert.That(result.ContentType, Is.EqualTo("text/html"));
-            Assert.That(result.GetResult(), Is.EqualTo("Post"));
+            result.ProcessResult(null, response);
+
+            Assert.That(response.ContentType, Is.EqualTo("text/html"));
+            Assert.That(response.Response, Is.EqualTo("Post"));
         }
 
         [Test]

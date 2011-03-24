@@ -47,10 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HandlerResult\Context\Default\DefaultRequestContext.cs" />
+    <Compile Include="HandlerResult\Context\Default\DefaultResponseContext.cs" />
+    <Compile Include="HandlerResult\Context\Fake\FakeRequestContext.cs" />
+    <Compile Include="HandlerResult\Context\Fake\FakeResponseContext.cs" />
+    <Compile Include="HandlerResult\Context\IRequestHeaders.cs" />
+    <Compile Include="HandlerResult\Context\IResponseContext.cs" />
+    <Compile Include="HandlerResult\Context\IRequestContext.cs" />
+    <Compile Include="HandlerResult\Context\RequestHeaders.cs" />
+    <Compile Include="HandlerResult\JsonOrXmlResult.cs" />
     <Compile Include="HandlerResult\XmlResult.cs" />
     <Compile Include="HandlerResult\RedirectResult.cs" />
     <Compile Include="HandlerResult\Factory\Result.cs" />
-    <Compile Include="HandlerResult\Interface\HandlerResultType.cs" />
     <Compile Include="Helpers\Url.cs" />
     <Compile Include="Init\Route.cs" />
     <Compile Include="HandlerResult\FileResult.cs" />
@@ -79,6 +87,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

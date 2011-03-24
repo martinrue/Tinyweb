@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using NUnit.Framework;
+using tinyweb.framework;
 using tinyweb.viewengine.ndjango;
 
 namespace tinyweb.viewengine.tests
@@ -8,7 +9,7 @@ namespace tinyweb.viewengine.tests
     public class NDjangoResultTests
     {
         [Test]
-        public void GetResult_WhenRequestedWithNonExistentPath_ThrowsFileNotFoundException()
+        public void ProcessResult_WhenRequestedWithNonExistentPath_ThrowsFileNotFoundException()
         {
             var exception = Assert.Throws<FileNotFoundException>(() => new NDjangoResult("c:\\fakepath"));
 
@@ -16,22 +17,28 @@ namespace tinyweb.viewengine.tests
         }
 
         [Test]
-        public void GetResult_WhenRequestedWithNoModel_ReturnsViewData()
+        public void ProcessResult_WhenRequestedWithNoModel_ReturnsViewData()
         {
+            var response = new FakeResponseContext();
             var result = new NDjangoResult("..\\..\\Test Data\\Views\\NDjango\\NoModel.django");
 
-            Assert.That(result.ContentType, Is.EqualTo("text/html"));
-            Assert.That(result.GetResult(), Contains.Substring("<h1>content</h1>"));
+            result.ProcessResult(null, response);
+
+            Assert.That(response.ContentType, Is.EqualTo("text/html"));
+            Assert.That(response.Response, Contains.Substring("<h1>content</h1>"));
         }
 
         [Test]
-        public void GetResult_WhenRequestedWithModel_ReturnsViewData()
+        public void ProcessResult_WhenRequestedWithModel_ReturnsViewData()
         {
+            var response = new FakeResponseContext();
             var model = new UserModel {ID = 42, Username = "Username"};
             var result = new NDjangoResult<UserModel>(model, "..\\..\\Test Data\\Views\\NDjango\\Model.django");
 
-            Assert.That(result.ContentType, Is.EqualTo("text/html"));
-            Assert.That(result.GetResult(), Contains.Substring("42Username"));
+            result.ProcessResult(null, response);
+
+            Assert.That(response.ContentType, Is.EqualTo("text/html"));
+            Assert.That(response.Response, Contains.Substring("42Username"));
         }
     }
 }

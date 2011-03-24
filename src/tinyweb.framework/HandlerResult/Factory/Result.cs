@@ -27,6 +27,11 @@
             return new XmlResult(data);
         }
 
+        public static JsonOrXmlResult JsonOrXml(object data)
+        {
+            return new JsonOrXmlResult(data);
+        }
+
         public static RedirectResult<T> Redirect<T>(object arguments = null)
         {
             return new RedirectResult<T>(arguments);

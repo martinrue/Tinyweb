@@ -1,6 +1,5 @@
 ﻿using System;
 using NUnit.Framework;
-using tinyweb.framework;
 
 namespace tinyweb.framework.tests
 {
@@ -24,19 +23,27 @@ namespace tinyweb.framework.tests
         }
 
         [Test]
-        public void GetResult_WhenCreatedWithValidHandler_ReturnsHandlerUri()
+        public void ProcessResult_WhenCreatedWithValidHandler_ReturnsHandlerUri()
         {
             Tinyweb.Handlers = new[] { new HandlerData { Type = typeof(Resource1Handler), Uri = "uri" } };
 
+            var response = new FakeResponseContext();
             var result = new RedirectResult<Resource1Handler>();
-            Assert.That(result.GetResult(), Is.EqualTo("/uri"));
+
+            result.ProcessResult(null, response);
+
+            Assert.That(response.RedirectUrl, Is.EqualTo("/uri"));
         }
 
         [Test]
-        public void GetResult_WhenCreatedWithValidUri_ReturnsUri()
+        public void ProcessResult_WhenCreatedWithValidUri_ReturnsUri()
         {
+            var response = new FakeResponseContext();
             var result = new RedirectResult("someuri");
-            Assert.That(result.GetResult(), Is.EqualTo("someuri"));
+
+            result.ProcessResult(null, response);
+
+            Assert.That(response.RedirectUrl, Is.EqualTo("someuri"));
         }
     }
 }

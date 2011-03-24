@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using tinyweb.framework;
 
@@ -7,23 +6,8 @@ namespace tinyweb.viewengine.ndjango
 {
     public class NDjangoResult<T> : IHandlerResult
     {
-        T model;
-        string template;
-
-        public HandlerResultType ResultType
-        {
-            get { return HandlerResultType.Render; }
-        }
-
-        public IDictionary<string, string> CustomHeaders
-        {
-            get { return new Dictionary<string, string>(); }
-        }
-
-        public string ContentType
-        {
-            get { return "text/html"; }
-        }
+        T _model;
+        string _template;
 
         public NDjangoResult(T model, string template)
         {  
@@ -34,34 +18,20 @@ namespace tinyweb.viewengine.ndjango
                 throw new FileNotFoundException(String.Format("The django view at {0} could not be found", fullTemplatePath));
             }
 
-            this.template = fullTemplatePath;
-            this.model = model;
+            _template = fullTemplatePath;
+            _model = model;
         }
 
-        public string GetResult()
+        public void ProcessResult(IRequestContext request, IResponseContext response)
         {
-            return NDjangoCompiler.Compile(model, template);
+            response.ContentType = "text/html";
+            response.Write(NDjangoCompiler.Compile(_model, _template));
         }
     }
 
     public class NDjangoResult : IHandlerResult
     {
-        string template;
-
-        public HandlerResultType ResultType
-        {
-            get { return HandlerResultType.Render; }
-        }
-
-        public IDictionary<string, string> CustomHeaders
-        {
-            get { return new Dictionary<string, string>(); }
-        }
-
-        public string ContentType
-        {
-            get { return "text/html"; }
-        }
+        string _template;
 
         public NDjangoResult(string template)
         {
@@ -72,12 +42,13 @@ namespace tinyweb.viewengine.ndjango
                 throw new FileNotFoundException(String.Format("The django view at {0} could not be found", fullTemplatePath));
             }
 
-            this.template = fullTemplatePath;
+            _template = fullTemplatePath;
         }
 
-        public string GetResult()
+        public void ProcessResult(IRequestContext request, IResponseContext response)
         {
-            return NDjangoCompiler.Compile<Object>(null, template);
+            response.ContentType = "text/html";
+            response.Write(NDjangoCompiler.Compile<Object>(null, _template));
         }
     }
 }

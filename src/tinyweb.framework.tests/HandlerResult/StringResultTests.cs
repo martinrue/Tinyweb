@@ -6,17 +6,25 @@ namespace tinyweb.framework.tests
     public class StringResultTests
     {
         [Test]
-        public void GetResult_WhenCreatedWithNewString_ReturnsString()
+        public void ProcessResult_WhenCreatedWithNewString_ReturnsString()
         {
+            var response = new FakeResponseContext();
             var result = new StringResult("test data");
-            Assert.That(result.GetResult(), Is.EqualTo("test data"));
+
+            result.ProcessResult(null, response);
+
+            Assert.That(response.Response, Is.EqualTo("test data"));
         }
 
         [Test]
-        public void GetResult_WhenCreated_ContentTypeIsTextHtml()
+        public void ProcessResult_WhenCreated_ContentTypeIsTextHtml()
         {
+            var response = new FakeResponseContext();
             var result = new StringResult("test data");
-            Assert.That(result.ContentType, Is.EqualTo("text/html"));
+
+            result.ProcessResult(null, response);
+
+            Assert.That(response.ContentType, Is.EqualTo("text/html"));
         }
     }
 }

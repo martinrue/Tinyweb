@@ -25,11 +25,14 @@ namespace tinyweb.framework.tests
             requestContext.HttpContext = MvcMockHelpers.FakeHttpContext(queryString: new NameValueCollection { {"param1", "1"}, {"param2", "world"} });
             requestContext.HttpContext.Request.SetHttpMethodResult("GET");
 
+            var response = new FakeResponseContext();
             var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
 
+            result.ProcessResult(null, response);
+
             Assert.That(result, Is.InstanceOf<StringResult>());
-            Assert.That(result.ContentType, Is.EqualTo("text/html"));
-            Assert.That(result.GetResult(), Is.EqualTo("1world"));
+            Assert.That(response.ContentType, Is.EqualTo("text/html"));
+            Assert.That(response.Response, Is.EqualTo("1world"));
         }
 
         [Test]
@@ -38,11 +41,14 @@ namespace tinyweb.framework.tests
             requestContext.HttpContext = MvcMockHelpers.FakeHttpContext(formData: new NameValueCollection { { "param1", "5" }, { "param2", "times" } });
             requestContext.HttpContext.Request.SetHttpMethodResult("GET");
 
+            var response = new FakeResponseContext();
             var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
 
+            result.ProcessResult(null, response);
+
             Assert.That(result, Is.InstanceOf<StringResult>());
-            Assert.That(result.ContentType, Is.EqualTo("text/html"));
-            Assert.That(result.GetResult(), Is.EqualTo("5times"));
+            Assert.That(response.ContentType, Is.EqualTo("text/html"));
+            Assert.That(response.Response, Is.EqualTo("5times"));
         }
 
         [Test]
@@ -53,11 +59,14 @@ namespace tinyweb.framework.tests
             requestContext.RouteData.Values.Add("param2", "strings");
             requestContext.HttpContext.Request.SetHttpMethodResult("GET");
 
+            var response = new FakeResponseContext();
             var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
 
+            result.ProcessResult(null, response);
+
             Assert.That(result, Is.InstanceOf<StringResult>());
-            Assert.That(result.ContentType, Is.EqualTo("text/html"));
-            Assert.That(result.GetResult(), Is.EqualTo("10strings"));
+            Assert.That(response.ContentType, Is.EqualTo("text/html"));
+            Assert.That(response.Response, Is.EqualTo("10strings"));
         }
 
         [Test]
@@ -66,12 +75,15 @@ namespace tinyweb.framework.tests
             requestContext.HttpContext = MvcMockHelpers.FakeHttpContext(queryString: new NameValueCollection { { "param1", "42" } }, formData: new NameValueCollection { {"param2", "1.141"} });
             requestContext.RouteData.Values.Add("param3", "true");
             requestContext.HttpContext.Request.SetHttpMethodResult("POST");
-            
+
+            var response = new FakeResponseContext();
             var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
 
+            result.ProcessResult(null, response);
+
             Assert.That(result, Is.InstanceOf<StringResult>());
-            Assert.That(result.ContentType, Is.EqualTo("text/html"));
-            Assert.That(result.GetResult(), Is.EqualTo("421.141True"));
+            Assert.That(response.ContentType, Is.EqualTo("text/html"));
+            Assert.That(response.Response, Is.EqualTo("421.141True"));
         }
 
         [Test]
@@ -80,11 +92,14 @@ namespace tinyweb.framework.tests
             requestContext.HttpContext = MvcMockHelpers.FakeHttpContext(queryString: new NameValueCollection { { "number1", "4" }, { "number2", "5" } });
             requestContext.HttpContext.Request.SetHttpMethodResult("PUT");
 
+            var response = new FakeResponseContext();
             var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
 
+            result.ProcessResult(null, response);
+
             Assert.That(result, Is.InstanceOf<StringResult>());
-            Assert.That(result.ContentType, Is.EqualTo("text/html"));
-            Assert.That(result.GetResult(), Is.EqualTo("Result: 9"));
+            Assert.That(response.ContentType, Is.EqualTo("text/html"));
+            Assert.That(response.Response, Is.EqualTo("Result: 9"));
         }
 
         [Test]
@@ -94,11 +109,14 @@ namespace tinyweb.framework.tests
             requestContext.RouteData.Values.Add("label", "the total is");
             requestContext.HttpContext.Request.SetHttpMethodResult("DELETE");
 
+            var response = new FakeResponseContext();
             var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
 
+            result.ProcessResult(null, response);
+
             Assert.That(result, Is.InstanceOf<StringResult>());
-            Assert.That(result.ContentType, Is.EqualTo("text/html"));
-            Assert.That(result.GetResult(), Is.EqualTo("the total is 240"));
+            Assert.That(response.ContentType, Is.EqualTo("text/html"));
+            Assert.That(response.Response, Is.EqualTo("the total is 240"));
         }
     }
 }

@@ -7,37 +7,49 @@ namespace tinyweb.framework.tests
     public class FileResultTests
     {
         [Test]
-        public void GetResult_WhenCreatedWithNonExistentPath_ThrowsFileNotFoundException()
+        public void ProcessResult_WhenCreatedWithNonExistentPath_ThrowsFileNotFoundException()
         {
             var exception = Assert.Throws<FileNotFoundException>(() => new FileResult("c:\\fakepath"));
             Assert.That(exception.Message, Is.EqualTo("The file at c:\\fakepath could not be found"));
         }
 
         [Test]
-        public void GetResult_WhenCreatedWithPathToHtmlFile_ReturnsPathToFileAndHasDispositionHeader()
+        public void ProcessResult_WhenCreatedWithPathToHtmlFile_ReturnsPathToFileAndHasDispositionHeader()
         {
+            var response = new FakeResponseContext();
             var result = new FileResult("..\\..\\Test Data\\HandlerResult\\Views\\View.html");
-            Assert.That(result.ContentType, Is.EqualTo("text/html"));
-            Assert.IsTrue(result.GetResult().EndsWith("\\Test Data\\HandlerResult\\Views\\View.html"));
-            Assert.That(result.CustomHeaders["Content-Disposition"], Is.EqualTo("attachment; filename=View.html"));
+
+            result.ProcessResult(null, response);
+
+            Assert.That(response.ContentType, Is.EqualTo("text/html"));
+            Assert.IsTrue(response.Response.EndsWith("\\Test Data\\HandlerResult\\Views\\View.html"));
+            Assert.That(response.Headers["Content-Disposition"], Is.EqualTo("attachment; filename=View.html"));
         }
 
         [Test]
-        public void GetResult_WhenCreatedWithPathToPDFFile_ReturnsPathToFileAndHasDispositionHeader()
+        public void ProcessResult_WhenCreatedWithPathToPDFFile_ReturnsPathToFileAndHasDispositionHeader()
         {
+            var response = new FakeResponseContext();
             var result = new FileResult("..\\..\\Test Data\\HandlerResult\\Files\\Download.txt");
-            Assert.That(result.ContentType, Is.EqualTo("text/plain"));
-            Assert.IsTrue(result.GetResult().EndsWith("\\Test Data\\HandlerResult\\Files\\Download.txt"));
-            Assert.That(result.CustomHeaders["Content-Disposition"], Is.EqualTo("attachment; filename=Download.txt"));
+
+            result.ProcessResult(null, response);
+
+            Assert.That(response.ContentType, Is.EqualTo("text/plain"));
+            Assert.That(response.Response.EndsWith("\\Test Data\\HandlerResult\\Files\\Download.txt"));
+            Assert.That(response.Headers["Content-Disposition"], Is.EqualTo("attachment; filename=Download.txt"));
         }
 
         [Test]
-        public void GetResult_WhenCreatedWithPathToUnknownFile_ReturnsPathToFileAndHasDispositionHeader()
+        public void ProcessResult_WhenCreatedWithPathToUnknownFile_ReturnsPathToFileAndHasDispositionHeader()
         {
+            var response = new FakeResponseContext();
             var result = new FileResult("..\\..\\Test Data\\HandlerResult\\Files\\Download.unknown");
-            Assert.That(result.ContentType, Is.EqualTo("application/unknown"));
-            Assert.IsTrue(result.GetResult().EndsWith("\\Test Data\\HandlerResult\\Files\\Download.unknown"));
-            Assert.That(result.CustomHeaders["Content-Disposition"], Is.EqualTo("attachment; filename=Download.unknown"));
+
+            result.ProcessResult(null, response);
+
+            Assert.That(response.ContentType, Is.EqualTo("application/unknown"));
+            Assert.IsTrue(response.Response.EndsWith("\\Test Data\\HandlerResult\\Files\\Download.unknown"));
+            Assert.That(response.Headers["Content-Disposition"], Is.EqualTo("attachment; filename=Download.unknown"));
         }
     }
 }

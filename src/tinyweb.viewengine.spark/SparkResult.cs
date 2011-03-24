@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using tinyweb.framework;
 
@@ -7,26 +6,11 @@ namespace tinyweb.viewengine.spark
 {
     public class SparkResult<T> : IHandlerResult
     {
-        T model;
-        string templatePath;
-        string templateName;
-        string master;
-
-        public HandlerResultType ResultType
-        {
-            get { return HandlerResultType.Render; }
-        }
-
-        public IDictionary<string, string> CustomHeaders
-        {
-            get { return new Dictionary<string, string>(); }
-        }
-
-        public string ContentType
-        {
-            get { return "text/html"; }
-        }
-
+        T _model;
+        string _templatePath;
+        string _templateName;
+        string _master;
+        
         public SparkResult(T model, string templatesPath, string master = null)
         {           
             var templateName = Path.GetFileName(templatesPath);
@@ -39,38 +23,24 @@ namespace tinyweb.viewengine.spark
                 throw new FileNotFoundException(String.Format("The spark view at {0} could not be found", fullTemplatePath));
             }
 
-            this.model = model;
-            this.templatePath = templatePath;
-            this.templateName = templateName;
-            this.master = master;
+            _model = model;
+            _templatePath = templatePath;
+            _templateName = templateName;
+            _master = master;
         }
 
-        public string GetResult()
+        public void ProcessResult(IRequestContext request, IResponseContext response)
         {
-            return SparkCompiler.Compile(model, templatePath, templateName, master);
+            response.ContentType = "text/html";
+            response.Write(SparkCompiler.Compile(_model, _templatePath, _templateName, _master));
         }
     }
 
     public class SparkResult : IHandlerResult
     {
-        string templatePath;
-        string templateName;
-        string master;
-
-        public HandlerResultType ResultType
-        {
-            get { return HandlerResultType.Render; }
-        }
-
-        public IDictionary<string, string> CustomHeaders
-        {
-            get { return new Dictionary<string, string>(); }
-        }
-
-        public string ContentType
-        {
-            get { return "text/html"; }
-        }
+        string _templatePath;
+        string _templateName;
+        string _master;
 
         public SparkResult(string templatesPath, string master = null)
         {
@@ -84,19 +54,15 @@ namespace tinyweb.viewengine.spark
                 throw new FileNotFoundException(String.Format("The spark view at {0} could not be found", fullTemplatePath));
             }
 
-            this.templatePath = templatePath;
-            this.templateName = templateName;
-            this.master = master;
+            _templatePath = templatePath;
+            _templateName = templateName;
+            _master = master;
         }
 
-        public static implicit operator SparkResult(string templateName)
+        public void ProcessResult(IRequestContext request, IResponseContext response)
         {
-            return new SparkResult(templateName);
-        }
-
-        public string GetResult()
-        {
-            return SparkCompiler.Compile<Object>(null, templatePath, templateName, master);
+            response.ContentType = "text/html";
+            response.Write(SparkCompiler.Compile<Object>(null, _templatePath, _templateName, _master));
         }
     }
 }

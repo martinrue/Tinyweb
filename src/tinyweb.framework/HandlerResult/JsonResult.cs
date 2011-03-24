@@ -1,41 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Script.Serialization;
 
 namespace tinyweb.framework
 {
     public class JsonResult : IHandlerResult
     {
-        object data;
-
-        public HandlerResultType ResultType
-        {
-            get { return HandlerResultType.Render; }
-        }
-
-        public IDictionary<string, string> CustomHeaders
-        {
-            get { return new Dictionary<string, string>(); }
-        }
-
-        public string ContentType
-        {
-            get { return "text/json"; }
-        }
+        object _data;
 
         public JsonResult(object data)
         {
-            this.data = data;
-        }
-
-        public string GetResult()
-        {
-            if (data != null)
+            if (data == null)
             {
-                return new JavaScriptSerializer().Serialize(this.data);
+                throw new ArgumentNullException("data");
             }
 
-            return String.Empty;
+            _data = data;
+        }
+
+        public void ProcessResult(IRequestContext request, IResponseContext response)
+        {
+            response.ContentType = "application/json";
+            response.Write(new JavaScriptSerializer().Serialize(_data));
         }
     }
 }

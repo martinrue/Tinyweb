@@ -8,17 +8,19 @@ namespace tinyweb.framework.tests
     public class XmlResultTests
     {
         [Test]
-        public void GetResult_WhenCreatedWithNull_ReturnsEmptyString()
+        public void ProcessResult_WhenCreatedWithNull_ThrowsArgumentNullException()
         {
-            var result = new XmlResult(null);
-            Assert.That(result.GetResult(), Is.EqualTo(String.Empty));
+            Assert.Throws<ArgumentNullException>(() => new XmlResult(null));
         }
 
         [Test]
-        public void GetResult_WhenCreatedWithCustomObject_ReturnsCorrectXmlRepresentation()
+        public void ProcessResult_WhenCreatedWithCustomObject_ReturnsCorrectXmlRepresentation()
         {
+            var response = new FakeResponseContext();
             var result = new XmlResult(new CustomType { Data = "data", Number = 50 });
-            
+
+            result.ProcessResult(null, response);
+
             var expected = "";
             expected += "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n";
             expected += "<CustomType xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n";
@@ -26,14 +28,17 @@ namespace tinyweb.framework.tests
             expected += "  <Number>50</Number>\r\n";
             expected += "</CustomType>";
 
-            Assert.That(result.ContentType, Is.EqualTo("text/xml"));
-            Assert.That(result.GetResult(), Is.EqualTo(expected));
+            Assert.That(response.ContentType, Is.EqualTo("application/xml"));
+            Assert.That(response.Response, Is.EqualTo(expected));
         }
 
         [Test]
-        public void GetResult_WhenCreatedWithCollection_ReturnsCorrectXmlRepresentation()
+        public void ProcessResult_WhenCreatedWithCollection_ReturnsCorrectXmlRepresentation()
         {
+            var response = new FakeResponseContext();
             var result = new XmlResult(new List<CustomType> { new CustomType { Data = "data1", Number = 1 }, new CustomType { Data = "data2", Number = 2 } });
+
+            result.ProcessResult(null, response);
 
             var expected = "";
             expected += "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n";
@@ -48,8 +53,8 @@ namespace tinyweb.framework.tests
             expected += "  </CustomType>\r\n";
             expected += "</ArrayOfCustomType>";
 
-            Assert.That(result.ContentType, Is.EqualTo("text/xml"));
-            Assert.That(result.GetResult(), Is.EqualTo(expected));
+            Assert.That(response.ContentType, Is.EqualTo("application/xml"));
+            Assert.That(response.Response, Is.EqualTo(expected));
         }
     }
 }

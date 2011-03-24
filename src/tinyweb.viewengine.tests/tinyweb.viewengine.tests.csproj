@@ -52,10 +52,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NDjangoResultTests.cs" />
+    <Compile Include="NHamlResultTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SparkResultTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Test Data\Models\UserModel.cs" />
-    <Compile Include="NHamlResultTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SparkResultTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Test Data\Views\Spark\Child.spark" />
