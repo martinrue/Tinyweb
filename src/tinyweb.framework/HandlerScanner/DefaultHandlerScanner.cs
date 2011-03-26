@@ -50,7 +50,11 @@ namespace tinyweb.framework
 
             var route = routeProperty.GetValue(handler) as Route;
 
-            if (route.RouteUri.IsEmpty())
+            if (route.RouteUri == "/")
+            {
+                route.RouteUri = String.Empty;
+            }
+            else if (route.RouteUri.IsEmpty())
             {
                 route.RouteUri = getRouteUriByConvention(type);
             }
@@ -63,7 +67,7 @@ namespace tinyweb.framework
             var handlerStart = type.Name.ToLower().IndexOf("handler");
             var pascalConvention = type.Name.Substring(0, handlerStart);
 
-            return String.Join("/", pascalConvention.PascalSplit());
+            return pascalConvention.ToLower() == "root" ? String.Empty : String.Join("/", pascalConvention.PascalSplit());
         }
     }
 }

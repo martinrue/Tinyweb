@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NUnit.Framework;
 
 namespace tinyweb.framework.tests
@@ -18,7 +19,7 @@ namespace tinyweb.framework.tests
         public void FindAll_WhenCalled_FindsAllHandlers()
         {
             var handlers = defaultHandlerScanner.FindAll();
-            Assert.That(handlers.Count(), Is.EqualTo(6));
+            Assert.That(handlers.Count(), Is.EqualTo(8));
         }
 
         [Test]
@@ -89,6 +90,20 @@ namespace tinyweb.framework.tests
         {
             var handlers = defaultHandlerScanner.FindAll();
             Assert.That(handlers.Single(h => h.Type == new PascalConventionHandler().GetType()).Uri, Is.EqualTo("Pascal/Convention"));
+        }
+
+        [Test]
+        public void FindAll_WhenCalled_RootHandlerHasEmptyUri()
+        {
+            var handlers = defaultHandlerScanner.FindAll();
+            Assert.That(handlers.Single(h => h.Type == new RootHandler().GetType()).Uri, Is.EqualTo(String.Empty));
+        }
+
+        [Test]
+        public void FindAll_WhenCalled_ExplicitRootHandlerHasEmptyUri()
+        {
+            var handlers = defaultHandlerScanner.FindAll();
+            Assert.That(handlers.Single(h => h.Type == new ExplicitRootHandler().GetType()).Uri, Is.EqualTo(String.Empty));
         }
     }
 }

@@ -87,6 +87,8 @@
     <Compile Include="HandlerFactory\HandlerFactoryTests.cs" />
     <Compile Include="HandlerFactory\DefaultHandlerFactoryTests.cs" />
     <Compile Include="HandlerScanner\HandlerScannerTests.cs" />
+    <Compile Include="Test Data\Handlers\ExplicitRootHandler.cs" />
+    <Compile Include="Test Data\Handlers\RootHandler.cs" />
     <Compile Include="TestHelpers\ContextHelpers.cs" />
     <Compile Include="TestHelpers\ObjectHelper.cs" />
     <Compile Include="Init\InitWithRegistriesTests.cs" />
