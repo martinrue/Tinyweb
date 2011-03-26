@@ -57,3 +57,13 @@ The easiest way to get started with Tinyweb is to [NuGet it](http://nuget.org/Li
 ## Build Server
 
 You can see the live build status (and grab the binary releases) from the [build server.](http://ci.thunder.invalidcast.com)
+
+## Versions
+
+1.3 Added convention for a handler called `RootHandler` and explicit `new Route("/")` for supporting index pages
+
+1.2 Refactoring of the handler result processing and introduction of `Result.JsonOrXml` which chooses JSON or XML depending on the accept header
+
+1.1 Added `Result.Xml` for serializing model to XML
+
+1.0 Initial release of Tinyweb
