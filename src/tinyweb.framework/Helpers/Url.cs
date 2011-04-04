@@ -16,30 +16,61 @@ namespace tinyweb.framework.Helpers
                 throw new Exception("The handler {0} was not found".With(typeof(T).Name));
             }
 
-            return "/" + (arguments == null ? handler.Uri : substituteUrlParameters(handler.Uri, arguments));
+            return buildUrl(handler, arguments);
         }
 
-        private static string substituteUrlParameters(string url, object arguments)
+        private static string buildUrl(HandlerData handler, object arguments)
         {
-            var properties = arguments.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            return "/" + substituteUrlParameters(handler.Uri, arguments, handler.DefaultRouteValues);
+        }
+
+        private static string substituteUrlParameters(string url, object arguments, object defaults)
+        {
             var unreplaced = new NameValueCollection();
 
-            foreach (var property in properties)
+            if (arguments != null)
             {
-                var name = property.Name;
-                var value = property.GetValue(arguments, null).ToString();
-                
-                var propertyReplaced = false;
+                var argumentProperties = arguments.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
 
-                url = recursiveReplace(url, name, value, ref propertyReplaced);
-
-                if (!propertyReplaced)
+                foreach (var property in argumentProperties)
                 {
-                    unreplaced.Add(name, value);
+                    var name = property.Name;
+                    var value = property.GetValue(arguments, null).ToString();
+
+                    var propertyReplaced = false;
+
+                    url = recursiveReplace(url, name, value, ref propertyReplaced);
+
+                    if (!propertyReplaced)
+                    {
+                        unreplaced.Add(name, value);
+                    }
                 }
             }
 
+            url = substituteUrlDefaults(url, defaults);
+
             return unreplaced.Count == 0 ? url : url + buildQueryString(unreplaced);
+        }
+
+        private static string substituteUrlDefaults(string url, object defaults)
+        {
+            if (defaults != null)
+            {
+                var defaultProperties = defaults.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+
+                foreach (var property in defaultProperties)
+                {
+                    var name = property.Name;
+                    var value = property.GetValue(defaults, null).ToString();
+
+                    var propertyReplaced = false;
+
+                    url = recursiveReplace(url, name, value, ref propertyReplaced);
+                }
+            }
+
+            return url;
         }
 
         private static string recursiveReplace(string url, string field, string value, ref bool propertyReplaced)

@@ -15,7 +15,7 @@ namespace tinyweb.framework.tests
         }
 
         [Test]
-        public void For_WithValidHandler_ReturnsHandlerUri()
+        public void UrlFor_WithValidHandler_ReturnsHandlerUri()
         {
             Tinyweb.Handlers = new List<HandlerData>
             {
@@ -26,13 +26,13 @@ namespace tinyweb.framework.tests
         }
 
         [Test]
-        public void For_WithInalidHandler_ThrowsException()
+        public void UrlFor_WithInalidHandler_ThrowsException()
         {
             Assert.Throws<Exception>(() => { Url.For<Resource1Handler>(); });
         }
 
         [Test]
-        public void For_WithParameterisedHandler_ReplacesParametersWithArguments()
+        public void UrlFor_WithParameters_ReplacesParametersWithArguments()
         {
             Tinyweb.Handlers = new List<HandlerData>
             {
@@ -45,7 +45,7 @@ namespace tinyweb.framework.tests
         }
 
         [Test]
-        public void For_WithRepeatedParameterisedHandler_ReplacesParametersWithArguments()
+        public void UrlFor_WithRepeatedParameters_ReplacesParametersWithArguments()
         {
             Tinyweb.Handlers = new List<HandlerData>
             {
@@ -58,7 +58,7 @@ namespace tinyweb.framework.tests
         }
 
         [Test]
-        public void For_WithArgumentsButNoParameters_AddsArgumentsToQueryString()
+        public void UrlFor_WithNoParameters_AddsAllArgumentsToQueryString()
         {
             Tinyweb.Handlers = new List<HandlerData>
             {
@@ -71,7 +71,7 @@ namespace tinyweb.framework.tests
         }
 
         [Test]
-        public void For_WithArgumentsAndParameters_ReplacesParametersAndAddsArgumentsToQueryString()
+        public void UrlFor_WithParameters_ReplacesParametersAndAddsArgumentsToQueryString()
         {
             Tinyweb.Handlers = new List<HandlerData>
             {
@@ -81,6 +81,32 @@ namespace tinyweb.framework.tests
             var url = Url.For<Resource1Handler>(new { step1 = "the", step2 = "quick", step3 = "brown" });
 
             Assert.That(url, Is.EqualTo("/someurl/the?step2=quick&step3=brown"));
+        }
+
+        [Test]
+        public void UrlFor_WithDefaultParameters_ReplacesParametersWithDefaultValues()
+        {
+            Tinyweb.Handlers = new List<HandlerData>
+            {
+                new HandlerData { Uri = "someurl/{page}", DefaultRouteValues = new { page = 1 }, Type = typeof(Resource1Handler) }
+            };
+
+            var url = Url.For<Resource1Handler>();
+
+            Assert.That(url, Is.EqualTo("/someurl/1"));
+        }
+
+        [Test]
+        public void UrlFor_WithOverriddenDefaultParameters_ReplacesParametersWithSuppliedDefaultParameterValues()
+        {
+            Tinyweb.Handlers = new List<HandlerData>
+            {
+                new HandlerData { Uri = "someurl/{page}", DefaultRouteValues = new { page = 1 }, Type = typeof(Resource1Handler) }
+            };
+
+            var url = Url.For<Resource1Handler>(new { page = 20 });
+
+            Assert.That(url, Is.EqualTo("/someurl/20"));
         }
     }
 }

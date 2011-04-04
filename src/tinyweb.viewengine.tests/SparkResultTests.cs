@@ -20,7 +20,7 @@ namespace tinyweb.viewengine.tests
         public void ProcessResult_WhenRequestedWithNoModel_ReturnsViewData()
         {
             var response = new FakeResponseContext();
-            var result = new SparkResult("..\\..\\Test Data\\Views\\Spark\\Simple.spark");
+            var result = new SparkResult("../../Test Data/Views/Spark/Simple.spark");
 
             result.ProcessResult(null, response);
 
@@ -33,7 +33,7 @@ namespace tinyweb.viewengine.tests
         {
             var response = new FakeResponseContext();
             var model = new UserModel { ID = 42, Username = "Username" };
-            var result = new SparkResult<UserModel>(model, "..\\..\\Test Data\\Views\\Spark\\View.spark");
+            var result = new SparkResult<UserModel>(model, "../../Test Data/Views/Spark/View.spark");
 
             result.ProcessResult(null, response);
 
@@ -47,7 +47,7 @@ namespace tinyweb.viewengine.tests
         {
             var response = new FakeResponseContext();
             var model = new UserModel { ID = 42, Username = "Username" };
-            var result = new SparkResult<UserModel>(model, "..\\..\\Test Data\\Views\\Spark\\View.spark");
+            var result = new SparkResult<UserModel>(model, "../../Test Data/Views/Spark/View.spark");
 
             result.ProcessResult(null, response);
 
@@ -59,7 +59,7 @@ namespace tinyweb.viewengine.tests
         public void ProcessResult_WhenRequestedWithModelUsingMaster_ReturnsCombinedView()
         {
             var response = new FakeResponseContext();
-            var result = new SparkResult("..\\..\\Test Data\\Views\\Spark\\Child.spark", "Master.spark");
+            var result = new SparkResult("../../Test Data/Views/Spark/Child.spark", "Master.spark");
 
             result.ProcessResult(null, response);
 

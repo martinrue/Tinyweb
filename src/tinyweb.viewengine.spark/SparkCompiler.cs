@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using Spark;
 using Spark.FileSystem;
@@ -14,7 +15,7 @@ namespace tinyweb.viewengine.spark
 
             var viewFolder = new FileSystemViewFolder(templatesPath);
             
-            var settings = new SparkSettings()
+            var defaultSettings = new SparkSettings()
                 .AddNamespace("System")
                 .AddNamespace("System.Collections.Generic")
                 .AddNamespace("System.Linq");
@@ -22,7 +23,7 @@ namespace tinyweb.viewengine.spark
             var sparkEngine = new SparkViewEngine
             {
                 ViewFolder = viewFolder,
-                Settings = settings
+                Settings = (ISparkSettings) ConfigurationManager.GetSection("spark") ?? defaultSettings
             };
 
             if (model != null)

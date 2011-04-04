@@ -19,11 +19,5 @@
   <files xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <file src="tinyweb.framework\bin\Release\tinyweb.framework.dll" target="lib\" />
     <file src="tinyweb.viewengine.spark\bin\Release\tinyweb.viewengine.spark.dll" target="lib\" />
-    <file src="tinyweb.viewengine.ndjango\bin\Release\tinyweb.viewengine.ndjango.dll" target="lib\" />
-    <file src="tinyweb.viewengine.nhaml\bin\Release\tinyweb.viewengine.nhaml.dll" target="lib\" />
-    <file src="..\lib\FSharp.PowerPack.Compatibility.dll" target="lib\" />
-    <file src="..\lib\FSharp.PowerPack.dll" target="lib\" />
-    <file src="..\lib\NDjango.Core40.dll" target="lib\" />
-    <file src="..\lib\NHaml.dll" target="lib\" />
   </files>
 </package>

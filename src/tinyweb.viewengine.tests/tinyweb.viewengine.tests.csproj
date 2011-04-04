@@ -51,10 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NDjangoResultTests.cs" />
-    <Compile Include="NHamlResultTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="SparkResultTests.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -77,30 +73,14 @@
     <Content Include="Test Data\Views\Spark\View.spark" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Test Data\Views\NHaml\Hello.haml" />
-    <Content Include="Test Data\Views\NHaml\View.haml" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\tinyweb.framework\tinyweb.framework.csproj">
       <Project>{4FEB7B17-C089-48A3-BA86-D70B24CCEB9B}</Project>
       <Name>tinyweb.framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\tinyweb.viewengine.ndjango\tinyweb.viewengine.ndjango.csproj">
-      <Project>{14B2949E-89A8-4923-A284-D112056F7E24}</Project>
-      <Name>tinyweb.viewengine.ndjango</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\tinyweb.viewengine.nhaml\tinyweb.viewengine.nhaml.csproj">
-      <Project>{01FF632C-154F-49B2-A98C-7C2977C24370}</Project>
-      <Name>tinyweb.viewengine.nhaml</Name>
     </ProjectReference>
     <ProjectReference Include="..\tinyweb.viewengine.spark\tinyweb.viewengine.spark.csproj">
       <Project>{1BE68BD1-5AE8-4900-B3C5-C792EB76BF3F}</Project>
       <Name>tinyweb.viewengine.spark</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Test Data\Views\NDjango\NoModel.django" />
-    <Content Include="Test Data\Views\NDjango\Model.django" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
