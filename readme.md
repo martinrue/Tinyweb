@@ -60,10 +60,4 @@ You can see the live build status (and grab the binary releases) from the [build
 
 ## Versions
 
-1.3 Added convention for a handler called `RootHandler` and explicit `new Route("/")` for supporting index pages
-
-1.2 Refactoring of the handler result processing and introduction of `Result.JsonOrXml` which chooses JSON or XML depending on the accept header
-
-1.1 Added `Result.Xml` for serializing model to XML
-
-1.0 Initial release of Tinyweb
+1.0.0 Release of stable public API and switch to semantic versioning
