@@ -13,22 +13,20 @@ namespace tinyweb.viewengine.spark
             var fullTemplatePath = Path.Combine(templatesPath, templateName);
             var templateFilename = Path.GetFileName(fullTemplatePath);
 
-            var viewFolder = new FileSystemViewFolder(templatesPath);
-            
-            var defaultSettings = new SparkSettings()
-                .AddNamespace("System")
-                .AddNamespace("System.Collections.Generic")
-                .AddNamespace("System.Linq");
-
             var sparkEngine = new SparkViewEngine
             {
-                ViewFolder = viewFolder,
-                Settings = (ISparkSettings) ConfigurationManager.GetSection("spark") ?? defaultSettings
+                ViewFolder = new FileSystemViewFolder(templatesPath),
+                DefaultPageBaseType = typeof(SparkView).FullName
             };
 
-            if (model != null)
+            if (ConfigurationManager.GetSection("spark") == null)
             {
-                sparkEngine.DefaultPageBaseType = "tinyweb.viewengine.spark.SparkView";
+                sparkEngine.Settings = new SparkSettings()
+                    .AddNamespace("System")
+                    .AddNamespace("System.Collections.Generic")
+                    .AddNamespace("System.Linq")
+                    .AddNamespace("tinyweb.framework")
+                    .AddNamespace("tinyweb.framework.Helpers");
             }
 
             var descriptor = new SparkViewDescriptor().AddTemplate(templateFilename);
@@ -47,7 +45,6 @@ namespace tinyweb.viewengine.spark
 
             var output = new StringWriter();
             view.RenderView(output);
-
             sparkEngine.ReleaseInstance(view);
             
             return output.ToString();
