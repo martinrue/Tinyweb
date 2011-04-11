@@ -24,7 +24,7 @@ Create a handler:
     	}    	
     }
 
-You now have a resource that supports HTTP GET at the location /Hello/World and returns a rendered Spark template. Let's tell Tinyweb to load itself and our work here is done.
+You now have a resource that supports HTTP GET at the location /hello/world and returns a rendered Spark template. Let's tell Tinyweb to load itself and our work here is done.
 
     public class Global : HttpApplication
     {
