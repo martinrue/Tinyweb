@@ -18,9 +18,9 @@ namespace tinyweb.framework
             if (method != null)
             {
                 var arguments = buildArgumentList(method.GetParameters(), requestContext);
-                return (IHandlerResult) method.Invoke(handler, arguments);
+                return (IHandlerResult)method.Invoke(handler, arguments);
             }
-            
+
             throw new HttpException(HttpStatusCode.NotImplemented.CastInt(), "The request could not be completed because the resource does not support {0}".With(httpVerb.Name()));
         }
 
@@ -40,9 +40,18 @@ namespace tinyweb.framework
                     continue;
                 }
 
-                if (parameter.ParameterType.IsValueType || parameter.ParameterType == typeof(String))  
+                if (parameter.ParameterType.IsValueType || parameter.ParameterType == typeof(String))
                 {
                     var value = getValueFromRequest(requestContext, parameter.Name.ToLower(), parameter.ParameterType);
+
+                    if (value != null)
+                    {
+                        argumentDictionary.Add(parameter.Name, value);
+                    }
+                }
+                else if (parameter.ParameterType.IsArray)
+                {
+                    var value = getArrayValueFromRequest(requestContext, parameter.Name.ToLower(), parameter.ParameterType);
 
                     if (value != null)
                     {
@@ -82,6 +91,10 @@ namespace tinyweb.framework
                     if (property.PropertyType.IsValueType || property.PropertyType == typeof(String))
                     {
                         property.SetValue(instance, getValueFromRequest(requestContext, property.Name, property.PropertyType), null);
+                    }
+                    else if (property.PropertyType.IsArray)
+                    {
+                        property.SetValue(instance, getArrayValueFromRequest(requestContext, property.Name.ToLower(), property.PropertyType), null);
                     }
                     else if (property.PropertyType.IsClass)
                     {
@@ -132,6 +145,39 @@ namespace tinyweb.framework
             }
 
             return null;
+        }
+
+        private object getArrayValueFromRequest(RequestContext requestContext, string requestedName, Type requestedType)
+        {
+            string[] requestArray = null;
+
+            if (requestContext.HttpContext.Request.QueryString != null)
+            {
+                if (requestContext.HttpContext.Request.QueryString.AllKeys.Contains(requestedName + "[]"))
+                {
+                    requestArray = requestContext.HttpContext.Request.QueryString.GetValues(requestedName + "[]");
+                }
+            }
+
+            if (requestContext.HttpContext.Request.Form != null)
+            {
+                if (requestContext.HttpContext.Request.Form.AllKeys.Contains(requestedName + "[]"))
+                {
+                    requestArray = requestContext.HttpContext.Request.Form.GetValues(requestedName + "[]");
+                }
+            }
+
+            if (requestArray == null || requestArray.GetType() == requestedType)
+            {
+                return requestArray;
+            }
+
+            var array = Array.CreateInstance(requestedType.GetElementType(), requestArray.Length);
+            var index = 0;
+
+            requestArray.ForEach(element => array.SetValue(Convert.ChangeType(element, requestedType.GetElementType()), index++));
+
+            return array;
         }
     }
 }
