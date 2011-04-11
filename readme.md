@@ -60,4 +60,6 @@ You can see the live build status (and grab the binary releases) from the [build
 
 ## Versions
 
+1.0.1 Update for binding of array types, lower casing of routes and internal Spark integration refactoring
+
 1.0.0 Release of stable public API and switch to semantic versioning
