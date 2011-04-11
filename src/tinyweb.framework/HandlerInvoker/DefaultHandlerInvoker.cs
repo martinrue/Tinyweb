@@ -51,7 +51,7 @@ namespace tinyweb.framework
                 }
                 else if (parameter.ParameterType.IsArray)
                 {
-                    var value = getArrayValueFromRequest(requestContext, parameter.Name.ToLower(), parameter.ParameterType);
+                    var value = getArrayValueFromRequest(requestContext, parameter.Name, parameter.ParameterType);
 
                     if (value != null)
                     {
@@ -94,7 +94,7 @@ namespace tinyweb.framework
                     }
                     else if (property.PropertyType.IsArray)
                     {
-                        property.SetValue(instance, getArrayValueFromRequest(requestContext, property.Name.ToLower(), property.PropertyType), null);
+                        property.SetValue(instance, getArrayValueFromRequest(requestContext, property.Name, property.PropertyType), null);
                     }
                     else if (property.PropertyType.IsClass)
                     {
