@@ -57,7 +57,7 @@ namespace tinyweb.framework
 
         public static string[] PascalSplit(this string input)
         {
-            return input.IsEmpty() ? new string[0] : Regex.Replace(input, "(\\B[A-Z])", " $1").Split(' ');
+            return input.IsEmpty() ? new string[0] : Regex.Replace(input, "(\\B[A-Z])", " $1").Split(' ').Select(x => x.ToLower()).ToArray();
         }
 
         public static string UrlEncode(this string input)

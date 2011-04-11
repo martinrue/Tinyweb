@@ -102,7 +102,7 @@ namespace tinyweb.framework.tests
             var values = "Word".PascalSplit();
 
             Assert.That(values.Length, Is.EqualTo(1));
-            Assert.That(values[0], Is.EqualTo("Word"));
+            Assert.That(values[0], Is.EqualTo("word"));
         }
 
         [Test]
@@ -111,8 +111,8 @@ namespace tinyweb.framework.tests
             var values = "Word1Word2".PascalSplit();
 
             Assert.That(values.Length, Is.EqualTo(2));
-            Assert.That(values[0], Is.EqualTo("Word1"));
-            Assert.That(values[1], Is.EqualTo("Word2"));
+            Assert.That(values[0], Is.EqualTo("word1"));
+            Assert.That(values[1], Is.EqualTo("word2"));
         }
 
         [Test]
@@ -121,10 +121,10 @@ namespace tinyweb.framework.tests
             var values = "UsersRegisterAddNew".PascalSplit();
 
             Assert.That(values.Length, Is.EqualTo(4));
-            Assert.That(values[0], Is.EqualTo("Users"));
-            Assert.That(values[1], Is.EqualTo("Register"));
-            Assert.That(values[2], Is.EqualTo("Add"));
-            Assert.That(values[3], Is.EqualTo("New"));
+            Assert.That(values[0], Is.EqualTo("users"));
+            Assert.That(values[1], Is.EqualTo("register"));
+            Assert.That(values[2], Is.EqualTo("add"));
+            Assert.That(values[3], Is.EqualTo("new"));
         }
 
         [Test]

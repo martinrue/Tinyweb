@@ -75,7 +75,7 @@ namespace tinyweb.framework.tests
         public void FindAll_WhenCalled_FourthHandlerUriIsCorrect()
         {
             var handlers = defaultHandlerScanner.FindAll();
-            Assert.That(handlers.Single(h => h.Type == new ConventionHandler().GetType()).Uri == "Convention");
+            Assert.That(handlers.Single(h => h.Type == new ConventionHandler().GetType()).Uri == "convention");
         }
 
         [Test]
@@ -89,7 +89,7 @@ namespace tinyweb.framework.tests
         public void FindAll_WhenCalled_PascalConventionHandlerHasCorrectUri()
         {
             var handlers = defaultHandlerScanner.FindAll();
-            Assert.That(handlers.Single(h => h.Type == new PascalConventionHandler().GetType()).Uri, Is.EqualTo("Pascal/Convention"));
+            Assert.That(handlers.Single(h => h.Type == new PascalConventionHandler().GetType()).Uri, Is.EqualTo("pascal/convention"));
         }
 
         [Test]
