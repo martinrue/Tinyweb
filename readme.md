@@ -48,6 +48,14 @@ Links to blogs and other resources about Tinyweb:
 
 [ASP.NET - Thinking In Resources](http://invalidcast.com/2011/03/asp-net-thinking-in-resources)
 
+## Applications
+
+The following full applications have been built with Tinyweb:
+
+[Tweet Conversations](http://tweetconversations.com)
+
+[Sentiment Analysis Demo](http://sentiment.brandlisten.com)
+
 ## NuGet
 
 The easiest way to get started with Tinyweb is to [NuGet it](http://nuget.org/List/Packages/Tinyweb):
