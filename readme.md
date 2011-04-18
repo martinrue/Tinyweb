@@ -60,6 +60,8 @@ You can see the live build status (and grab the binary releases) from the [build
 
 ## Versions
 
+1.0.2 When Tinyweb.AllowFormatExtensions is set, JsonOrXml result types allow the use of a URL override for specifying the requested content type (i.e. /resource.json)
+
 1.0.1 Update for binding of array types, lower casing of routes and internal Spark integration refactoring
 
 1.0.0 Release of stable public API and switch to semantic versioning

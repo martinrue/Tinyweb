@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HandlerResult\Context\RouteValues.cs" />
+    <Compile Include="HandlerResult\Context\IRouteValues.cs" />
     <Compile Include="HandlerResult\Context\Default\DefaultRequestContext.cs" />
     <Compile Include="HandlerResult\Context\Default\DefaultResponseContext.cs" />
     <Compile Include="HandlerResult\Context\Fake\FakeRequestContext.cs" />

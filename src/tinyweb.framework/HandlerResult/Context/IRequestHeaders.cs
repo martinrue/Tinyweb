@@ -2,9 +2,6 @@
 {
     public interface IRequestHeaders
     {
-        string this[string header]
-        {
-            get;
-        }
+        string this[string header] { get; }
     }
 }

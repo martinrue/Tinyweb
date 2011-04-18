@@ -4,9 +4,9 @@ namespace tinyweb.framework
 {
     public class RequestHeaders : IRequestHeaders
     {
-        HttpContext _context;
+        HttpContextBase _context;
 
-        public RequestHeaders(HttpContext context)
+        public RequestHeaders(HttpContextBase context)
         {
             _context = context;
         }

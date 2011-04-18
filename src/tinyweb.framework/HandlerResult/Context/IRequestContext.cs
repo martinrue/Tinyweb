@@ -3,5 +3,6 @@
     public interface IRequestContext
     {
         IRequestHeaders Headers { get; }
+        IRouteValues RouteValues { get; }
     }
 }

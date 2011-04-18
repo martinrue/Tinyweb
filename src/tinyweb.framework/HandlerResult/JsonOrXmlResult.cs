@@ -18,18 +18,38 @@ namespace tinyweb.framework
 
         public void ProcessResult(IRequestContext request, IResponseContext response)
         {
-            var accept = request.Headers["Accept"].ParseAcceptHeader();
-
-            var jsonPriority = accept.ContainsKey("application/json") ? accept["application/json"] : 1;
-            var xmlPriority = accept.ContainsKey("application/xml") ? accept["application/xml"] : 0.9;
-
-            if (xmlPriority > jsonPriority)
+            if (request.RouteValues.Routes.ContainsKey("format"))
             {
-                new XmlResult(_data).ProcessResult(request, response);
+                switch (request.RouteValues.Routes["format"].ToString())
+                {
+                    case "xml":
+                    {
+                        new XmlResult(_data).ProcessResult(request, response);
+                    }
+                    break;
+
+                    default:
+                    {
+                        new JsonResult(_data).ProcessResult(request, response);
+                    }
+                    break;
+                }
             }
             else
             {
-                new JsonResult(_data).ProcessResult(request, response);
+                var accept = request.Headers["Accept"].ParseAcceptHeader();
+
+                var jsonPriority = accept.ContainsKey("application/json") ? accept["application/json"] : 1;
+                var xmlPriority = accept.ContainsKey("application/xml") ? accept["application/xml"] : 0.9;
+
+                if (xmlPriority > jsonPriority)
+                {
+                    new XmlResult(_data).ProcessResult(request, response);
+                }
+                else
+                {
+                    new JsonResult(_data).ProcessResult(request, response);
+                }
             }
         }
     }

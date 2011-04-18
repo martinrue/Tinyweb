@@ -21,7 +21,7 @@ namespace tinyweb.framework
             var handler = HandlerFactory.Current.Create(_handlerData);
             var result = HandlerInvoker.Current.Execute(handler, _requestContext);
 
-            result.ProcessResult(new DefaultRequestContext(context), new DefaultResponseContext(context));
+            result.ProcessResult(new DefaultRequestContext(_requestContext), new DefaultResponseContext(context));
         }
     }
 }

@@ -13,12 +13,14 @@ namespace tinyweb.framework
     {
         public static IEnumerable<HandlerData> Handlers { get; set; }
 
+        public static bool AllowFormatExtensions { get; set; }
+
         public static int Init(params Registry[] registries)
         {
             ObjectFactory.Initialize(x => registries.ForEach(x.AddRegistry));
-            
+
             Handlers = HandlerScanner.Current.FindAll();
-            Handlers.ForEach(handler => RouteTable.Routes.Add(new SWR.Route(handler.Uri, new RouteValueDictionary(handler.DefaultRouteValues), new RouteHandler(handler))));
+            Handlers.ForEach(addRoute);
 
             return Handlers.Count();
         }
@@ -33,6 +35,18 @@ namespace tinyweb.framework
             }
 
             return report.ToString();
+        }
+
+        private static void addRoute(HandlerData handler)
+        {
+            RouteTable.Routes.Add(new SWR.Route(handler.Uri.Trim('/'), new RouteValueDictionary(handler.DefaultRouteValues), new RouteHandler(handler)));
+
+            if (AllowFormatExtensions)
+            {
+                var route = handler.Uri.Trim('/') + ".{format}";
+
+                RouteTable.Routes.Add(new SWR.Route(route, new RouteValueDictionary(handler.DefaultRouteValues), new RouteHandler(handler)));
+            }
         }
     }
 }
