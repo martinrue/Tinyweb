@@ -13,20 +13,42 @@ namespace tinyweb.framework
         public IHandlerResult Execute(object handler, RequestContext requestContext)
         {
             var httpVerb = requestContext.HttpContext.Request.HttpMethod.ToEnum<HttpVerb>();
-            var method = this.getMethod(handler, httpVerb);
+            
+            var before = getMethod(handler, "Before");
+            var method = getMethod(handler, httpVerb);
+            var after = getMethod(handler, "After");
 
-            if (method != null)
+            if (method == null)
             {
-                var arguments = buildArgumentList(method.GetParameters(), requestContext);
-                return (IHandlerResult)method.Invoke(handler, arguments);
+                throw new HttpException(HttpStatusCode.NotImplemented.CastInt(), "The request could not be completed because the resource does not support {0}".With(httpVerb.Name()));
             }
 
-            throw new HttpException(HttpStatusCode.NotImplemented.CastInt(), "The request could not be completed because the resource does not support {0}".With(httpVerb.Name()));
+            if (before != null)
+            {
+                var beforeArgs = buildArgumentList(before.GetParameters(), requestContext);
+                before.Invoke(handler, beforeArgs);
+            }
+
+            var methodArgs = buildArgumentList(method.GetParameters(), requestContext);
+            var result = (IHandlerResult)method.Invoke(handler, methodArgs);
+
+            if (after != null)
+            {
+                var afterArgs = buildArgumentList(after.GetParameters(), requestContext);
+                after.Invoke(handler, afterArgs);
+            }
+
+            return result;
         }
 
         private MethodInfo getMethod(object handler, HttpVerb verb)
         {
             return handler.GetType().GetMethods().SingleOrDefault(m => m.Name.ToLower() == verb.Name().ToLower());
+        }
+
+        private MethodInfo getMethod(object handler, string name)
+        {
+            return handler.GetType().GetMethods().SingleOrDefault(m => m.Name.ToLower() == name.ToLower());
         }
 
         private object[] buildArgumentList(ParameterInfo[] parameters, RequestContext requestContext)
@@ -73,7 +95,7 @@ namespace tinyweb.framework
 
                 if (!argumentDictionary.ContainsKey(parameter.Name))
                 {
-                    throw new Exception(String.Format("The parameter {0} of type {1} could not be matched during the invocation of the handler method", parameter.Name, parameter.ParameterType));
+                    throw new Exception(String.Format("No argument was supplied for required parameter {0} ({1})", parameter.Name, parameter.ParameterType));
                 }
             }
 

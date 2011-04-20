@@ -54,5 +54,21 @@ namespace tinyweb.framework.tests
             var exception = Assert.Throws<HttpException>(() => defaultHandlerInvoker.Execute(new Resource1Handler(), requestContext));
             Assert.That(exception.Message, Is.EqualTo("The request could not be completed because the resource does not support DELETE"));
         }
+
+        [Test]
+        public void Execute_WithBeforeAndAfterMethod_CallsBeforeAndThenAfter()
+        {
+            requestContext.HttpContext.Request.SetHttpMethodResult("GET");
+            
+            var handler = new BeforeAfterHandler();
+
+            Assert.That(handler.Calls.Count, Is.EqualTo(0));
+
+            defaultHandlerInvoker.Execute(handler, requestContext);
+
+            Assert.That(handler.Calls[0], Is.EqualTo("before"));
+            Assert.That(handler.Calls[1], Is.EqualTo("get"));
+            Assert.That(handler.Calls[2], Is.EqualTo("after"));
+        }
     }
 }

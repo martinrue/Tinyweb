@@ -19,7 +19,7 @@ namespace tinyweb.framework.tests
         public void FindAll_WhenCalled_FindsAllHandlers()
         {
             var handlers = defaultHandlerScanner.FindAll();
-            Assert.That(handlers.Count(), Is.EqualTo(8));
+            Assert.That(handlers.Count(), Is.EqualTo(9));
         }
 
         [Test]
