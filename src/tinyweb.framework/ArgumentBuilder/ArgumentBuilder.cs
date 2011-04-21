@@ -1,57 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Reflection;
-using System.Web;
 using System.Web.Routing;
 
 namespace tinyweb.framework
 {
-    public class DefaultHandlerInvoker : IHandlerInvoker
+    public class ArgumentBuilder : IArgumentBuilder
     {
-        public IHandlerResult Execute(object handler, RequestContext requestContext)
-        {
-            var httpVerb = requestContext.HttpContext.Request.HttpMethod.ToEnum<HttpVerb>();
-            
-            var before = getMethod(handler, "Before");
-            var method = getMethod(handler, httpVerb);
-            var after = getMethod(handler, "After");
-
-            if (method == null)
-            {
-                throw new HttpException(HttpStatusCode.NotImplemented.CastInt(), "The request could not be completed because the resource does not support {0}".With(httpVerb.Name()));
-            }
-
-            if (before != null)
-            {
-                var beforeArgs = buildArgumentList(before.GetParameters(), requestContext);
-                before.Invoke(handler, beforeArgs);
-            }
-
-            var methodArgs = buildArgumentList(method.GetParameters(), requestContext);
-            var result = (IHandlerResult)method.Invoke(handler, methodArgs);
-
-            if (after != null)
-            {
-                var afterArgs = buildArgumentList(after.GetParameters(), requestContext);
-                after.Invoke(handler, afterArgs);
-            }
-
-            return result;
-        }
-
-        private MethodInfo getMethod(object handler, HttpVerb verb)
-        {
-            return handler.GetType().GetMethods().SingleOrDefault(m => m.Name.ToLower() == verb.Name().ToLower());
-        }
-
-        private MethodInfo getMethod(object handler, string name)
-        {
-            return handler.GetType().GetMethods().SingleOrDefault(m => m.Name.ToLower() == name.ToLower());
-        }
-
-        private object[] buildArgumentList(ParameterInfo[] parameters, RequestContext requestContext)
+        public object[] BuildArguments(ParameterInfo[] parameters, RequestContext requestContext)
         {
             var argumentDictionary = new Dictionary<string, object>();
 
@@ -133,23 +90,6 @@ namespace tinyweb.framework
             }
         }
 
-        private object getValueFromRequest(RequestContext requestContext, string requestedName, Type requestedType)
-        {
-            var value = findValue(requestContext.RouteData.Values, requestedName, requestedType);
-
-            if (value == null)
-            {
-                value = findValue(requestContext.HttpContext.Request.QueryString.ToRouteValueDictionary(), requestedName, requestedType);
-            }
-
-            if (value == null)
-            {
-                value = findValue(requestContext.HttpContext.Request.Form.ToRouteValueDictionary(), requestedName, requestedType);
-            }
-
-            return value;
-        }
-
         private object findValue(RouteValueDictionary dictionary, string requestedName, Type requestedType)
         {
             if (dictionary.ContainsKey(requestedName))
@@ -167,6 +107,28 @@ namespace tinyweb.framework
             }
 
             return null;
+        }
+
+        private object getValueFromRequest(RequestContext requestContext, string requestedName, Type requestedType)
+        {
+            object value = null;
+
+            if (requestContext.RouteData != null)
+            {
+                value = findValue(requestContext.RouteData.Values, requestedName, requestedType);   
+            }
+
+            if (value == null)
+            {
+                value = findValue(requestContext.HttpContext.Request.QueryString.ToRouteValueDictionary(), requestedName, requestedType);
+            }
+
+            if (value == null)
+            {
+                value = findValue(requestContext.HttpContext.Request.Form.ToRouteValueDictionary(), requestedName, requestedType);
+            }
+
+            return value;
         }
 
         private object getArrayValueFromRequest(RequestContext requestContext, string requestedName, Type requestedType)

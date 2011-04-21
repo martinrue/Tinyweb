@@ -41,5 +41,10 @@
         {
             return new RedirectResult(uri);
         }
+
+        public static NoneResult None()
+        {
+            return new NoneResult();
+        }
     }
 }

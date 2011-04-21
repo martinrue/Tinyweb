@@ -2,7 +2,7 @@
 {
     public static class HandlerInvoker
     {
-        static IHandlerInvoker invoker = new DefaultHandlerInvoker();
+        static IHandlerInvoker invoker = new DefaultHandlerInvoker(new ArgumentBuilder());
 
         public static IHandlerInvoker Current
         {

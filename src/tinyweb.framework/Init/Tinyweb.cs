@@ -12,6 +12,7 @@ namespace tinyweb.framework
     public static class Tinyweb
     {
         public static IEnumerable<HandlerData> Handlers { get; set; }
+        public static IEnumerable<FilterData> Filters { get; set; }
 
         public static bool AllowFormatExtensions { get; set; }
 
@@ -19,6 +20,7 @@ namespace tinyweb.framework
         {
             ObjectFactory.Initialize(x => registries.ForEach(x.AddRegistry));
 
+            Filters = FilterScanner.Current.FindAll();
             Handlers = HandlerScanner.Current.FindAll();
             Handlers.ForEach(addRoute);
 
@@ -29,9 +31,23 @@ namespace tinyweb.framework
         {
             var report = new StringBuilder();
 
+            report.AppendLine("Routes:");
+
             foreach (var handler in Handlers.OrderBy(h => h.Uri))
             {
                 report.AppendLine(String.Format("/{0} -> {1}", handler.Uri, handler.Type.Name));
+            }
+
+            report.AppendLine("Filters:");
+
+            foreach (var filter in Filters.Where(f => f.BeforeFilter).OrderBy(f => f.Priority))
+            {
+                report.AppendLine(String.Format("Before: {0} [Priority {1}]", filter.Type.Name, filter.Priority));
+            }
+
+            foreach (var filter in Filters.Where(f => f.AfterFilter).OrderBy(f => f.Priority))
+            {
+                report.AppendLine(String.Format("After: {0} [Priority {1}]", filter.Type.Name, filter.Priority));
             }
 
             return report.ToString();

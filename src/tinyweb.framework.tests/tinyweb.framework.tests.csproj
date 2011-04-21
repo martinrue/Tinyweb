@@ -59,34 +59,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HandlerResult\JsonOrXmlResultTests.cs" />
-    <Compile Include="HandlerResult\FileResultTests.cs">
+    <Compile Include="Filters\FilterFactory\DefaultFilterFactoryTests.cs" />
+    <Compile Include="Filters\FilterFactory\FilterFactoryTests.cs" />
+    <Compile Include="Filters\FilterInvoker\DefaultFilterInvokerTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="HandlerResult\HtmlResultTests.cs">
+    <Compile Include="Filters\FilterInvoker\FilterInvokerTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="HandlerResult\JsonResultTests.cs">
+    <Compile Include="Handlers\HandlerScanner\DefaultHandlerScannerTests.cs" />
+    <Compile Include="Filters\FilterScanner\FilterScannerTests.cs" />
+    <Compile Include="Handlers\HandlerResult\JsonOrXmlResultTests.cs" />
+    <Compile Include="Handlers\HandlerResult\FileResultTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="HandlerResult\RedirectResultTests.cs">
+    <Compile Include="Handlers\HandlerResult\HtmlResultTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="HandlerResult\StringResultTests.cs">
+    <Compile Include="Handlers\HandlerResult\JsonResultTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="HandlerResult\XmlResultTests.cs">
+    <Compile Include="Handlers\HandlerResult\RedirectResultTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Handlers\HandlerResult\StringResultTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Handlers\HandlerResult\XmlResultTests.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helpers\UrlTests.cs" />
     <Compile Include="Init\InitTests.cs" />
-    <Compile Include="HandlerInvoker\MethodInvokerTests.cs" />
-    <Compile Include="HandlerInvoker\DefaultHandlerInvokerTests.cs" />
-    <Compile Include="HandlerInvoker\HandlerInvokerTests.cs" />
+    <Compile Include="Handlers\HandlerInvoker\HttpMethodInvokerTests.cs" />
+    <Compile Include="Handlers\HandlerInvoker\DefaultHandlerInvokerTests.cs" />
+    <Compile Include="Handlers\HandlerInvoker\HandlerInvokerTests.cs" />
     <Compile Include="Extensions\ExtensionsTests.cs" />
-    <Compile Include="HandlerFactory\HandlerFactoryTests.cs" />
-    <Compile Include="HandlerFactory\DefaultHandlerFactoryTests.cs" />
-    <Compile Include="HandlerScanner\HandlerScannerTests.cs" />
+    <Compile Include="Handlers\HandlerFactory\HandlerFactoryTests.cs" />
+    <Compile Include="Handlers\HandlerFactory\DefaultHandlerFactoryTests.cs" />
+    <Compile Include="Handlers\HandlerScanner\HandlerScannerTests.cs" />
+    <Compile Include="Test Data\FilterInvoker\CustomFilterInvoker.cs" />
+    <Compile Include="Test Data\FilterFactories\CustomFilterFactory.cs" />
+    <Compile Include="Test Data\FilterScanners\CustomFilterScanner.cs" />
+    <Compile Include="Test Data\Filters\AfterFilter.cs" />
+    <Compile Include="Test Data\Filters\BeforeFilter.cs" />
+    <Compile Include="Test Data\Filters\BeforeAndAfterFilter.cs" />
+    <Compile Include="Test Data\Filters\InvokerAfterTestFilter.cs" />
+    <Compile Include="Test Data\Filters\InvokerBeforeTestFilter.cs" />
+    <Compile Include="Test Data\Filters\NoDefaultCtorFilter.cs" />
+    <Compile Include="Test Data\Filters\NonPirorityFilter.cs" />
+    <Compile Include="Test Data\Filters\InvalidFilter.cs" />
     <Compile Include="Test Data\Handlers\BeforeAfterHandler.cs" />
     <Compile Include="Test Data\Handlers\ExplicitRootHandler.cs" />
     <Compile Include="Test Data\Handlers\RootHandler.cs" />
@@ -106,7 +127,7 @@
     <Compile Include="Test Data\Handlers\Resource3Handler.cs" />
     <Compile Include="Test Data\Handlers\Resource2Handler.cs" />
     <Compile Include="Test Data\Handlers\Resource1Handler.cs" />
-    <Compile Include="HandlerScanner\DefaultHandlerScannerTests.cs" />
+    <Compile Include="Filters\FilterScanner\DefaultFilterScannerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test Data\HandlerResult\Json\CustomType.cs" />
     <Compile Include="Test Data\Init\IBarRepository.cs" />

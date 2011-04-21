@@ -8,7 +8,7 @@ namespace tinyweb.framework.tests
         [TearDown]
         public void TearDown()
         {
-            HandlerInvoker.SetHandlerInvoker(new DefaultHandlerInvoker());
+            HandlerInvoker.SetHandlerInvoker(new DefaultHandlerInvoker(new ArgumentBuilder()));
         }
 
         [Test]
@@ -18,7 +18,7 @@ namespace tinyweb.framework.tests
         }
 
         [Test]
-        public void Current_WhenSetToCustomHandlerInvoker_ReturnsCustomHandlerScanner()
+        public void Current_WhenSetToCustomHandlerInvoker_ReturnsCustomHandlerInvoker()
         {
             HandlerInvoker.SetHandlerInvoker(new CustomHandlerInvoker());
             Assert.IsInstanceOf<CustomHandlerInvoker>(HandlerInvoker.Current);

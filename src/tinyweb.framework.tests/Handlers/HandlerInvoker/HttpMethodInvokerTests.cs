@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace tinyweb.framework.tests
 {
     [TestFixture]
-    public class MethodInvokerTests
+    public class HttpMethodInvokerTests
     {
         IHandlerInvoker defaultHandlerInvoker;
         RequestContext requestContext;
@@ -13,10 +13,8 @@ namespace tinyweb.framework.tests
         [SetUp]
         public void Setup()
         {
-            defaultHandlerInvoker = new DefaultHandlerInvoker();
-            
-            requestContext = new RequestContext();
-            requestContext.RouteData = new RouteData();
+            defaultHandlerInvoker = new DefaultHandlerInvoker(new ArgumentBuilder());
+            requestContext = new RequestContext { RouteData = new RouteData() };
         }
 
         [Test]
@@ -28,9 +26,9 @@ namespace tinyweb.framework.tests
             var response = new FakeResponseContext();
             var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
 
-            result.ProcessResult(null, response);
+            result.Result.ProcessResult(null, response);
 
-            Assert.That(result, Is.InstanceOf<StringResult>());
+            Assert.That(result.Result, Is.InstanceOf<StringResult>());
             Assert.That(response.ContentType, Is.EqualTo("text/html"));
             Assert.That(response.Response, Is.EqualTo("1world"));
         }
@@ -44,9 +42,9 @@ namespace tinyweb.framework.tests
             var response = new FakeResponseContext();
             var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
 
-            result.ProcessResult(null, response);
+            result.Result.ProcessResult(null, response);
 
-            Assert.That(result, Is.InstanceOf<StringResult>());
+            Assert.That(result.Result, Is.InstanceOf<StringResult>());
             Assert.That(response.ContentType, Is.EqualTo("text/html"));
             Assert.That(response.Response, Is.EqualTo("5times"));
         }
@@ -62,9 +60,9 @@ namespace tinyweb.framework.tests
             var response = new FakeResponseContext();
             var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
 
-            result.ProcessResult(null, response);
+            result.Result.ProcessResult(null, response);
 
-            Assert.That(result, Is.InstanceOf<StringResult>());
+            Assert.That(result.Result, Is.InstanceOf<StringResult>());
             Assert.That(response.ContentType, Is.EqualTo("text/html"));
             Assert.That(response.Response, Is.EqualTo("10strings"));
         }
@@ -79,9 +77,9 @@ namespace tinyweb.framework.tests
             var response = new FakeResponseContext();
             var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
 
-            result.ProcessResult(null, response);
+            result.Result.ProcessResult(null, response);
 
-            Assert.That(result, Is.InstanceOf<StringResult>());
+            Assert.That(result.Result, Is.InstanceOf<StringResult>());
             Assert.That(response.ContentType, Is.EqualTo("text/html"));
             Assert.That(response.Response, Is.EqualTo("421.141True"));
         }
@@ -95,9 +93,9 @@ namespace tinyweb.framework.tests
             var response = new FakeResponseContext();
             var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
 
-            result.ProcessResult(null, response);
+            result.Result.ProcessResult(null, response);
 
-            Assert.That(result, Is.InstanceOf<StringResult>());
+            Assert.That(result.Result, Is.InstanceOf<StringResult>());
             Assert.That(response.ContentType, Is.EqualTo("text/html"));
             Assert.That(response.Response, Is.EqualTo("Result: 9"));
         }
@@ -112,9 +110,9 @@ namespace tinyweb.framework.tests
             var response = new FakeResponseContext();
             var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
 
-            result.ProcessResult(null, response);
+            result.Result.ProcessResult(null, response);
 
-            Assert.That(result, Is.InstanceOf<StringResult>());
+            Assert.That(result.Result, Is.InstanceOf<StringResult>());
             Assert.That(response.ContentType, Is.EqualTo("text/html"));
             Assert.That(response.Response, Is.EqualTo("the total is 240"));
         }

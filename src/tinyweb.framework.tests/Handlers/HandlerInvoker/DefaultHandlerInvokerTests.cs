@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace tinyweb.framework.tests
 {
     [TestFixture]
-    public class DefaultHandlerInvokerTests2
+    public class DefaultHandlerInvokerTests
     {
         IHandlerInvoker defaultHandlerInvoker;
         RequestContext requestContext;
@@ -13,8 +13,7 @@ namespace tinyweb.framework.tests
         [SetUp]
         public void Setup()
         {
-            defaultHandlerInvoker = new DefaultHandlerInvoker();
-
+            defaultHandlerInvoker = new DefaultHandlerInvoker(new ArgumentBuilder());
             requestContext = new RequestContext { HttpContext = MvcMockHelpers.FakeHttpContext() };
         }
 
@@ -26,7 +25,7 @@ namespace tinyweb.framework.tests
             var response = new FakeResponseContext();
             var result = defaultHandlerInvoker.Execute(new Resource1Handler(), requestContext);
 
-            result.ProcessResult(null, response);
+            result.Result.ProcessResult(null, response);
 
             Assert.That(response.ContentType, Is.EqualTo("text/html"));
             Assert.That(response.Response, Is.EqualTo("Get"));
@@ -40,7 +39,7 @@ namespace tinyweb.framework.tests
             var response = new FakeResponseContext();
             var result = defaultHandlerInvoker.Execute(new Resource1Handler(), requestContext);
 
-            result.ProcessResult(null, response);
+            result.Result.ProcessResult(null, response);
 
             Assert.That(response.ContentType, Is.EqualTo("text/html"));
             Assert.That(response.Response, Is.EqualTo("Post"));
