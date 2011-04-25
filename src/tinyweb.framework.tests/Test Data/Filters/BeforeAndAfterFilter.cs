@@ -1,14 +1,14 @@
 ﻿namespace tinyweb.framework.tests
 {
-    [RunPriority(2)]
+    [FilterPriority(2)]
     public class BeforeAndAfterFilter
     {
-        public IHandlerResult After()
+        public IResult After()
         {
             return new NoneResult();
         }
 
-        public IHandlerResult Before()
+        public IResult Before()
         {
             return new NoneResult();
         }

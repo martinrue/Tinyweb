@@ -4,7 +4,7 @@ using Microsoft.Win32;
 
 namespace tinyweb.framework
 {
-    public class FileResult : IHandlerResult
+    public class FileResult : IResult
     {
         string _filepath;
         

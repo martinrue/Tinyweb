@@ -4,7 +4,7 @@
     {
         public int Number { get; set; }
 
-        public IHandlerResult Before(int number)
+        public IResult Before(int number)
         {
             Number = number;
             return new NoneResult();

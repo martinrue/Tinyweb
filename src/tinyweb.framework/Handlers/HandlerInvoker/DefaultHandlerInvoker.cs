@@ -32,16 +32,16 @@ namespace tinyweb.framework
             if (before != null)
             {
                 var beforeArgs = _argumentBuilder.BuildArguments(before.GetParameters(), requestContext);
-                result.BeforeResult = (IHandlerResult) before.Invoke(handler, beforeArgs);
+                result.BeforeResult = before.Invoke(handler, beforeArgs) as IResult;
             }
 
             var methodArgs = _argumentBuilder.BuildArguments(method.GetParameters(), requestContext);
-            result.Result = (IHandlerResult) method.Invoke(handler, methodArgs);
+            result.Result = (IResult) method.Invoke(handler, methodArgs);
 
             if (after != null)
             {
                 var afterArgs = _argumentBuilder.BuildArguments(after.GetParameters(), requestContext);
-                result.AfterResult = (IHandlerResult) after.Invoke(handler, afterArgs);
+                result.AfterResult = after.Invoke(handler, afterArgs) as IResult;
             }
 
             return result;

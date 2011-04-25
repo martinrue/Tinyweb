@@ -35,7 +35,7 @@ namespace tinyweb.framework
         private bool handlerIsValid(Type type)
         {
             var allowedMethods = new[] { "get", "post", "put", "delete" };
-            return type.GetMethods().Any(method => allowedMethods.Contains(method.Name.ToLower()) && method.ReturnType == typeof(IHandlerResult));
+            return type.GetMethods().Any(method => allowedMethods.Contains(method.Name.ToLower()) && method.ReturnType == typeof(IResult));
         }
 
         private Route getRoute(Type type)

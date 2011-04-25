@@ -2,8 +2,8 @@
 {
     public class ExecutionResult
     {
-        public IHandlerResult BeforeResult { get; set; }
-        public IHandlerResult Result { get; set; }
-        public IHandlerResult AfterResult { get; set; }
+        public IResult BeforeResult { get; set; }
+        public IResult Result { get; set; }
+        public IResult AfterResult { get; set; }
     }
 }

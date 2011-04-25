@@ -7,7 +7,7 @@
             
         }
 
-        public IHandlerResult After()
+        public IResult After()
         {
             return new NoneResult();
         }

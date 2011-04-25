@@ -6,22 +6,22 @@ namespace tinyweb.framework.tests
     {
         Route route = new Route("invoke");
 
-        public IHandlerResult Get(int param1, string param2)
+        public IResult Get(int param1, string param2)
         {
             return new StringResult(param1 + param2);
         }
 
-        public IHandlerResult Post(int param1, double param2, bool param3)
+        public IResult Post(int param1, double param2, bool param3)
         {
             return new StringResult(param1.ToString() + param2.ToString() + param3.ToString());
         }
 
-        public IHandlerResult Put(SimpleModel model)
+        public IResult Put(SimpleModel model)
         {
             return new StringResult("Result: " + (model.Number1 + model.Number2));
         }
 
-        public IHandlerResult Delete(ComplexModel model)
+        public IResult Delete(ComplexModel model)
         {
             return new StringResult(String.Format("{0} {1}", model.Label, (model.Numbers.Number1 + model.Numbers.Number2) * model.Factor));
         }

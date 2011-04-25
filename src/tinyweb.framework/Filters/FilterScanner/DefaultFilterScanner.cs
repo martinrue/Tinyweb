@@ -30,8 +30,8 @@ namespace tinyweb.framework
                 {
                     Type = type,
                     Priority = getPriority(type),
-                    BeforeFilter = methods.Any(m => m.Name.ToLower() == "before" && m.ReturnType == typeof(IHandlerResult)),
-                    AfterFilter = methods.Any(m => m.Name.ToLower() == "after" && m.ReturnType == typeof(IHandlerResult))
+                    BeforeFilter = methods.Any(m => m.Name.ToLower() == "before"),
+                    AfterFilter = methods.Any(m => m.Name.ToLower() == "after")
                 };
 
                 if (filter.AfterFilter || filter.BeforeFilter)
@@ -45,11 +45,11 @@ namespace tinyweb.framework
 
         public int getPriority(Type type)
         {
-            var attributes = type.GetCustomAttributes(typeof(RunPriority), false);
+            var attributes = type.GetCustomAttributes(typeof(FilterPriority), false);
             
             if (attributes.Count() >= 1)
             {
-                var priority = (RunPriority) attributes.First();
+                var priority = (FilterPriority)attributes.First();
                 return priority.Priority;
             }
 

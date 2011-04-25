@@ -2,7 +2,7 @@
 {
     public class RootHandler
     {
-        public IHandlerResult Get()
+        public IResult Get()
         {
             return new StringResult("Get");
         }

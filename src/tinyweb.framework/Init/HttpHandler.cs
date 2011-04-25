@@ -48,7 +48,11 @@ namespace tinyweb.framework
             filters.ForEach(type =>
             {
                 var result = FilterInvoker.Current.RunBefore(type, _requestContext);
-                result.ProcessResult(new DefaultRequestContext(_requestContext), new DefaultResponseContext(context));
+
+                if (result != null)
+                {
+                    result.ProcessResult(new DefaultRequestContext(_requestContext), new DefaultResponseContext(context));
+                }
             });
         }
 
@@ -57,7 +61,11 @@ namespace tinyweb.framework
             filters.ForEach(type =>
             {
                 var result = FilterInvoker.Current.RunAfter(type, _requestContext);
-                result.ProcessResult(new DefaultRequestContext(_requestContext), new DefaultResponseContext(context));
+
+                if (result != null)
+                {
+                    result.ProcessResult(new DefaultRequestContext(_requestContext), new DefaultResponseContext(context));
+                }
             });
         }
 

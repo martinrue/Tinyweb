@@ -4,7 +4,7 @@
     {
         Route route = new Route("resource2");
     
-        public IHandlerResult Get()
+        public IResult Get()
         {
             return new StringResult("");
         }

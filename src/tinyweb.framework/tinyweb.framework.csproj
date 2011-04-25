@@ -93,7 +93,7 @@
     <Compile Include="Handlers\HandlerInvoker\DefaultHandlerInvoker.cs" />
     <Compile Include="Handlers\HandlerInvoker\HandlerInvoker.cs" />
     <Compile Include="Handlers\HandlerInvoker\IHandlerInvoker.cs" />
-    <Compile Include="Handlers\HandlerResult\Interface\IHandlerResult.cs" />
+    <Compile Include="Handlers\HandlerResult\Interface\IResult.cs" />
     <Compile Include="Handlers\HandlerResult\HtmlResult.cs" />
     <Compile Include="Handlers\HandlerScanner\DefaultHandlerScanner.cs" />
     <Compile Include="Handlers\HandlerScanner\HandlerScanner.cs" />

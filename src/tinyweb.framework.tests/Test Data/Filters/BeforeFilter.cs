@@ -1,9 +1,9 @@
 ﻿namespace tinyweb.framework.tests
 {
-    [RunPriority(3)]
+    [FilterPriority(3)]
     public class BeforeFilter
     {
-        public IHandlerResult Before()
+        public IResult Before()
         {
             return new NoneResult();
         }

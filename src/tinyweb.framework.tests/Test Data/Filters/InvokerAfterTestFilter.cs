@@ -4,7 +4,7 @@
     {
         public string Phrase { get; set; }
 
-        public IHandlerResult After(string phrase)
+        public IResult After(string phrase)
         {
             Phrase = phrase;
             return new NoneResult();

@@ -3,7 +3,7 @@ using System.Web.Script.Serialization;
 
 namespace tinyweb.framework
 {
-    public class JsonResult : IHandlerResult
+    public class JsonResult : IResult
     {
         object _data;
 

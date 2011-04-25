@@ -2,7 +2,7 @@ using System;
 
 namespace tinyweb.framework
 {
-    public class JsonOrXmlResult : IHandlerResult
+    public class JsonOrXmlResult : IResult
     {
         object _data;
 

@@ -4,7 +4,7 @@ using tinyweb.framework;
 
 namespace tinyweb.viewengine.spark
 {
-    public class SparkResult<T> : IHandlerResult
+    public class SparkResult<T> : IResult
     {
         T _model;
         string _templatePath;
@@ -36,7 +36,7 @@ namespace tinyweb.viewengine.spark
         }
     }
 
-    public class SparkResult : IHandlerResult
+    public class SparkResult : IResult
     {
         string _templatePath;
         string _templateName;

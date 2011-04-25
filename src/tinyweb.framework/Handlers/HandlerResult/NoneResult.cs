@@ -1,6 +1,6 @@
 ﻿namespace tinyweb.framework
 {
-    public class NoneResult : IHandlerResult
+    public class NoneResult : IResult
     {
         public void ProcessResult(IRequestContext request, IResponseContext response)
         {

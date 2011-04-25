@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace tinyweb.framework
 {
-    public class XmlResult : IHandlerResult
+    public class XmlResult : IResult
     {
         object _data;
 

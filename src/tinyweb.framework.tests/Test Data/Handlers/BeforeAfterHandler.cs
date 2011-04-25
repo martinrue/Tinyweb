@@ -11,7 +11,7 @@ namespace tinyweb.framework.tests
             Calls.Add("before");
         }
 
-        public IHandlerResult Get()
+        public IResult Get()
         {
             Calls.Add("get");
 

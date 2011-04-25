@@ -3,7 +3,7 @@ using System.IO;
 
 namespace tinyweb.framework
 {
-    public class HtmlResult : IHandlerResult
+    public class HtmlResult : IResult
     {
         string _filepath;
 

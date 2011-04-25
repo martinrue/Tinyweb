@@ -2,7 +2,7 @@ namespace tinyweb.framework.tests
 {
     public class PascalConventionHandler
     {
-        public IHandlerResult Get()
+        public IResult Get()
         {
             return new StringResult("");
         }

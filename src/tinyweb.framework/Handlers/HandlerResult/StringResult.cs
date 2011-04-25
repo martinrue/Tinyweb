@@ -1,6 +1,6 @@
 ﻿namespace tinyweb.framework
 {
-    public class StringResult : IHandlerResult
+    public class StringResult : IResult
     {
         string _data;
 

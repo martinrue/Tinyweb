@@ -2,7 +2,7 @@
 {
     public class ConventionHandler
     {
-        public IHandlerResult Get()
+        public IResult Get()
         {
             return new StringResult("");
         }

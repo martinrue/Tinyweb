@@ -2,7 +2,7 @@
 {
     public class InvalidFilter
     {
-        public IHandlerResult Unrecognised()
+        public IResult Unrecognised()
         {
             return new NoneResult();
         }

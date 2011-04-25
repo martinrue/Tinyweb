@@ -4,7 +4,7 @@ namespace tinyweb.viewengine.tests
 {
     public class TestHandler
     {
-        public IHandlerResult Get()
+        public IResult Get()
         {
             return Result.String("");
         }

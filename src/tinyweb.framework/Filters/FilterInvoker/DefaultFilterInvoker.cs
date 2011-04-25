@@ -13,24 +13,24 @@ namespace tinyweb.framework
             _argumentBuilder = argumentBuilder;
         }
 
-        public IHandlerResult RunBefore(object filter, RequestContext requestContext)
+        public IResult RunBefore(object filter, RequestContext requestContext)
         {
             return executeFilterMethod(filter, "Before", requestContext);
         }
 
-        public IHandlerResult RunAfter(object filter, RequestContext requestContext)
+        public IResult RunAfter(object filter, RequestContext requestContext)
         {
             return executeFilterMethod(filter, "After", requestContext);
         }
 
-        private IHandlerResult executeFilterMethod(object filter, string filterMethod, RequestContext context)
+        private IResult executeFilterMethod(object filter, string filterMethod, RequestContext context)
         {
             var method = getMethod(filter, filterMethod);
 
             if (method != null)
             {
                 var args = _argumentBuilder.BuildArguments(method.GetParameters(), context);
-                return (IHandlerResult) method.Invoke(filter, args);
+                return method.Invoke(filter, args) as IResult;
             }
 
             return null;

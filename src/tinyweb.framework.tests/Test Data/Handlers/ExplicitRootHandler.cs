@@ -4,7 +4,7 @@
     {
         Route route = new Route("/");
 
-        public IHandlerResult Get()
+        public IResult Get()
         {
             return new StringResult("Get");
         }

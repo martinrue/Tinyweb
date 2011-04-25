@@ -2,11 +2,11 @@
 
 namespace tinyweb.framework
 {
-    public class RunPriority : Attribute
+    public class FilterPriority : Attribute
     {
         public int Priority { get; set; }
 
-        public RunPriority(int priority)
+        public FilterPriority(int priority)
         {
             Priority = priority;
         }

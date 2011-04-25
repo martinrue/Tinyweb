@@ -3,7 +3,7 @@ using tinyweb.framework.Helpers;
 
 namespace tinyweb.framework
 {
-    public class RedirectResult<T> : IHandlerResult
+    public class RedirectResult<T> : IResult
     {
         string _uri;
 
@@ -19,7 +19,7 @@ namespace tinyweb.framework
         }
     }
 
-    public class RedirectResult : IHandlerResult
+    public class RedirectResult : IResult
     {
         string _uri;
 
