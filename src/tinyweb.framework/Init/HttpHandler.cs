@@ -2,10 +2,11 @@
 using System.Linq;
 using System.Web;
 using System.Web.Routing;
+using System.Web.SessionState;
 
 namespace tinyweb.framework
 {
-    public class HttpHandler : IHttpHandler
+    public class HttpHandler : IHttpHandler, IRequiresSessionState
     {
         RequestContext _requestContext;
         HandlerData _handlerData;

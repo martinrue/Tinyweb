@@ -68,6 +68,8 @@ You can see the live build status (and grab the binary releases) from the [build
 
 ## Versions
 
+2.0.1 Fixed bug that prevented handlers accessing session state from the RequestContext
+
 2.0.0 Support for global and handler filters for before/after processing and changed public API by renaming IHandlerResult to IResult, forcing semver v2.0.0
 
 1.0.2 When Tinyweb.AllowFormatExtensions is set, JsonOrXml result types allow the use of a URL override for specifying the requested content type (i.e. /resource.json)
