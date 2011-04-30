@@ -6,7 +6,7 @@ Tinyweb is a lightweight web framework for ASP.NET that embraces HTTP and aims t
 
 Tinyweb moves away from the MVC pattern for developing web applications. Instead, you start with separate addressable resources that respond directly to the HTTP method that was used to access the resource. Every resource is a `class` and every implemented HTTP method (get, post, put, delete) is a method on the `class`. 
 
-With Tinyweb, you're writing code that is conceptually close to the way HTTP actually works. *Your code and HTTP sitting in a tree, K.I.S.S.I.N.G.*
+With Tinyweb, you're writing code that is conceptually close to the way HTTP actually works.
 
 ## Simplicity
 
@@ -33,10 +33,14 @@ You now have a resource that supports HTTP GET at the location /hello/world and 
             Tinyweb.Init();
         }
     }
-
+	
 ## It's Still ASP.NET
 
 Tinyweb is just another web framework, but underneath it's still the same ASP.NET you've been using for years. You still have access to `Request`, `Response`, `Session`, `Cache` and all of that other stuff that makes you squeal in delight.
+
+## Documentation
+
+Details of all features of the framework and how to use them can be found in the [docs](https://github.com/martinrue/Tinyweb/wiki). 
 
 ## Resources
 
