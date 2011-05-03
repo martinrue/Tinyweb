@@ -8,7 +8,7 @@ namespace tinyweb.framework
 {
     public class ArgumentBuilder : IArgumentBuilder
     {
-        public object[] BuildArguments(ParameterInfo[] parameters, RequestContext requestContext)
+        public object[] BuildArguments(ParameterInfo[] parameters, RequestContext requestContext, HandlerData handlerData)
         {
             var argumentDictionary = new Dictionary<string, object>();
 
@@ -42,6 +42,10 @@ namespace tinyweb.framework
                     if (parameter.ParameterType == typeof(RequestContext))
                     {
                         argumentDictionary.Add(parameter.Name, requestContext);
+                    }
+                    else if (parameter.ParameterType == typeof(HandlerData))
+                    {
+                        argumentDictionary.Add(parameter.Name, handlerData);
                     }
                     else
                     {

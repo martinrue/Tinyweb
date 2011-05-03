@@ -22,7 +22,7 @@ namespace tinyweb.framework.tests
             requestContext.HttpContext.Request.QueryString.Add("number", "42");
 
             var filter = new InvokerBeforeTestFilter();
-            filterInvoker.RunBefore(filter, requestContext);
+            filterInvoker.RunBefore(filter, requestContext, null);
 
             Assert.That(filter.Number, Is.EqualTo(42));
         }
@@ -33,7 +33,7 @@ namespace tinyweb.framework.tests
             requestContext.HttpContext.Request.QueryString.Add("phrase", "testing");
 
             var filter = new InvokerAfterTestFilter();
-            filterInvoker.RunAfter(filter, requestContext);
+            filterInvoker.RunAfter(filter, requestContext, null);
 
             Assert.That(filter.Phrase, Is.EqualTo("testing"));
         }

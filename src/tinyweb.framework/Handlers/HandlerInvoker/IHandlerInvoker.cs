@@ -4,6 +4,6 @@ namespace tinyweb.framework
 {
     public interface IHandlerInvoker
     {
-        ExecutionResult Execute(object handler, RequestContext requestContext);
+        ExecutionResult Execute(object handler, RequestContext requestContext, HandlerData handlerData);
     }
 }

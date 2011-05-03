@@ -23,7 +23,7 @@ namespace tinyweb.framework.tests
             requestContext.HttpContext.Request.SetHttpMethodResult("GET");
 
             var response = new FakeResponseContext();
-            var result = defaultHandlerInvoker.Execute(new Resource1Handler(), requestContext);
+            var result = defaultHandlerInvoker.Execute(new Resource1Handler(), requestContext, null);
 
             result.Result.ProcessResult(null, response);
 
@@ -37,7 +37,7 @@ namespace tinyweb.framework.tests
             requestContext.HttpContext.Request.SetHttpMethodResult("POST");
 
             var response = new FakeResponseContext();
-            var result = defaultHandlerInvoker.Execute(new Resource1Handler(), requestContext);
+            var result = defaultHandlerInvoker.Execute(new Resource1Handler(), requestContext, null);
 
             result.Result.ProcessResult(null, response);
 
@@ -50,7 +50,7 @@ namespace tinyweb.framework.tests
         {
             requestContext.HttpContext.Request.SetHttpMethodResult("DELETE");
 
-            var exception = Assert.Throws<HttpException>(() => defaultHandlerInvoker.Execute(new Resource1Handler(), requestContext));
+            var exception = Assert.Throws<HttpException>(() => defaultHandlerInvoker.Execute(new Resource1Handler(), requestContext, null));
             Assert.That(exception.Message, Is.EqualTo("The request could not be completed because the resource does not support DELETE"));
         }
 
@@ -63,7 +63,7 @@ namespace tinyweb.framework.tests
 
             Assert.That(handler.Calls.Count, Is.EqualTo(0));
 
-            defaultHandlerInvoker.Execute(handler, requestContext);
+            defaultHandlerInvoker.Execute(handler, requestContext, null);
 
             Assert.That(handler.Calls[0], Is.EqualTo("before"));
             Assert.That(handler.Calls[1], Is.EqualTo("get"));

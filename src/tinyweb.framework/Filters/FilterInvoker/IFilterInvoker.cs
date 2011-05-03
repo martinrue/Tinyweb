@@ -4,7 +4,7 @@ namespace tinyweb.framework
 {
     public interface IFilterInvoker
     {
-        IResult RunBefore(object filter, RequestContext requestContext);
-        IResult RunAfter(object filter, RequestContext requestContext);
+        IResult RunBefore(object filter, RequestContext requestContext, HandlerData handlerData);
+        IResult RunAfter(object filter, RequestContext requestContext, HandlerData handlerData);
     }
 }

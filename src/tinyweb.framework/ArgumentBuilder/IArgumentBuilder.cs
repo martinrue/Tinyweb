@@ -5,6 +5,6 @@ namespace tinyweb.framework
 {
     public interface IArgumentBuilder
     {
-        object[] BuildArguments(ParameterInfo[] parameters, RequestContext requestContext);
+        object[] BuildArguments(ParameterInfo[] parameters, RequestContext requestContext, HandlerData handlerData);
     }
 }

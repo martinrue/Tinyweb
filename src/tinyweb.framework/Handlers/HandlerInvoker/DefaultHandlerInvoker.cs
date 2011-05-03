@@ -15,7 +15,7 @@ namespace tinyweb.framework
             _argumentBuilder = argumentBuilder;
         }
 
-        public ExecutionResult Execute(object handler, RequestContext requestContext)
+        public ExecutionResult Execute(object handler, RequestContext requestContext, HandlerData handlerData)
         {
             var result = new ExecutionResult();
             var httpVerb = requestContext.HttpContext.Request.HttpMethod.ToEnum<HttpVerb>();
@@ -31,16 +31,16 @@ namespace tinyweb.framework
 
             if (before != null)
             {
-                var beforeArgs = _argumentBuilder.BuildArguments(before.GetParameters(), requestContext);
+                var beforeArgs = _argumentBuilder.BuildArguments(before.GetParameters(), requestContext, handlerData);
                 result.BeforeResult = before.Invoke(handler, beforeArgs) as IResult;
             }
 
-            var methodArgs = _argumentBuilder.BuildArguments(method.GetParameters(), requestContext);
+            var methodArgs = _argumentBuilder.BuildArguments(method.GetParameters(), requestContext, handlerData);
             result.Result = (IResult) method.Invoke(handler, methodArgs);
 
             if (after != null)
             {
-                var afterArgs = _argumentBuilder.BuildArguments(after.GetParameters(), requestContext);
+                var afterArgs = _argumentBuilder.BuildArguments(after.GetParameters(), requestContext, handlerData);
                 result.AfterResult = after.Invoke(handler, afterArgs) as IResult;
             }
 

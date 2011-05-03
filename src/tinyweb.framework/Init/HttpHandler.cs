@@ -24,10 +24,10 @@ namespace tinyweb.framework
             var beforeFilters = createBeforeFilters();
             var afterFilters = createAfterFilters();
 
-            processBeforeFilters(beforeFilters, context);
+            processBeforeFilters(beforeFilters, context, _handlerData);
 
             var handler = HandlerFactory.Current.Create(_handlerData);
-            var result = HandlerInvoker.Current.Execute(handler, _requestContext);
+            var result = HandlerInvoker.Current.Execute(handler, _requestContext, _handlerData);
 
             if (result.BeforeResult != null)
             {
@@ -41,14 +41,14 @@ namespace tinyweb.framework
                 result.AfterResult.ProcessResult(new DefaultRequestContext(_requestContext), new DefaultResponseContext(context));
             }
 
-            processAfterFilters(afterFilters, context);
+            processAfterFilters(afterFilters, context, _handlerData);
         }
 
-        private void processBeforeFilters(IEnumerable<object> filters, HttpContext context)
+        private void processBeforeFilters(IEnumerable<object> filters, HttpContext context, HandlerData handlerData)
         {
             filters.ForEach(type =>
             {
-                var result = FilterInvoker.Current.RunBefore(type, _requestContext);
+                var result = FilterInvoker.Current.RunBefore(type, _requestContext, handlerData);
 
                 if (result != null)
                 {
@@ -57,11 +57,11 @@ namespace tinyweb.framework
             });
         }
 
-        private void processAfterFilters(IEnumerable<object> filters, HttpContext context)
+        private void processAfterFilters(IEnumerable<object> filters, HttpContext context, HandlerData handlerData)
         {
             filters.ForEach(type =>
             {
-                var result = FilterInvoker.Current.RunAfter(type, _requestContext);
+                var result = FilterInvoker.Current.RunAfter(type, _requestContext, handlerData);
 
                 if (result != null)
                 {

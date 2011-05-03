@@ -5,7 +5,7 @@ namespace tinyweb.framework.tests
 {
     public class CustomHandlerInvoker : IHandlerInvoker
     {
-        public ExecutionResult Execute(object handler, RequestContext requestContext)
+        public ExecutionResult Execute(object handler, RequestContext requestContext, HandlerData handlerData)
         {
             throw new NotImplementedException();
         }

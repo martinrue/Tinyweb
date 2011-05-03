@@ -24,7 +24,7 @@ namespace tinyweb.framework.tests
             requestContext.HttpContext.Request.SetHttpMethodResult("GET");
 
             var response = new FakeResponseContext();
-            var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
+            var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext, null);
 
             result.Result.ProcessResult(null, response);
 
@@ -40,7 +40,7 @@ namespace tinyweb.framework.tests
             requestContext.HttpContext.Request.SetHttpMethodResult("GET");
 
             var response = new FakeResponseContext();
-            var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
+            var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext, null);
 
             result.Result.ProcessResult(null, response);
 
@@ -58,7 +58,7 @@ namespace tinyweb.framework.tests
             requestContext.HttpContext.Request.SetHttpMethodResult("GET");
 
             var response = new FakeResponseContext();
-            var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
+            var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext, null);
 
             result.Result.ProcessResult(null, response);
 
@@ -75,7 +75,7 @@ namespace tinyweb.framework.tests
             requestContext.HttpContext.Request.SetHttpMethodResult("POST");
 
             var response = new FakeResponseContext();
-            var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
+            var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext, null);
 
             result.Result.ProcessResult(null, response);
 
@@ -91,7 +91,7 @@ namespace tinyweb.framework.tests
             requestContext.HttpContext.Request.SetHttpMethodResult("PUT");
 
             var response = new FakeResponseContext();
-            var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
+            var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext, null);
 
             result.Result.ProcessResult(null, response);
 
@@ -108,7 +108,7 @@ namespace tinyweb.framework.tests
             requestContext.HttpContext.Request.SetHttpMethodResult("DELETE");
 
             var response = new FakeResponseContext();
-            var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext);
+            var result = defaultHandlerInvoker.Execute(new InvokeHandler(), requestContext, null);
 
             result.Result.ProcessResult(null, response);
 
