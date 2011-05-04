@@ -14,6 +14,7 @@ namespace tinyweb.framework
         public static IEnumerable<HandlerData> Handlers { get; set; }
         public static IEnumerable<FilterData> Filters { get; set; }
 
+        public static Action<Exception, RequestContext, HandlerData> OnError;
         public static bool AllowFormatExtensions { get; set; }
 
         public static int Init(params Registry[] registries)

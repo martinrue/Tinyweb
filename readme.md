@@ -72,6 +72,8 @@ You can see the live build status (and grab the binary releases) from the [build
 
 ## Versions
 
+2.1.0 Added support for an error handler for managing any errors thrown by handlers or the framework and added access to HandlerData to model binding
+
 2.0.1 Fixed bug that prevented handlers accessing session state from the RequestContext
 
 2.0.0 Support for global and handler filters for before/after processing and changed public API by renaming IHandlerResult to IResult, forcing semver v2.0.0

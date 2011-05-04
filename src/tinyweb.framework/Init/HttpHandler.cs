@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Routing;
@@ -21,27 +22,39 @@ namespace tinyweb.framework
 
         public void ProcessRequest(HttpContext context)
         {
-            var beforeFilters = createBeforeFilters();
-            var afterFilters = createAfterFilters();
-
-            processBeforeFilters(beforeFilters, context, _handlerData);
-
-            var handler = HandlerFactory.Current.Create(_handlerData);
-            var result = HandlerInvoker.Current.Execute(handler, _requestContext, _handlerData);
-
-            if (result.BeforeResult != null)
+            try
             {
-                result.BeforeResult.ProcessResult(new DefaultRequestContext(_requestContext), new DefaultResponseContext(context));    
-            }
-            
-            result.Result.ProcessResult(new DefaultRequestContext(_requestContext), new DefaultResponseContext(context));
+                var beforeFilters = createBeforeFilters();
+                var afterFilters = createAfterFilters();
 
-            if (result.AfterResult != null)
+                processBeforeFilters(beforeFilters, context, _handlerData);
+
+                var handler = HandlerFactory.Current.Create(_handlerData);
+                var result = HandlerInvoker.Current.Execute(handler, _requestContext, _handlerData);
+
+                if (result.BeforeResult != null)
+                {
+                    result.BeforeResult.ProcessResult(new DefaultRequestContext(_requestContext), new DefaultResponseContext(context));
+                }
+
+                result.Result.ProcessResult(new DefaultRequestContext(_requestContext), new DefaultResponseContext(context));
+
+                if (result.AfterResult != null)
+                {
+                    result.AfterResult.ProcessResult(new DefaultRequestContext(_requestContext), new DefaultResponseContext(context));
+                }
+
+                processAfterFilters(afterFilters, context, _handlerData);
+            }
+            catch (Exception exception)
             {
-                result.AfterResult.ProcessResult(new DefaultRequestContext(_requestContext), new DefaultResponseContext(context));
+                if (Tinyweb.OnError != null)
+                {
+                    Tinyweb.OnError(exception, _requestContext, _handlerData);
+                }
+                
+                throw;
             }
-
-            processAfterFilters(afterFilters, context, _handlerData);
         }
 
         private void processBeforeFilters(IEnumerable<object> filters, HttpContext context, HandlerData handlerData)
