@@ -52,6 +52,14 @@ Links to blogs and other resources about Tinyweb:
 
 [ASP.NET - Thinking In Resources](http://invalidcast.com/2011/03/asp-net-thinking-in-resources)
 
+[Tinyweb Series: 1 Getting Started](http://invalidcast.com/2011/05/tinyweb-series-1-getting-started)
+
+[Tinyweb Series: 2 Building APIs](http://invalidcast.com/2011/05/tinyweb-series-2-building-apis)
+
+[Tinyweb Series: 3 Dependency Injection & Filters](http://invalidcast.com/2011/05/tinyweb-series-3-dependency-injection-filters)
+
+[Tinyweb Series: 4 Views & Model Binding](http://invalidcast.com/2011/05/tinyweb-series-4-views-model-binding)
+
 ## Applications
 
 The following full applications have been built with Tinyweb:
