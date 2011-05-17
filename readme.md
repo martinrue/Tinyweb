@@ -80,6 +80,8 @@ You can see the live build status (and grab the binary releases) from the [build
 
 ## Versions
 
+2.1.1 Fixed bug caused by Result.Redirect allowing ThreadAbort exceptions to flow through to the OnError delegate for every redirect
+
 2.1.0 Added support for an error handler for managing any errors thrown by handlers or the framework and added access to HandlerData to model binding
 
 2.0.1 Fixed bug that prevented handlers accessing session state from the RequestContext
