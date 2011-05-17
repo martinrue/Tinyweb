@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Routing;
 using System.Web.SessionState;
@@ -45,6 +46,10 @@ namespace tinyweb.framework
                 }
 
                 processAfterFilters(afterFilters, context, _handlerData);
+            }
+            catch (ThreadAbortException exception)
+            {
+                // Swallow exceptions caused by Result.Redirect calls in filters/handlers
             }
             catch (Exception exception)
             {
