@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="ArgumentBuilder\ArgumentBuilder.cs" />
     <Compile Include="ArgumentBuilder\IArgumentBuilder.cs" />
+    <Compile Include="ArgumentBuilder\Ignore.cs" />
     <Compile Include="Filters\FilterFactory\DefaultFilterFactory.cs" />
     <Compile Include="Filters\FilterFactory\FilterFactory.cs" />
     <Compile Include="Filters\FilterFactory\IFilterFactory.cs" />

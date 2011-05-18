@@ -71,6 +71,11 @@ namespace tinyweb.framework
 
                 foreach (var property in requestedType.GetProperties())
                 {
+                    if (ignoreAttributeSet(property))
+                    {
+                        continue;
+                    }
+
                     if (property.PropertyType.IsValueType || property.PropertyType == typeof(String))
                     {
                         property.SetValue(instance, getValueFromRequest(requestContext, property.Name, property.PropertyType), null);
@@ -167,5 +172,12 @@ namespace tinyweb.framework
 
             return array;
         }
+
+        private bool ignoreAttributeSet(PropertyInfo property)
+        {
+            var attributes = property.GetCustomAttributes(typeof(Ignore), false);
+            return attributes.Any();
+        }
+
     }
 }

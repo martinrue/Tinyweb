@@ -80,15 +80,17 @@ You can see the live build status (and grab the binary releases) from the [build
 
 ## Versions
 
-2.1.1 Fixed bug caused by Result.Redirect allowing ThreadAbort exceptions to flow through to the OnError delegate for every redirect
+2.1.2 Added `Ignore` attribute for excluding specific properties of a of class from model binding
 
-2.1.0 Added support for an error handler for managing any errors thrown by handlers or the framework and added access to HandlerData to model binding
+2.1.1 Fixed bug caused by `Result.Redirect` allowing `ThreadAbort` exceptions to flow through to the `Tinyweb.OnError` delegate for every redirect
 
-2.0.1 Fixed bug that prevented handlers accessing session state from the RequestContext
+2.1.0 Added support for an error handler for managing errors thrown during handler/filter execution and added access to `HandlerData` to model binding
 
-2.0.0 Support for global and handler filters for before/after processing and changed public API by renaming IHandlerResult to IResult, forcing semver v2.0.0
+2.0.1 Fixed bug that prevented handlers accessing session state from the `RequestContext`
 
-1.0.2 When Tinyweb.AllowFormatExtensions is set, JsonOrXml result types allow the use of a URL override for specifying the requested content type (i.e. /resource.json)
+2.0.0 Support for global and handler filters for before/after processing and changed public API by renaming `IHandlerResult` to `IResult`, forcing semver v2.0.0
+
+1.0.2 When `Tinyweb.AllowFormatExtensions` is set, `Result.JsonOrXml` allows the use of a URL override for specifying the requested content type (i.e. /resource.json)
 
 1.0.1 Update for binding of array types, lower casing of routes and internal Spark integration refactoring
 
