@@ -11,13 +11,14 @@ namespace tinyweb.framework
         {
             var types = findHandlers();
 
-            return types.Select(type => new { Route = getRoute(type), Type = type })
-                        .Select(t => new HandlerData
-                        {
-                            Type = t.Type,
-                            Uri = t.Route.RouteUri,
-                            DefaultRouteValues = t.Route.Defaults
-                        });
+            var handlers = types.Select(type => new { Route = getRoute(type), Type = type }).ToList();
+
+            return handlers.Select(t => new HandlerData
+            {
+                Type = t.Type,
+                Uri = t.Route.RouteUri,
+                DefaultRouteValues = t.Route.Defaults
+            });
         }
 
         private IEnumerable<Type> findHandlers()
