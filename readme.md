@@ -80,6 +80,8 @@ You can see the live build status (and grab the binary releases) from the [build
 
 ## Versions
 
+2.1.4 Fixed bug with Result.JsonOrXml when no accept header is specified - it now defaults to JSON
+
 2.1.3 Fixed lazy loading bug that caused init to load handlers twice during scanning
 
 2.1.2 Added `Ignore` attribute for excluding specific properties of a class from model binding

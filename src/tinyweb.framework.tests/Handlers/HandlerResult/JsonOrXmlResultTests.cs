@@ -135,6 +135,7 @@ namespace tinyweb.framework.tests
         {
             var headers = new Mock<IRequestHeaders>();
             headers.Setup(x => x[It.IsAny<string>()]).Returns(acceptHeader);
+            headers.Setup(x => x.KeyExists(It.IsAny<string>())).Returns(true);
 
             var routeValues = new RouteValues(new RouteValueDictionary());
             

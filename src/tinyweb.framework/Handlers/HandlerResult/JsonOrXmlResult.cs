@@ -37,6 +37,12 @@ namespace tinyweb.framework
             }
             else
             {
+                if (!request.Headers.KeyExists("Accept"))
+                {
+                    new JsonResult(_data).ProcessResult(request, response);
+                    return;
+                }
+
                 var accept = request.Headers["Accept"].ParseAcceptHeader();
 
                 var jsonPriority = accept.ContainsKey("application/json") ? accept["application/json"] : 1;
