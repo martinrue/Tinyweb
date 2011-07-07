@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using tinyweb.framework.Helpers;
 
 namespace tinyweb.framework.tests
 {
@@ -25,6 +26,8 @@ namespace tinyweb.framework.tests
         [Test]
         public void ProcessResult_WhenCreatedWithValidHandler_ReturnsHandlerUri()
         {
+            Url.ApplicationPathProvider = new FakeApplicationPathProvider();
+
             Tinyweb.Handlers = new[] { new HandlerData { Type = typeof(Resource1Handler), Uri = "uri" } };
 
             var response = new FakeResponseContext();

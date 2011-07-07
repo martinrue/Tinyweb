@@ -12,6 +12,7 @@ namespace tinyweb.framework.tests
         public void Setup()
         {
             Tinyweb.Handlers = new List<HandlerData>();
+            Url.ApplicationPathProvider = new FakeApplicationPathProvider { Path = "/virtual" };
         }
 
         [Test]
@@ -22,7 +23,7 @@ namespace tinyweb.framework.tests
                 new HandlerData { Uri = "users/register", Type = typeof(Resource1Handler) }
             };
 
-            Assert.That(Url.For<Resource1Handler>(), Is.EqualTo("/users/register"));
+            Assert.That(Url.For<Resource1Handler>(), Is.EqualTo("/virtual/users/register"));
         }
 
         [Test]
@@ -41,7 +42,7 @@ namespace tinyweb.framework.tests
 
             var url = Url.For<Resource1Handler>(new { p1 = "quick", p2 = "fox jumped" });
 
-            Assert.That(url, Is.EqualTo("/the/quick/brown/fox+jumped"));
+            Assert.That(url, Is.EqualTo("/virtual/the/quick/brown/fox+jumped"));
         }
 
         [Test]
@@ -54,7 +55,7 @@ namespace tinyweb.framework.tests
 
             var url = Url.For<Resource1Handler>(new { arg1 = "fancy", arg2 = "url" });
 
-            Assert.That(url, Is.EqualTo("/some/fancy/fancy/url/url"));
+            Assert.That(url, Is.EqualTo("/virtual/some/fancy/fancy/url/url"));
         }
 
         [Test]
@@ -67,7 +68,7 @@ namespace tinyweb.framework.tests
 
             var url = Url.For<Resource1Handler>(new { step1 = "the", step2 = "quick", step3 = "brown" });
 
-            Assert.That(url, Is.EqualTo("/someurl?step1=the&step2=quick&step3=brown"));
+            Assert.That(url, Is.EqualTo("/virtual/someurl?step1=the&step2=quick&step3=brown"));
         }
 
         [Test]
@@ -80,7 +81,7 @@ namespace tinyweb.framework.tests
 
             var url = Url.For<Resource1Handler>(new { step1 = "the", step2 = "quick", step3 = "brown" });
 
-            Assert.That(url, Is.EqualTo("/someurl/the?step2=quick&step3=brown"));
+            Assert.That(url, Is.EqualTo("/virtual/someurl/the?step2=quick&step3=brown"));
         }
 
         [Test]
@@ -93,7 +94,7 @@ namespace tinyweb.framework.tests
 
             var url = Url.For<Resource1Handler>();
 
-            Assert.That(url, Is.EqualTo("/someurl/1"));
+            Assert.That(url, Is.EqualTo("/virtual/someurl/1"));
         }
 
         [Test]
@@ -106,7 +107,7 @@ namespace tinyweb.framework.tests
 
             var url = Url.For<Resource1Handler>(new { page = 20 });
 
-            Assert.That(url, Is.EqualTo("/someurl/20"));
+            Assert.That(url, Is.EqualTo("/virtual/someurl/20"));
         }
     }
 }

@@ -7,6 +7,8 @@ namespace tinyweb.framework.Helpers
 {
     public static class Url
     {
+        public static IApplicationPathProvider ApplicationPathProvider = new RealApplicationPathProvider();
+
         public static string For<T>(object arguments = null)
         {
             var handler = Tinyweb.Handlers.SingleOrDefault(h => h.Type == typeof(T));
@@ -21,7 +23,13 @@ namespace tinyweb.framework.Helpers
 
         private static string buildUrl(HandlerData handler, object arguments)
         {
-            return "/" + substituteUrlParameters(handler.Uri, arguments, handler.DefaultRouteValues);
+            return getApplicationPath() + substituteUrlParameters(handler.Uri, arguments, handler.DefaultRouteValues);
+        }
+
+        private static string getApplicationPath()
+        {
+            var path = ApplicationPathProvider.GetApplicationPath();
+            return path.EndsWith("/") ? path : path + "/";
         }
 
         private static string substituteUrlParameters(string url, object arguments, object defaults)

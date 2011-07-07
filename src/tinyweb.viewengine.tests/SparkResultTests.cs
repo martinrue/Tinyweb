@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
 using tinyweb.framework;
+using tinyweb.framework.Helpers;
 using tinyweb.viewengine.spark;
 
 namespace tinyweb.viewengine.tests
@@ -89,6 +90,8 @@ namespace tinyweb.viewengine.tests
             {
                 new HandlerData { Uri = "foo/bar", Type = typeof(TestHandler) }
             };
+
+            Url.ApplicationPathProvider = new FakeApplicationPathProvider();
 
             var response = new FakeResponseContext();
             var result = new SparkResult("../../Test Data/Views/Spark/Url.spark");

@@ -77,6 +77,9 @@
     <Compile Include="Handlers\HandlerResult\XmlResult.cs" />
     <Compile Include="Handlers\HandlerResult\RedirectResult.cs" />
     <Compile Include="Handlers\HandlerResult\Factory\Result.cs" />
+    <Compile Include="Helpers\FakeApplicationPathProvider.cs" />
+    <Compile Include="Helpers\IApplicationPathProvider.cs" />
+    <Compile Include="Helpers\RealApplicationPathProvider.cs" />
     <Compile Include="Helpers\Url.cs" />
     <Compile Include="Init\Route.cs" />
     <Compile Include="Handlers\HandlerResult\FileResult.cs" />
