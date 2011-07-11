@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RazorResultTests.cs" />
     <Compile Include="SparkResultTests.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -78,6 +79,10 @@
       <Project>{4FEB7B17-C089-48A3-BA86-D70B24CCEB9B}</Project>
       <Name>tinyweb.framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\tinyweb.viewengine.razor\tinyweb.viewengine.razor.csproj">
+      <Project>{B135AE31-63ED-408B-BE82-737A910AE095}</Project>
+      <Name>tinyweb.viewengine.razor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\tinyweb.viewengine.spark\tinyweb.viewengine.spark.csproj">
       <Project>{1BE68BD1-5AE8-4900-B3C5-C792EB76BF3F}</Project>
       <Name>tinyweb.viewengine.spark</Name>
@@ -87,6 +92,13 @@
     <None Include="packages.config" />
     <Content Include="Test Data\Views\Spark\DateTime.spark" />
     <Content Include="Test Data\Views\Spark\Url.spark" />
+    <None Include="Test Data\Views\Razor\Child.cshtml" />
+    <None Include="Test Data\Views\Razor\DateTime.cshtml" />
+    <None Include="Test Data\Views\Razor\Master.cshtml" />
+    <None Include="Test Data\Views\Razor\Shared\Partial.cshtml" />
+    <None Include="Test Data\Views\Razor\Simple.cshtml" />
+    <None Include="Test Data\Views\Razor\Url.cshtml" />
+    <None Include="Test Data\Views\Razor\View.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
