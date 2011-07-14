@@ -6,18 +6,22 @@ using tinyweb.framework;
 using tinyweb.framework.Helpers;
 using tinyweb.viewengine.razor;
 
-namespace tinyweb.viewengine.tests {
+namespace tinyweb.viewengine.tests
+{
     [TestFixture]
-    public class RazorResultTests {
+    public class RazorResultTests
+    {
         [Test]
-        public void ProcessResult_WhenRequestedWithNonExistentPath_ThrowsFileNotFoundException() {
+        public void ProcessResult_WhenRequestedWithNonExistentPath_ThrowsFileNotFoundException()
+        {
             var exception = Assert.Throws<FileNotFoundException>(() => new RazorResult("c:\\fakepath"));
 
             Assert.That(exception.Message, Is.EqualTo("The razor view at c:\\fakepath could not be found"));
         }
 
         [Test]
-        public void ProcessResult_WhenRequestedWithNoModel_ReturnsViewData() {
+        public void ProcessResult_WhenRequestedWithNoModel_ReturnsViewData()
+        {
             var response = new FakeResponseContext();
             var result = new RazorResult("../../Test Data/Views/Razor/Simple.cshtml");
 
@@ -28,7 +32,8 @@ namespace tinyweb.viewengine.tests {
         }
 
         [Test]
-        public void ProcessResult_WhenRequestedWithModel_ReturnsViewData() {
+        public void ProcessResult_WhenRequestedWithModel_ReturnsViewData()
+        {
             var response = new FakeResponseContext();
             var model = new UserModel { ID = 42, Username = "Username" };
             var result = new RazorResult<UserModel>(model, "../../Test Data/Views/Razor/View.cshtml");
@@ -41,7 +46,8 @@ namespace tinyweb.viewengine.tests {
         }
 
         [Test]
-        public void ProcessResult_WhenRequestedWithModelUsingPartial_ReturnsCombinedView() {
+        public void ProcessResult_WhenRequestedWithModelUsingPartial_ReturnsCombinedView()
+        {
             var response = new FakeResponseContext();
             var model = new UserModel { ID = 42, Username = "Username" };
             var result = new RazorResult<UserModel>(model, "../../Test Data/Views/Razor/View.cshtml");
@@ -53,7 +59,8 @@ namespace tinyweb.viewengine.tests {
         }
 
         [Test]
-        public void ProcessResult_WhenRequestedWithModelUsingMaster_ReturnsCombinedView() {
+        public void ProcessResult_WhenRequestedWithModelUsingMaster_ReturnsCombinedView()
+        {
             var response = new FakeResponseContext();
             var result = new RazorResult("../../Test Data/Views/Razor/Child.cshtml", "Master.cshtml");
 
@@ -64,7 +71,8 @@ namespace tinyweb.viewengine.tests {
         }
 
         [Test]
-        public void ProcessResult_WhenOutputtingDateTime_IsAbleToAccessSystemNamespace() {
+        public void ProcessResult_WhenOutputtingDateTime_IsAbleToAccessSystemNamespace()
+        {
             var response = new FakeResponseContext();
             var result = new RazorResult("../../Test Data/Views/Razor/DateTime.cshtml");
 
@@ -76,7 +84,8 @@ namespace tinyweb.viewengine.tests {
         }
 
         [Test]
-        public void ProcessResult_WhenOutputtingHandlerUrl_IsAbleToAccessTinywebHandlersNamespace() {
+        public void ProcessResult_WhenOutputtingHandlerUrl_IsAbleToAccessTinywebHandlersNamespace()
+        {
             Tinyweb.Handlers = new List<HandlerData>
             {
                 new HandlerData { Uri = "foo/bar", Type = typeof(TestHandler) }

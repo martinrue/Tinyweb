@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using tinyweb.framework.Helpers;
+using System.Text;
 
-namespace tinyweb.viewengine.razor {
-    public abstract class TemplateBase<T> {
+namespace tinyweb.viewengine.razor
+{
+    public abstract class TemplateBase<T>
+    {
         public string Layout { get; set; }
 
         public Func<string> RenderBody { get; set; }
 
         public T Model { get; set; }
 
-        protected TemplateBase() {
+        protected TemplateBase()
+        {
             Builder = new StringBuilder();
             Html = new HtmlHelper<T>(this);
         }
@@ -22,36 +22,51 @@ namespace tinyweb.viewengine.razor {
         public string Path { get; internal set; }
         public StringBuilder Builder { get; private set; }
         public string Result { get { return Builder.ToString(); } }
-        public void Clear() {
+
+        public void Clear()
+        {
             Builder.Clear();
         }
+
         public virtual void Execute() { }
 
-        public void Write(object @object) {
+        public void Write(object @object)
+        {
             if (@object == null)
+            {
                 return;
+            }
 
             Builder.Append(@object);
         }
 
-        public void WriteLiteral(string @string) {
+        public void WriteLiteral(string @string)
+        {
             if (@string == null)
+            {
                 return;
+            }
 
             Builder.Append(@string);
         }
 
-        public static void WriteLiteralTo(TextWriter writer, string literal) {
+        public static void WriteLiteralTo(TextWriter writer, string literal)
+        {
             if (literal == null)
+            {
                 return;
+            }
 
             writer.Write(literal);
         }
 
 
-        public static void WriteTo(TextWriter writer, object obj) {
+        public static void WriteTo(TextWriter writer, object obj)
+        {
             if (obj == null)
+            {
                 return;
+            }
 
             writer.Write(obj);
         }

@@ -10,7 +10,7 @@ With Tinyweb, you're writing code that is conceptually close to the way HTTP act
 
 ## Simplicity
 
-Getting started is as simple as creating a resource (a `class` with a method) and calling `Tinyweb.Init()` from `Application_Start`. That's it. You don't even have to specify the resource URL (unless you want to), Tinyweb will infer it from the `class` name. View engines, model binding and all that goodness are supported too.
+Getting started is as simple as creating a resource (a `class` with a method) and calling `Tinyweb.Init()` from `Application_Start`. That's it. You don't even have to specify the resource URL (unless you want to), Tinyweb will infer it from the `class` name. View engines (Spark & Razor), model binding and all that goodness are supported too.
 
 ## Example
 
@@ -48,7 +48,7 @@ Links to blogs and other resources about Tinyweb:
 
 [Introducing Tinyweb](http://invalidcast.com/2010/12/my-new-black)
 
-[Tinyweb on OS X & Mono](http://invalidcast.com/2011/01/tinyweb-does-mono)
+[Tinyweb on Mac OS X & Mono](http://invalidcast.com/2011/01/tinyweb-does-mono)
 
 [ASP.NET - Thinking In Resources](http://invalidcast.com/2011/03/asp-net-thinking-in-resources)
 
@@ -59,6 +59,8 @@ Links to blogs and other resources about Tinyweb:
 [Tinyweb Series: 3 Dependency Injection & Filters](http://invalidcast.com/2011/05/tinyweb-series-3-dependency-injection-filters)
 
 [Tinyweb Series: 4 Views & Model Binding](http://invalidcast.com/2011/05/tinyweb-series-4-views-model-binding)
+
+[Tinyweb Series: 5 To-do Demo](http://invalidcast.com/2011/05/tinyweb-series-5-to-do-demo)
 
 ## Applications
 
@@ -79,6 +81,8 @@ The easiest way to get started with Tinyweb is to [NuGet it](http://nuget.org/Li
 You can see the live build status (and grab the binary releases) from the [build server.](http://ci.thunder.invalidcast.com)
 
 ## Versions
+
+2.2.0 Tinyweb now supports the Razor view engine thanks to Ben Dornis
 
 2.1.5 Fix for Url.For helper to include the virtual application path
 
@@ -101,3 +105,11 @@ You can see the live build status (and grab the binary releases) from the [build
 1.0.1 Update for binding of array types, lower casing of routes and internal Spark integration refactoring
 
 1.0.0 Release of stable public API and switch to semantic versioning
+
+## Contributors
+
+Many thanks to the following people who have contributed to Tinyweb:
+
+* [Ben Dornis](https://github.com/Buildstarted)
+
+* [Tom Bell](https://github.com/tombell)

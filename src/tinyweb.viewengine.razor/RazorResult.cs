@@ -1,34 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using tinyweb.framework;
 using System.IO;
+using tinyweb.framework;
 
-namespace tinyweb.viewengine.razor {
-    public class RazorResult<T> : RazorResult, IResult {
+namespace tinyweb.viewengine.razor
+{
+    public class RazorResult<T> : RazorResult, IResult
+    {
         T _model;
 
-        public RazorResult(T model, string templateName, string master = null)
-            : base(templateName, master) {
+        public RazorResult(T model, string templateName, string master = null) : base(templateName, master)
+        {
             _model = model;
         }
 
-        public override void ProcessResult(IRequestContext request, IResponseContext response) {
+        public override void ProcessResult(IRequestContext request, IResponseContext response)
+        {
             response.ContentType = "text/html";
             response.Write(RazorCompiler.Render(_model, _templateName, _master));
         }
     }
 
-    public class RazorResult : IResult {
+    public class RazorResult : IResult
+    {
         internal string _templateName;
         internal string _master;
 
-        public RazorResult(string templateName, string master = null) {
-            var templatePath = AppDomain.CurrentDomain.BaseDirectory;
-            string fullTemplatePath = "";
+        public RazorResult(string templateName, string master = null)
+        {
+            string fullTemplatePath;
             fullTemplatePath = Helpers.ResolveTemplatePath(templateName);
-            if (fullTemplatePath == null) {
+
+            if (fullTemplatePath == null)
+            {
                 throw new FileNotFoundException(String.Format("The razor view at {0} could not be found", templateName));
             }
 
@@ -36,7 +39,8 @@ namespace tinyweb.viewengine.razor {
             _master = master;
         }
 
-        public virtual void ProcessResult(IRequestContext request, IResponseContext response) {
+        public virtual void ProcessResult(IRequestContext request, IResponseContext response)
+        {
             response.ContentType = "text/html";
             response.Write(RazorCompiler.Render(_templateName));
         }
