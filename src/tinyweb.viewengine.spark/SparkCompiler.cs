@@ -9,13 +9,32 @@ namespace tinyweb.viewengine.spark
 {
     public static class SparkCompiler
     {
-        static ConcurrentDictionary<string, ISparkView> cache = new ConcurrentDictionary<string, ISparkView>();
+        static ConcurrentDictionary<string, ISparkViewEntry> cache = new ConcurrentDictionary<string, ISparkViewEntry>();
 
         public static string Compile<T>(T model, string templatesPath, string templateName, string master)
         {
             var fullTemplatePath = Path.Combine(templatesPath, templateName);
             var templateFilename = Path.GetFileName(fullTemplatePath);
 
+            var sparkEngine = buildSparkEngine(templatesPath);
+            var descriptor = buildDescriptor(templateFilename, master);
+            var viewEntry = buildSparkViewEntry(fullTemplatePath, sparkEngine, master, descriptor);
+            var view = viewEntry.CreateInstance();
+
+            if (model != null)
+            {
+                (view as SparkView<T>).Model = model;
+            }
+
+            var output = new StringWriter();
+            view.RenderView(output);
+            sparkEngine.ReleaseInstance(view);
+            
+            return output.ToString();
+        }
+
+        private static SparkViewEngine buildSparkEngine(string templatesPath)
+        {
             var sparkEngine = new SparkViewEngine
             {
                 ViewFolder = new FileSystemViewFolder(templatesPath),
@@ -32,6 +51,11 @@ namespace tinyweb.viewengine.spark
                     .AddNamespace("tinyweb.framework.Helpers");
             }
 
+            return sparkEngine;
+        }
+
+        private static SparkViewDescriptor buildDescriptor(string templateFilename, string master)
+        {
             var descriptor = new SparkViewDescriptor().AddTemplate(templateFilename);
 
             if (!String.IsNullOrEmpty(master))
@@ -39,29 +63,25 @@ namespace tinyweb.viewengine.spark
                 descriptor.AddTemplate(master);
             }
 
-            ISparkView view;
+            return descriptor;
+        }
+
+        private static ISparkViewEntry buildSparkViewEntry(string fullTemplatePath, SparkViewEngine sparkEngine, string master, SparkViewDescriptor descriptor)
+        {
+            ISparkViewEntry entry;
             var key = fullTemplatePath + master;
- 
+
             if (!cache.ContainsKey(key))
             {
-                view = sparkEngine.CreateInstance(descriptor);
-                cache[key] = view;
+                entry = sparkEngine.CreateEntry(descriptor);
+                cache[key] = entry;
             }
             else
             {
-                view = cache[key];
+                entry = cache[key];
             }
 
-            if (model != null)
-            {
-                (view as SparkView<T>).Model = model;
-            }
-
-            var output = new StringWriter();
-            view.RenderView(output);
-            sparkEngine.ReleaseInstance(view);
-            
-            return output.ToString();
+            return entry;
         }
     }
 }
