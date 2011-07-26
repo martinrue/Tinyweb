@@ -62,6 +62,8 @@ Links to blogs and other resources about Tinyweb:
 
 [Tinyweb Series: 5 To-do Demo](http://invalidcast.com/2011/05/tinyweb-series-5-to-do-demo)
 
+[Micro Web Frameworks in .NET 101: Tinyweb](http://yobriefca.se/blog/2011/07/18/micro-web-frameworks-101-tinyweb/)
+
 ## Applications
 
 The following full applications have been built with Tinyweb:
@@ -81,6 +83,8 @@ The easiest way to get started with Tinyweb is to [NuGet it](http://nuget.org/Li
 You can see the live build status (and grab the binary releases) from the [build server.](http://ci.thunder.invalidcast.com)
 
 ## Versions
+
+2.2.1 Spark now has caching, making both Spark and Razor lightning fast when rendering views. Also fixed bug where some global filters were being created twice
 
 2.2.0 Tinyweb now supports the Razor view engine thanks to Ben Dornis
 
