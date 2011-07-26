@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Configuration;
 using System.IO;
 using Spark;
@@ -8,6 +9,8 @@ namespace tinyweb.viewengine.spark
 {
     public static class SparkCompiler
     {
+        static ConcurrentDictionary<string, ISparkView> cache = new ConcurrentDictionary<string, ISparkView>();
+
         public static string Compile<T>(T model, string templatesPath, string templateName, string master)
         {
             var fullTemplatePath = Path.Combine(templatesPath, templateName);
@@ -36,7 +39,18 @@ namespace tinyweb.viewengine.spark
                 descriptor.AddTemplate(master);
             }
 
-            var view = sparkEngine.CreateInstance(descriptor);
+            ISparkView view;
+            var key = fullTemplatePath + master;
+ 
+            if (!cache.ContainsKey(key))
+            {
+                view = sparkEngine.CreateInstance(descriptor);
+                cache[key] = view;
+            }
+            else
+            {
+                view = cache[key];
+            }
 
             if (model != null)
             {

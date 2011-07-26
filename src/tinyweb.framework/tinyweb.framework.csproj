@@ -81,6 +81,7 @@
     <Compile Include="Helpers\IApplicationPathProvider.cs" />
     <Compile Include="Helpers\RealApplicationPathProvider.cs" />
     <Compile Include="Helpers\Url.cs" />
+    <Compile Include="Init\FilterInstance.cs" />
     <Compile Include="Init\Route.cs" />
     <Compile Include="Handlers\HandlerResult\FileResult.cs" />
     <Compile Include="Handlers\HandlerResult\JsonResult.cs" />

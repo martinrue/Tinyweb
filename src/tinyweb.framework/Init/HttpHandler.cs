@@ -25,10 +25,9 @@ namespace tinyweb.framework
         {
             try
             {
-                var beforeFilters = createBeforeFilters();
-                var afterFilters = createAfterFilters();
+                var globalFilters = createFilters();
 
-                processBeforeFilters(beforeFilters, context, _handlerData);
+                processBeforeFilters(globalFilters, context, _handlerData);
 
                 var handler = HandlerFactory.Current.Create(_handlerData);
                 var result = HandlerInvoker.Current.Execute(handler, _requestContext, _handlerData);
@@ -45,7 +44,7 @@ namespace tinyweb.framework
                     result.AfterResult.ProcessResult(new DefaultRequestContext(_requestContext), new DefaultResponseContext(context));
                 }
 
-                processAfterFilters(afterFilters, context, _handlerData);
+                processAfterFilters(globalFilters, context, _handlerData);
             }
             catch (ThreadAbortException exception)
             {
@@ -62,11 +61,11 @@ namespace tinyweb.framework
             }
         }
 
-        private void processBeforeFilters(IEnumerable<object> filters, HttpContext context, HandlerData handlerData)
+        private void processBeforeFilters(IEnumerable<FilterInstance> filters, HttpContext context, HandlerData handlerData)
         {
-            filters.ForEach(type =>
+            filters.Where(filter => filter.BeforeFilter).Select(filter => filter.Instance).ForEach(instance =>
             {
-                var result = FilterInvoker.Current.RunBefore(type, _requestContext, handlerData);
+                var result = FilterInvoker.Current.RunBefore(instance, _requestContext, handlerData);
 
                 if (result != null)
                 {
@@ -75,11 +74,11 @@ namespace tinyweb.framework
             });
         }
 
-        private void processAfterFilters(IEnumerable<object> filters, HttpContext context, HandlerData handlerData)
+        private void processAfterFilters(IEnumerable<FilterInstance> filters, HttpContext context, HandlerData handlerData)
         {
-            filters.ForEach(type =>
+            filters.Where(filter => filter.AfterFilter).Select(filter => filter.Instance).ForEach(instance =>
             {
-                var result = FilterInvoker.Current.RunAfter(type, _requestContext, handlerData);
+                var result = FilterInvoker.Current.RunAfter(instance, _requestContext, handlerData);
 
                 if (result != null)
                 {
@@ -88,14 +87,15 @@ namespace tinyweb.framework
             });
         }
 
-        private IEnumerable<object> createBeforeFilters()
+        private IEnumerable<FilterInstance> createFilters()
         {
-            return Tinyweb.Filters.Where(f => f.BeforeFilter).OrderBy(f => f.Priority).Select(filter => FilterFactory.Current.Create(filter));
-        }
-
-        private IEnumerable<object> createAfterFilters()
-        {
-            return Tinyweb.Filters.Where(f => f.AfterFilter).OrderBy(f => f.Priority).Select(filter => FilterFactory.Current.Create(filter));
+            return Tinyweb.Filters.OrderBy(f => f.Priority).Select(filter => new FilterInstance 
+            { 
+                Instance = FilterFactory.Current.Create(filter),
+                BeforeFilter = filter.BeforeFilter,
+                AfterFilter = filter.AfterFilter
+            
+            }).ToList();
         }
     }
 }
