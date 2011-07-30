@@ -110,7 +110,7 @@ namespace tinyweb.framework
 
                 try
                 {
-                    return Convert.ChangeType(dictionary[requestedName], requestedType);
+                    return changeType(dictionary[requestedName], requestedType);
                 }
                 catch { }
             }
@@ -168,7 +168,7 @@ namespace tinyweb.framework
             var array = Array.CreateInstance(requestedType.GetElementType(), requestArray.Length);
             var index = 0;
 
-            requestArray.ForEach(element => array.SetValue(Convert.ChangeType(element, requestedType.GetElementType()), index++));
+            requestArray.ForEach(element => array.SetValue(changeType(element, requestedType.GetElementType()), index++));
 
             return array;
         }
@@ -179,5 +179,19 @@ namespace tinyweb.framework
             return attributes.Any();
         }
 
+        private object changeType(object value, Type conversionType)
+        {
+            if (conversionType.IsGenericType && conversionType.GetGenericTypeDefinition().Equals(typeof(Nullable<>)))
+            {
+                if (value == null)
+                {
+                    return null;
+                }
+
+                conversionType = Nullable.GetUnderlyingType(conversionType);
+            }
+
+            return Convert.ChangeType(value, conversionType);
+        }
     }
 }

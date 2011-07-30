@@ -84,6 +84,8 @@ You can see the live build status (and grab the binary releases) from the [build
 
 ## Versions
 
+2.2.2 Fixed model binder to support binding to nullable types
+
 2.2.1 Spark now has caching, making both Spark and Razor lightning fast when rendering views. Also fixed bug where some global filters were being created twice
 
 2.2.0 Tinyweb now supports the Razor view engine thanks to Ben Dornis
