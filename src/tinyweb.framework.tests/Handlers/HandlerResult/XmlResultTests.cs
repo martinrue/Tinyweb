@@ -19,6 +19,9 @@ namespace tinyweb.framework.tests
             var response = new FakeResponseContext();
             var result = new XmlResult(new CustomType { Data = "data", Number = 50 });
 
+            Assert.That((result.Data as CustomType).Data, Is.EqualTo("data"));
+            Assert.That((result.Data as CustomType).Number, Is.EqualTo(50));
+
             result.ProcessResult(null, response);
 
             var expected = "";
@@ -37,6 +40,8 @@ namespace tinyweb.framework.tests
         {
             var response = new FakeResponseContext();
             var result = new XmlResult(new List<CustomType> { new CustomType { Data = "data1", Number = 1 }, new CustomType { Data = "data2", Number = 2 } });
+
+            Assert.That(result.Data as List<CustomType>, Is.Not.Empty);
 
             result.ProcessResult(null, response);
 

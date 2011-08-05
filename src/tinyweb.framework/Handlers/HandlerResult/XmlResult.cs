@@ -7,7 +7,7 @@ namespace tinyweb.framework
 {
     public class XmlResult : IResult
     {
-        object _data;
+        public object Data { get; set; }
 
         public XmlResult(object data)
         {
@@ -16,7 +16,7 @@ namespace tinyweb.framework
                 throw new ArgumentNullException("data");
             }
 
-            _data = data;
+            Data = data;
         }
 
         public void ProcessResult(IRequestContext request, IResponseContext response)
@@ -27,7 +27,7 @@ namespace tinyweb.framework
 
             using (var writer = new StringWriter(result))
             {
-                new XmlSerializer(_data.GetType()).Serialize(writer, _data);
+                new XmlSerializer(Data.GetType()).Serialize(writer, Data);
             }
 
             response.Write(result.ToString());

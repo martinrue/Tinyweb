@@ -6,63 +6,65 @@ namespace tinyweb.viewengine.spark
 {
     public class SparkResult<T> : IResult
     {
-        T _model;
+        public T Model { get; set; }
+        public string ViewPath { get; set; }
+        public string MasterPath { get; set; }
+
         string _templatePath;
         string _templateName;
-        string _master;
         
         public SparkResult(T model, string templatesPath, string master = null)
-        {           
-            var templateName = Path.GetFileName(templatesPath);
-            var templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetDirectoryName(templatesPath));
+        {
+            Model = model;
+            ViewPath = templatesPath;
+            MasterPath = master;
 
-            var fullTemplatePath = Path.Combine(templatePath, templateName);
+            _templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetDirectoryName(templatesPath));
+            _templateName = Path.GetFileName(templatesPath);
+        }
+
+        public void ProcessResult(IRequestContext request, IResponseContext response)
+        {
+            var fullTemplatePath = Path.Combine(_templatePath, _templateName);
 
             if (!File.Exists(fullTemplatePath))
             {
                 throw new FileNotFoundException(String.Format("The spark view at {0} could not be found", fullTemplatePath));
             }
 
-            _model = model;
-            _templatePath = templatePath;
-            _templateName = templateName;
-            _master = master;
-        }
-
-        public void ProcessResult(IRequestContext request, IResponseContext response)
-        {
             response.ContentType = "text/html";
-            response.Write(SparkCompiler.Compile(_model, _templatePath, _templateName, _master));
+            response.Write(SparkCompiler.Compile(Model, _templatePath, _templateName, MasterPath));
         }
     }
 
     public class SparkResult : IResult
     {
+        public string ViewPath { get; set; }
+        public string MasterPath { get; set; }
+
         string _templatePath;
         string _templateName;
-        string _master;
 
         public SparkResult(string templatesPath, string master = null)
         {
-            var templateName = Path.GetFileName(templatesPath);
-            var templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetDirectoryName(templatesPath));
+            ViewPath = templatesPath;
+            MasterPath = master;
 
-            var fullTemplatePath = Path.Combine(templatePath, templateName);
+            _templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetDirectoryName(templatesPath));
+            _templateName = Path.GetFileName(templatesPath);
+        }
+
+        public void ProcessResult(IRequestContext request, IResponseContext response)
+        {
+            var fullTemplatePath = Path.Combine(_templatePath, _templateName);
 
             if (!File.Exists(fullTemplatePath))
             {
                 throw new FileNotFoundException(String.Format("The spark view at {0} could not be found", fullTemplatePath));
             }
 
-            _templatePath = templatePath;
-            _templateName = templateName;
-            _master = master;
-        }
-
-        public void ProcessResult(IRequestContext request, IResponseContext response)
-        {
             response.ContentType = "text/html";
-            response.Write(SparkCompiler.Compile<Object>(null, _templatePath, _templateName, _master));
+            response.Write(SparkCompiler.Compile<Object>(null, _templatePath, _templateName, MasterPath));
         }
     }
 }

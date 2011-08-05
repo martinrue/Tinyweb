@@ -2,17 +2,17 @@
 {
     public class StringResult : IResult
     {
-        string _data;
+        public string Data { get; set; }
 
         public StringResult(string data)
         {
-            _data = data;
+            Data = data;
         }
 
         public void ProcessResult(IRequestContext request, IResponseContext response)
         {
             response.ContentType = "text/html";
-            response.Write(_data);
+            response.Write(Data);
         }
     }
 }

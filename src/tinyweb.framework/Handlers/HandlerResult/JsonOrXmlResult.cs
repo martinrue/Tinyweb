@@ -4,7 +4,7 @@ namespace tinyweb.framework
 {
     public class JsonOrXmlResult : IResult
     {
-        object _data;
+        public object Data { get; set; }
 
         public JsonOrXmlResult(object data)
         {
@@ -13,7 +13,7 @@ namespace tinyweb.framework
                 throw new ArgumentNullException("data");
             }
 
-            _data = data;
+            Data = data;
         }
 
         public void ProcessResult(IRequestContext request, IResponseContext response)
@@ -24,13 +24,13 @@ namespace tinyweb.framework
                 {
                     case "xml":
                     {
-                        new XmlResult(_data).ProcessResult(request, response);
+                        new XmlResult(Data).ProcessResult(request, response);
                     }
                     break;
 
                     default:
                     {
-                        new JsonResult(_data).ProcessResult(request, response);
+                        new JsonResult(Data).ProcessResult(request, response);
                     }
                     break;
                 }
@@ -39,7 +39,7 @@ namespace tinyweb.framework
             {
                 if (!request.Headers.KeyExists("Accept"))
                 {
-                    new JsonResult(_data).ProcessResult(request, response);
+                    new JsonResult(Data).ProcessResult(request, response);
                     return;
                 }
 
@@ -50,11 +50,11 @@ namespace tinyweb.framework
 
                 if (xmlPriority > jsonPriority)
                 {
-                    new XmlResult(_data).ProcessResult(request, response);
+                    new XmlResult(Data).ProcessResult(request, response);
                 }
                 else
                 {
-                    new JsonResult(_data).ProcessResult(request, response);
+                    new JsonResult(Data).ProcessResult(request, response);
                 }
             }
         }

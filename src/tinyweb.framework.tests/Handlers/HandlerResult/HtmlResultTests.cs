@@ -9,7 +9,7 @@ namespace tinyweb.framework.tests
         [Test]
         public void ProcessResult_WhenCreatedWithNonExistentPath_ThrowsFileNotFoundException()
         {
-            var exception = Assert.Throws<FileNotFoundException>(() => new HtmlResult("c:\\fakepath"));
+            var exception = Assert.Throws<FileNotFoundException>(() => new HtmlResult("c:\\fakepath").ProcessResult(null, null));
             Assert.That(exception.Message, Is.EqualTo("The view at c:\\fakepath could not be found"));
         }
 
@@ -18,6 +18,8 @@ namespace tinyweb.framework.tests
         {
             var response = new FakeResponseContext();
             var result = new HtmlResult("..\\..\\Test Data\\HandlerResult\\Views\\View.html");
+
+            Assert.That(result.FilePath, Is.EqualTo("..\\..\\Test Data\\HandlerResult\\Views\\View.html"));
 
             result.ProcessResult(null, response);
 

@@ -5,23 +5,23 @@ namespace tinyweb.framework
 {
     public class RedirectResult<T> : IResult
     {
-        string _uri;
+        public string Uri { get; set; }
 
         public RedirectResult(object arguments = null)
         {
-            _uri = Url.For<T>(arguments);
+            Uri = Url.For<T>(arguments);
         }
 
         public void ProcessResult(IRequestContext request, IResponseContext response)
         {
             response.ContentType = "text/html";
-            response.Redirect(_uri);
+            response.Redirect(Uri);
         }
     }
 
     public class RedirectResult : IResult
     {
-        string _uri;
+        public string Uri { get; set; }
 
         public RedirectResult(string uri)
         {
@@ -30,13 +30,13 @@ namespace tinyweb.framework
                 throw new Exception("The specified redirect uri is invalid");
             }
 
-            _uri = uri;
+            Uri = uri;
         }
 
         public void ProcessResult(IRequestContext request, IResponseContext response)
         {
             response.ContentType = "text/html";
-            response.Redirect(_uri);
+            response.Redirect(Uri);
         }
     }
 }

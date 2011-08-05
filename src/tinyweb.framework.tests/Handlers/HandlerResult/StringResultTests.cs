@@ -11,6 +11,8 @@ namespace tinyweb.framework.tests
             var response = new FakeResponseContext();
             var result = new StringResult("test data");
 
+            Assert.That(result.Data, Is.EqualTo("test data"));
+
             result.ProcessResult(null, response);
 
             Assert.That(response.Response, Is.EqualTo("test data"));
@@ -21,6 +23,8 @@ namespace tinyweb.framework.tests
         {
             var response = new FakeResponseContext();
             var result = new StringResult("test data");
+
+            Assert.That(result.Data, Is.EqualTo("test data"));
 
             result.ProcessResult(null, response);
 

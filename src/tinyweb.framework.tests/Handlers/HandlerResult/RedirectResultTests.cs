@@ -33,6 +33,8 @@ namespace tinyweb.framework.tests
             var response = new FakeResponseContext();
             var result = new RedirectResult<Resource1Handler>();
 
+            Assert.That(result.Uri, Is.EqualTo("/uri"));
+
             result.ProcessResult(null, response);
 
             Assert.That(response.RedirectUrl, Is.EqualTo("/uri"));
@@ -43,6 +45,8 @@ namespace tinyweb.framework.tests
         {
             var response = new FakeResponseContext();
             var result = new RedirectResult("someuri");
+
+            Assert.That(result.Uri, Is.EqualTo("someuri"));
 
             result.ProcessResult(null, response);
 

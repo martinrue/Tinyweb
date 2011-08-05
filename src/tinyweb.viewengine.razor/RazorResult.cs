@@ -4,45 +4,55 @@ using tinyweb.framework;
 
 namespace tinyweb.viewengine.razor
 {
-    public class RazorResult<T> : RazorResult, IResult
+    public class RazorResult<T> : IResult
     {
-        T _model;
+        public T Model { get; set; }
+        public string ViewPath { get; set; }
+        public string MasterPath { get; set; }
 
-        public RazorResult(T model, string templateName, string master = null) : base(templateName, master)
+        public RazorResult(T model, string templateName, string master = null)
         {
-            _model = model;
+            Model = model;
+            ViewPath = templateName;
+            MasterPath = master;
         }
 
-        public override void ProcessResult(IRequestContext request, IResponseContext response)
+        public void ProcessResult(IRequestContext request, IResponseContext response)
         {
+            var fullTemplatePath = Helpers.ResolveTemplatePath(ViewPath);
+
+            if (fullTemplatePath == null)
+            {
+                throw new FileNotFoundException(String.Format("The razor view at {0} could not be found", ViewPath));
+            }
+
             response.ContentType = "text/html";
-            response.Write(RazorCompiler.Render(_model, _templateName, _master));
+            response.Write(RazorCompiler.Render(Model, fullTemplatePath, MasterPath));
         }
     }
 
     public class RazorResult : IResult
     {
-        internal string _templateName;
-        internal string _master;
+        public string ViewPath { get; set; }
+        public string MasterPath { get; set; }
 
         public RazorResult(string templateName, string master = null)
         {
-            string fullTemplatePath;
-            fullTemplatePath = Helpers.ResolveTemplatePath(templateName);
+            ViewPath = templateName;
+            MasterPath = master;
+        }
+
+        public void ProcessResult(IRequestContext request, IResponseContext response)
+        {
+            var fullTemplatePath = Helpers.ResolveTemplatePath(ViewPath);
 
             if (fullTemplatePath == null)
             {
-                throw new FileNotFoundException(String.Format("The razor view at {0} could not be found", templateName));
+                throw new FileNotFoundException(String.Format("The razor view at {0} could not be found", ViewPath));
             }
 
-            _templateName = fullTemplatePath;
-            _master = master;
-        }
-
-        public virtual void ProcessResult(IRequestContext request, IResponseContext response)
-        {
             response.ContentType = "text/html";
-            response.Write(RazorCompiler.Render(_templateName));
+            response.Write(RazorCompiler.Render(fullTemplatePath, MasterPath));
         }
     }
 }

@@ -84,6 +84,8 @@ You can see the live build status (and grab the binary releases) from the [build
 
 ## Versions
 
+2.2.3 Made all result types testable by making their input public, allowing test inspection before rendering
+
 2.2.2 Fixed model binder to support binding to nullable types
 
 2.2.1 Spark now has caching, making both Spark and Razor lightning fast when rendering views. Also fixed bug where some global filters were being created twice

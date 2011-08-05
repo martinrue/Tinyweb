@@ -6,28 +6,30 @@ namespace tinyweb.framework
 {
     public class FileResult : IResult
     {
-        string _filepath;
-        
+        public string FilePath { get; set; }
+
         public FileResult(string filepath)
         {
-            _filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filepath);
-
-            if (!File.Exists(_filepath))
-            {
-                throw new FileNotFoundException(String.Format("The file at {0} could not be found", _filepath));
-            }
+            FilePath = filepath;
         }
 
         public void ProcessResult(IRequestContext request, IResponseContext response)
         {
-            response.AddHeader("Content-Disposition", String.Format("attachment; filename={0}", Path.GetFileName(_filepath)));
-            response.ContentType = getContentType();
-            response.WriteFile(_filepath);
+            var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FilePath);
+
+            if (!File.Exists(fullPath))
+            {
+                throw new FileNotFoundException(String.Format("The file at {0} could not be found", fullPath));
+            }
+
+            response.AddHeader("Content-Disposition", String.Format("attachment; filename={0}", Path.GetFileName(fullPath)));
+            response.ContentType = getContentType(fullPath);
+            response.WriteFile(fullPath);
         }
 
-        private string getContentType()
+        private string getContentType(string path)
         {
-            var key = Registry.ClassesRoot.OpenSubKey(Path.GetExtension(_filepath).ToLower());
+            var key = Registry.ClassesRoot.OpenSubKey(Path.GetExtension(path).ToLower());
 
             if (key != null && key.GetValue("Content Type") != null)
             {

@@ -5,22 +5,24 @@ namespace tinyweb.framework
 {
     public class HtmlResult : IResult
     {
-        string _filepath;
+        public string FilePath { get; set; }
 
         public HtmlResult(string filepath)
         {
-            _filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filepath);
-
-            if (!File.Exists(_filepath))
-            {
-                throw new FileNotFoundException(String.Format("The view at {0} could not be found", _filepath));
-            }
+            FilePath = filepath;
         }
 
         public void ProcessResult(IRequestContext request, IResponseContext response)
         {
+            var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FilePath);
+
+            if (!File.Exists(fullPath))
+            {
+                throw new FileNotFoundException(String.Format("The view at {0} could not be found", fullPath));
+            }
+
             response.ContentType = "text/html";
-            response.Write(File.ReadAllText(_filepath));
+            response.Write(File.ReadAllText(fullPath));
         }
     }
 }

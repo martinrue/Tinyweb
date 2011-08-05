@@ -9,7 +9,7 @@ namespace tinyweb.framework.tests
         [Test]
         public void ProcessResult_WhenCreatedWithNonExistentPath_ThrowsFileNotFoundException()
         {
-            var exception = Assert.Throws<FileNotFoundException>(() => new FileResult("c:\\fakepath"));
+            var exception = Assert.Throws<FileNotFoundException>(() => new FileResult("c:\\fakepath").ProcessResult(null, null));
             Assert.That(exception.Message, Is.EqualTo("The file at c:\\fakepath could not be found"));
         }
 
@@ -18,6 +18,8 @@ namespace tinyweb.framework.tests
         {
             var response = new FakeResponseContext();
             var result = new FileResult("..\\..\\Test Data\\HandlerResult\\Views\\View.html");
+
+            Assert.That(result.FilePath, Is.EqualTo("..\\..\\Test Data\\HandlerResult\\Views\\View.html"));
 
             result.ProcessResult(null, response);
 
@@ -32,6 +34,8 @@ namespace tinyweb.framework.tests
             var response = new FakeResponseContext();
             var result = new FileResult("..\\..\\Test Data\\HandlerResult\\Files\\Download.txt");
 
+            Assert.That(result.FilePath, Is.EqualTo("..\\..\\Test Data\\HandlerResult\\Files\\Download.txt"));
+
             result.ProcessResult(null, response);
 
             Assert.That(response.ContentType, Is.EqualTo("text/plain"));
@@ -44,6 +48,8 @@ namespace tinyweb.framework.tests
         {
             var response = new FakeResponseContext();
             var result = new FileResult("..\\..\\Test Data\\HandlerResult\\Files\\Download.unknown");
+
+            Assert.That(result.FilePath, Is.EqualTo("..\\..\\Test Data\\HandlerResult\\Files\\Download.unknown"));
 
             result.ProcessResult(null, response);
 

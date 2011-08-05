@@ -22,6 +22,9 @@ namespace tinyweb.framework.tests
 
             var result = new JsonOrXmlResult(new CustomType { Data = "data", Number = 50 });
 
+            Assert.That((result.Data as CustomType).Data, Is.EqualTo("data"));
+            Assert.That((result.Data as CustomType).Number, Is.EqualTo(50));
+
             result.ProcessResult(request, response);
 
             Assert.That(response.ContentType, Is.EqualTo("application/json"));
@@ -34,6 +37,9 @@ namespace tinyweb.framework.tests
             var response = new FakeResponseContext();
 
             var result = new JsonOrXmlResult(new CustomType { Data = "data", Number = 50 });
+
+            Assert.That((result.Data as CustomType).Data, Is.EqualTo("data"));
+            Assert.That((result.Data as CustomType).Number, Is.EqualTo(50));
 
             result.ProcessResult(request, response);
 
@@ -48,6 +54,9 @@ namespace tinyweb.framework.tests
 
             var result = new JsonOrXmlResult(new CustomType { Data = "data", Number = 50 });
 
+            Assert.That((result.Data as CustomType).Data, Is.EqualTo("data"));
+            Assert.That((result.Data as CustomType).Number, Is.EqualTo(50));
+
             result.ProcessResult(request, response);
 
             Assert.That(response.ContentType, Is.EqualTo("application/json"));
@@ -60,6 +69,9 @@ namespace tinyweb.framework.tests
             var response = new FakeResponseContext();
 
             var result = new JsonOrXmlResult(new CustomType { Data = "data", Number = 50 });
+
+            Assert.That((result.Data as CustomType).Data, Is.EqualTo("data"));
+            Assert.That((result.Data as CustomType).Number, Is.EqualTo(50));
 
             result.ProcessResult(request, response);
 
@@ -74,6 +86,9 @@ namespace tinyweb.framework.tests
 
             var result = new JsonOrXmlResult(new CustomType { Data = "data", Number = 50 });
 
+            Assert.That((result.Data as CustomType).Data, Is.EqualTo("data"));
+            Assert.That((result.Data as CustomType).Number, Is.EqualTo(50));
+
             result.ProcessResult(request, response);
 
             Assert.That(response.ContentType, Is.EqualTo("application/json"));
@@ -86,6 +101,9 @@ namespace tinyweb.framework.tests
             var response = new FakeResponseContext();
 
             var result = new JsonOrXmlResult(new CustomType { Data = "data", Number = 50 });
+
+            Assert.That((result.Data as CustomType).Data, Is.EqualTo("data"));
+            Assert.That((result.Data as CustomType).Number, Is.EqualTo(50));
 
             result.ProcessResult(request, response);
 
@@ -100,6 +118,9 @@ namespace tinyweb.framework.tests
 
             var result = new JsonOrXmlResult(new CustomType { Data = "data", Number = 50 });
 
+            Assert.That((result.Data as CustomType).Data, Is.EqualTo("data"));
+            Assert.That((result.Data as CustomType).Number, Is.EqualTo(50));
+
             result.ProcessResult(request, response);
 
             Assert.That(response.ContentType, Is.EqualTo("application/xml"));
@@ -113,6 +134,9 @@ namespace tinyweb.framework.tests
 
             var result = new JsonOrXmlResult(new CustomType { Data = "data", Number = 50 });
 
+            Assert.That((result.Data as CustomType).Data, Is.EqualTo("data"));
+            Assert.That((result.Data as CustomType).Number, Is.EqualTo(50));
+
             result.ProcessResult(request, response);
 
             Assert.That(response.ContentType, Is.EqualTo("application/json"));
@@ -125,6 +149,9 @@ namespace tinyweb.framework.tests
             var response = new FakeResponseContext();
 
             var result = new JsonOrXmlResult(new CustomType { Data = "data", Number = 50 });
+
+            Assert.That((result.Data as CustomType).Data, Is.EqualTo("data"));
+            Assert.That((result.Data as CustomType).Number, Is.EqualTo(50));
 
             result.ProcessResult(request, response);
 

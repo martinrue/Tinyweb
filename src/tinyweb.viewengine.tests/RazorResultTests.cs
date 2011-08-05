@@ -14,7 +14,7 @@ namespace tinyweb.viewengine.tests
         [Test]
         public void ProcessResult_WhenRequestedWithNonExistentPath_ThrowsFileNotFoundException()
         {
-            var exception = Assert.Throws<FileNotFoundException>(() => new RazorResult("c:\\fakepath"));
+            var exception = Assert.Throws<FileNotFoundException>(() => new RazorResult("c:\\fakepath").ProcessResult(null, null));
 
             Assert.That(exception.Message, Is.EqualTo("The razor view at c:\\fakepath could not be found"));
         }
@@ -25,10 +25,27 @@ namespace tinyweb.viewengine.tests
             var response = new FakeResponseContext();
             var result = new RazorResult("../../Test Data/Views/Razor/Simple.cshtml");
 
+            Assert.That(result.ViewPath, Is.EqualTo("../../Test Data/Views/Razor/Simple.cshtml"));
+
             result.ProcessResult(null, response);
 
             Assert.That(response.ContentType, Is.EqualTo("text/html"));
             Assert.That(response.Response, Contains.Substring("<h1>header</h1>"));
+        }
+
+        [Test]
+        public void ProcessResult_WhenRequestedWithNoModelAndMaster_ReturnsViewData()
+        {
+            var response = new FakeResponseContext();
+            var result = new RazorResult("../../Test Data/Views/Razor/Simple.cshtml", "Master.cshtml");
+
+            Assert.That(result.ViewPath, Is.EqualTo("../../Test Data/Views/Razor/Simple.cshtml"));
+            Assert.That(result.MasterPath, Is.EqualTo("Master.cshtml"));
+
+            result.ProcessResult(null, response);
+
+            Assert.That(response.ContentType, Is.EqualTo("text/html"));
+            Assert.That(response.Response, Contains.Substring("<h1><h1>header</h1></h1>"));
         }
 
         [Test]
@@ -37,6 +54,10 @@ namespace tinyweb.viewengine.tests
             var response = new FakeResponseContext();
             var model = new UserModel { ID = 42, Username = "Username" };
             var result = new RazorResult<UserModel>(model, "../../Test Data/Views/Razor/View.cshtml");
+
+            Assert.That(result.ViewPath, Is.EqualTo("../../Test Data/Views/Razor/View.cshtml"));
+            Assert.That(result.Model.ID, Is.EqualTo(42));
+            Assert.That(result.Model.Username, Is.EqualTo("Username"));
 
             result.ProcessResult(null, response);
 
@@ -52,6 +73,10 @@ namespace tinyweb.viewengine.tests
             var model = new UserModel { ID = 42, Username = "Username" };
             var result = new RazorResult<UserModel>(model, "../../Test Data/Views/Razor/View.cshtml");
 
+            Assert.That(result.ViewPath, Is.EqualTo("../../Test Data/Views/Razor/View.cshtml"));
+            Assert.That(result.Model.ID, Is.EqualTo(42));
+            Assert.That(result.Model.Username, Is.EqualTo("Username"));
+
             result.ProcessResult(null, response);
 
             Assert.That(response.ContentType, Is.EqualTo("text/html"));
@@ -64,6 +89,9 @@ namespace tinyweb.viewengine.tests
             var response = new FakeResponseContext();
             var result = new RazorResult("../../Test Data/Views/Razor/Child.cshtml", "Master.cshtml");
 
+            Assert.That(result.ViewPath, Is.EqualTo("../../Test Data/Views/Razor/Child.cshtml"));
+            Assert.That(result.MasterPath, Is.EqualTo("Master.cshtml"));
+
             result.ProcessResult(null, response);
 
             Assert.That(response.ContentType, Is.EqualTo("text/html"));
@@ -75,6 +103,8 @@ namespace tinyweb.viewengine.tests
         {
             var response = new FakeResponseContext();
             var result = new RazorResult("../../Test Data/Views/Razor/DateTime.cshtml");
+
+            Assert.That(result.ViewPath, Is.EqualTo("../../Test Data/Views/Razor/DateTime.cshtml"));
 
             result.ProcessResult(null, response);
 
@@ -95,6 +125,8 @@ namespace tinyweb.viewengine.tests
 
             var response = new FakeResponseContext();
             var result = new RazorResult("../../Test Data/Views/Razor/Url.cshtml");
+
+            Assert.That(result.ViewPath, Is.EqualTo("../../Test Data/Views/Razor/Url.cshtml"));
 
             result.ProcessResult(null, response);
 

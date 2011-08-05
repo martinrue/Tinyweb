@@ -5,7 +5,7 @@ namespace tinyweb.framework
 {
     public class JsonResult : IResult
     {
-        object _data;
+        public object Data { get; set; }
 
         public JsonResult(object data)
         {
@@ -14,13 +14,13 @@ namespace tinyweb.framework
                 throw new ArgumentNullException("data");
             }
 
-            _data = data;
+            Data = data;
         }
 
         public void ProcessResult(IRequestContext request, IResponseContext response)
         {
             response.ContentType = "application/json";
-            response.Write(new JavaScriptSerializer().Serialize(_data));
+            response.Write(new JavaScriptSerializer().Serialize(Data));
         }
     }
 }
