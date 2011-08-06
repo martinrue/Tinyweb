@@ -42,7 +42,7 @@ namespace tinyweb.framework
         private Route getRoute(Type type)
         {
             var handler = HandlerFactory.Current.Create(new HandlerData { Type = type });
-            var routeProperty = handler.GetType().GetField("route", BindingFlags.NonPublic | BindingFlags.Instance);
+            var routeProperty = handler.GetType().GetField("route", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
             if (routeProperty == null)
             {
