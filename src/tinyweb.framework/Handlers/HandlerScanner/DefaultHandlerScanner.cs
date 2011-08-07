@@ -42,14 +42,12 @@ namespace tinyweb.framework
         private Route getRoute(Type type)
         {
             var handler = HandlerFactory.Current.Create(new HandlerData { Type = type });
-            var routeProperty = handler.GetType().GetField("route", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            var route = getExplicitRouteFromHandler(handler);
 
-            if (routeProperty == null)
+            if (route == null)
             {
                 return new Route(getRouteUriByConvention(type));
             }
-
-            var route = routeProperty.GetValue(handler) as Route;
 
             if (route.RouteUri == "/")
             {
@@ -58,6 +56,35 @@ namespace tinyweb.framework
             else if (route.RouteUri.IsEmpty())
             {
                 route.RouteUri = getRouteUriByConvention(type);
+            }
+
+            return route;
+        }
+
+        private Route getExplicitRouteFromHandler(object handler)
+        {
+            var routeMember = handler.GetType().GetMember("Route", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.IgnoreCase).FirstOrDefault();
+
+            if (routeMember == null)
+            {
+                return null;
+            }
+
+            Route route = null;
+
+            if (routeMember is MethodInfo)
+            {
+                route = ((MethodInfo)routeMember).Invoke(handler, null) as Route;
+            }
+
+            if (routeMember is FieldInfo)
+            {
+                route = ((FieldInfo)routeMember).GetValue(handler) as Route;
+            }
+
+            if (routeMember is PropertyInfo)
+            {
+                route = ((PropertyInfo)routeMember).GetValue(handler, null) as Route;
             }
 
             return route;

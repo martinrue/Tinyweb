@@ -19,7 +19,7 @@ namespace tinyweb.framework.tests
         public void FindAll_WhenCalled_FindsAllHandlers()
         {
             var handlers = defaultHandlerScanner.FindAll();
-            Assert.That(handlers.Count(), Is.EqualTo(9));
+            Assert.That(handlers.Count(), Is.EqualTo(11));
         }
 
         [Test]
@@ -100,10 +100,24 @@ namespace tinyweb.framework.tests
         }
 
         [Test]
-        public void FindAll_WhenCalled_ExplicitRootHandlerHasEmptyUri()
+        public void FindAll_WhenCalled_ExplicitFieldRouteRootHandlerHasEmptyUri()
         {
             var handlers = defaultHandlerScanner.FindAll();
-            Assert.That(handlers.Single(h => h.Type == new ExplicitRootHandler().GetType()).Uri, Is.EqualTo(String.Empty));
+            Assert.That(handlers.Single(h => h.Type == new ExplicitFieldRouteRootHandler().GetType()).Uri, Is.EqualTo(String.Empty));
+        }
+
+        [Test]
+        public void FindAll_WhenCalled_ExplicitPropertyRouteRootHandlerHasEmptyUri()
+        {
+            var handlers = defaultHandlerScanner.FindAll();
+            Assert.That(handlers.Single(h => h.Type == new ExplicitPropertyRouteRootHandler().GetType()).Uri, Is.EqualTo(String.Empty));
+        }
+
+        [Test]
+        public void FindAll_WhenCalled_ExplicitMethodRouteRootHandlerHasEmptyUri()
+        {
+            var handlers = defaultHandlerScanner.FindAll();
+            Assert.That(handlers.Single(h => h.Type == new ExplicitMethodRouteRootHandler().GetType()).Uri, Is.EqualTo(String.Empty));
         }
     }
 }

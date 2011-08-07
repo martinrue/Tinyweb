@@ -109,7 +109,9 @@
     <Compile Include="Test Data\Filters\NonPirorityFilter.cs" />
     <Compile Include="Test Data\Filters\InvalidFilter.cs" />
     <Compile Include="Test Data\Handlers\BeforeAfterHandler.cs" />
-    <Compile Include="Test Data\Handlers\ExplicitRootHandler.cs" />
+    <Compile Include="Test Data\Handlers\ExplicitMethodRouteRootHandler.cs" />
+    <Compile Include="Test Data\Handlers\ExplicitPropertyRouteRootHandler.cs" />
+    <Compile Include="Test Data\Handlers\ExplicitFieldRouteRootHandler.cs" />
     <Compile Include="Test Data\Handlers\RootHandler.cs" />
     <Compile Include="TestHelpers\ContextHelpers.cs" />
     <Compile Include="TestHelpers\ObjectHelper.cs" />

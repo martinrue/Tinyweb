@@ -1,8 +1,11 @@
 ﻿namespace tinyweb.framework.tests
 {
-    public class ExplicitRootHandler
+    public class ExplicitMethodRouteRootHandler
     {
-        Route route = new Route("/");
+        public Route Route()
+        {
+            return new Route("/");
+        }
 
         public IResult Get()
         {
