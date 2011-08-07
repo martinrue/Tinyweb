@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
+using tinyweb.framework.tests.TestArea;
 
 namespace tinyweb.framework.tests
 {
@@ -15,11 +16,17 @@ namespace tinyweb.framework.tests
             defaultHandlerScanner = new DefaultHandlerScanner();
         }
 
+        [TearDown]
+        public void Teardown()
+        {
+            Tinyweb.Areas.Clear();
+        }
+
         [Test]
         public void FindAll_WhenCalled_FindsAllHandlers()
         {
             var handlers = defaultHandlerScanner.FindAll();
-            Assert.That(handlers.Count(), Is.EqualTo(11));
+            Assert.That(handlers.Count(), Is.EqualTo(15));
         }
 
         [Test]
@@ -118,6 +125,38 @@ namespace tinyweb.framework.tests
         {
             var handlers = defaultHandlerScanner.FindAll();
             Assert.That(handlers.Single(h => h.Type == new ExplicitMethodRouteRootHandler().GetType()).Uri, Is.EqualTo(String.Empty));
+        }
+
+        [Test]
+        public void FindAll_WhenCalled_AreaResourceHandlerIncludesAreaInUri()
+        {
+            Tinyweb.RegisterArea("test", typeof(ResourceHandler).Namespace);
+            var handlers = defaultHandlerScanner.FindAll();
+            Assert.That(handlers.Single(h => h.Type == new ResourceHandler().GetType()).Uri, Is.EqualTo("test/resource"));
+        }
+
+        [Test]
+        public void FindAll_WhenCalled_HandlerWithTheSameNameAsARegisteredAreaInANamespaceMapsToAreaRootUri()
+        {
+            Tinyweb.RegisterArea("test", typeof(TestHandler).Namespace);
+            var handlers = defaultHandlerScanner.FindAll();
+            Assert.That(handlers.Single(h => h.Type == new TestHandler().GetType()).Uri, Is.EqualTo("test"));
+        }
+
+        [Test]
+        public void FindAll_WhenCalled_AreaResourceHandlerWithExplicitRouteIncludesAreaInUri()
+        {
+            Tinyweb.RegisterArea("test", typeof(ExplicitRouteAreaHandler).Namespace);
+            var handlers = defaultHandlerScanner.FindAll();
+            Assert.That(handlers.Single(h => h.Type == new ExplicitRouteAreaHandler().GetType()).Uri, Is.EqualTo("test/foo/bar"));
+        }
+
+        [Test]
+        public void FindAll_WhenCalled_AreaResourceHandlerWithExplicitRouteWithAreaDoesNotPrependAreaAgainInUri()
+        {
+            Tinyweb.RegisterArea("test", typeof(ExplicitRouteWithAreaHandler).Namespace);
+            var handlers = defaultHandlerScanner.FindAll();
+            Assert.That(handlers.Single(h => h.Type == new ExplicitRouteWithAreaHandler().GetType()).Uri, Is.EqualTo("test/foo/baz"));
         }
     }
 }

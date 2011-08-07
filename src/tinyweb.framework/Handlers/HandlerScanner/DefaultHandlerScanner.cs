@@ -42,12 +42,7 @@ namespace tinyweb.framework
         private Route getRoute(Type type)
         {
             var handler = HandlerFactory.Current.Create(new HandlerData { Type = type });
-            var route = getExplicitRouteFromHandler(handler);
-
-            if (route == null)
-            {
-                return new Route(getRouteUriByConvention(type));
-            }
+            var route = getExplicitRouteFromHandler(handler) ?? new Route(getRouteUriByConvention(type));
 
             if (route.RouteUri == "/")
             {
@@ -57,6 +52,8 @@ namespace tinyweb.framework
             {
                 route.RouteUri = getRouteUriByConvention(type);
             }
+
+            route.RouteUri = addHandlerAreaToRouteUriIfRegistered(type, route.RouteUri);
 
             return route;
         }
@@ -94,8 +91,28 @@ namespace tinyweb.framework
         {
             var handlerStart = type.Name.ToLower().IndexOf("handler");
             var pascalConvention = type.Name.Substring(0, handlerStart);
-
+            
             return pascalConvention.ToLower() == "root" ? String.Empty : String.Join("/", pascalConvention.PascalSplit());
+        }
+
+        private string addHandlerAreaToRouteUriIfRegistered(Type handlerType, string routeUri)
+        {
+            var handlerNamespace = handlerType.Namespace ?? "";
+            var handlerArea = Tinyweb.Areas.ContainsKey(handlerNamespace) ? Tinyweb.Areas[handlerNamespace] : null;
+
+            if (string.IsNullOrEmpty(handlerArea) || handlerArea.Equals(routeUri))
+            {
+                return routeUri;
+            }
+
+            var areaRouteUriPrefix = handlerArea + "/";
+
+            if (routeUri.StartsWith(areaRouteUriPrefix))
+            {
+                return routeUri;
+            }
+
+            return areaRouteUriPrefix + routeUri;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,11 +12,17 @@ namespace tinyweb.framework
 {
     public static class Tinyweb
     {
+        public static IDictionary<string, string> Areas { get; set; } 
         public static IEnumerable<HandlerData> Handlers { get; set; }
         public static IEnumerable<FilterData> Filters { get; set; }
 
         public static Action<Exception, RequestContext, HandlerData> OnError;
         public static bool AllowFormatExtensions { get; set; }
+
+        static Tinyweb()
+        {
+            Areas = new Dictionary<string, string>();
+        }
 
         public static int Init(params Registry[] registries)
         {
@@ -26,6 +33,11 @@ namespace tinyweb.framework
             Handlers.ForEach(addRoute);
 
             return Handlers.Count();
+        }
+
+        public static void RegisterArea(string area, string areaNamespace)
+        {
+            Areas.Add(areaNamespace, area);
         }
 
         public static string WhatHaveIGot()

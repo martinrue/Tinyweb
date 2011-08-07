@@ -113,6 +113,10 @@
     <Compile Include="Test Data\Handlers\ExplicitPropertyRouteRootHandler.cs" />
     <Compile Include="Test Data\Handlers\ExplicitFieldRouteRootHandler.cs" />
     <Compile Include="Test Data\Handlers\RootHandler.cs" />
+    <Compile Include="Test Data\Handlers\Test\ExplicitRouteWithAreaHandler.cs" />
+    <Compile Include="Test Data\Handlers\Test\ExplicitRouteAreaHandler.cs" />
+    <Compile Include="Test Data\Handlers\Test\ResourceHandler.cs" />
+    <Compile Include="Test Data\Handlers\Test\TestHandler.cs" />
     <Compile Include="TestHelpers\ContextHelpers.cs" />
     <Compile Include="TestHelpers\ObjectHelper.cs" />
     <Compile Include="Init\InitWithRegistriesTests.cs" />

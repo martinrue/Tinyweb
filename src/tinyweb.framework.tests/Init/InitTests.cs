@@ -15,7 +15,7 @@ namespace tinyweb.framework.tests
         [Test]
         public void Initialise_WithSpecificNumberOfHandlers_ReturnsCorrectNumberOfHandlers()
         {
-            Assert.That(Tinyweb.Handlers.Count(), Is.EqualTo(11));
+            Assert.That(Tinyweb.Handlers.Count(), Is.EqualTo(15));
         }
 
         [Test]
