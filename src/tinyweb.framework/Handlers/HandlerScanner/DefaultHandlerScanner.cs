@@ -97,10 +97,10 @@ namespace tinyweb.framework
 
         private string addHandlerAreaToRouteUriIfRegistered(Type handlerType, string routeUri)
         {
-            var handlerNamespace = handlerType.Namespace ?? "";
+            var handlerNamespace = handlerType.Namespace ?? string.Empty;
             var handlerArea = Tinyweb.Areas.ContainsKey(handlerNamespace) ? Tinyweb.Areas[handlerNamespace] : null;
 
-            if (string.IsNullOrEmpty(handlerArea) || handlerArea.Equals(routeUri))
+            if (handlerArea.IsEmpty() || handlerArea == routeUri)
             {
                 return routeUri;
             }
