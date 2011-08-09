@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,7 +36,7 @@ namespace tinyweb.framework
 
         public static void RegisterArea(string area, string areaNamespace)
         {
-            Areas.Add(areaNamespace, area);
+            Areas.Add(areaNamespace, area.ToLower());
         }
 
         public static string WhatHaveIGot()

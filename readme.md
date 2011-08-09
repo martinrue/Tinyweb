@@ -118,6 +118,8 @@ You can see the live build status (and grab the binary releases) from the [build
 
 Many thanks to the following people who have contributed to Tinyweb:
 
+* [Matt Burton](https://github.com/mattburton)
+
 * [Ben Dornis](https://github.com/Buildstarted)
 
 * [Tom Bell](https://github.com/tombell)
