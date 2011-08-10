@@ -25,10 +25,16 @@ namespace tinyweb.framework
 
         public static int Init(params Registry[] registries)
         {
-            ObjectFactory.Initialize(x => registries.ForEach(x.AddRegistry));
+            if (registries.Any())
+            {
+                ObjectFactory.Initialize(x => registries.ForEach(x.AddRegistry));
+                HandlerFactory.SetHandlerFactory(new StructureMapHandlerFactory());
+            }
 
-            Filters = FilterScanner.Current.FindAll();
-            Handlers = HandlerScanner.Current.FindAll();
+            var scanResult = AssemblyScanner.FindHandlersAndFilters(HandlerScanner.Current.GetSearcher(), FilterScanner.Current.GetSearcher());
+
+            Handlers = HandlerScanner.Current.FindAll(scanResult.Handlers);
+            Filters = FilterScanner.Current.FindAll(scanResult.Filters);
             Handlers.ForEach(addRoute);
 
             return Handlers.Count();

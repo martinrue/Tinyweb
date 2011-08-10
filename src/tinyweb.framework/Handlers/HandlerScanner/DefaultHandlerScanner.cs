@@ -7,10 +7,8 @@ namespace tinyweb.framework
 {
     public class DefaultHandlerScanner : IHandlerScanner
     {
-        public IEnumerable<HandlerData> FindAll()
+        public IEnumerable<HandlerData> FindAll(IEnumerable<Type> types)
         {
-            var types = findHandlers();
-
             var handlers = types.Select(type => new { Route = getRoute(type), Type = type }).ToList();
 
             return handlers.Select(t => new HandlerData
@@ -21,16 +19,9 @@ namespace tinyweb.framework
             });
         }
 
-        private IEnumerable<Type> findHandlers()
+        public Func<Type, bool> GetSearcher()
         {
-            var typesFound = new List<Type>();
-
-            AppDomain.CurrentDomain.GetAssemblies().ForEach(assembly =>
-            {
-                typesFound.AddRange(assembly.GetTypes().Where(t => t.Name.ToLower().EndsWith("handler") && handlerIsValid(t)));
-            });
-
-            return typesFound;
+            return t => t.Name.ToLower().EndsWith("handler") && handlerIsValid(t);
         }
 
         private bool handlerIsValid(Type type)
@@ -41,16 +32,26 @@ namespace tinyweb.framework
 
         private Route getRoute(Type type)
         {
-            var handler = HandlerFactory.Current.Create(new HandlerData { Type = type });
-            var route = getExplicitRouteFromHandler(handler) ?? new Route(getRouteUriByConvention(type));
+            Route route;
+            var routeMember = type.GetMember("Route", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.IgnoreCase).SingleOrDefault();
 
-            if (route.RouteUri == "/")
+            if (routeMember != null)
             {
-                route.RouteUri = String.Empty;
+                var handler = HandlerFactory.Current.Create(new HandlerData { Type = type });
+                route = getExplicitRouteFromHandler(routeMember, handler) ?? new Route(getRouteUriByConvention(type));
+
+                if (route.RouteUri == "/")
+                {
+                    route.RouteUri = String.Empty;
+                }
+                else if (route.RouteUri.IsEmpty())
+                {
+                    route.RouteUri = getRouteUriByConvention(type);
+                }
             }
-            else if (route.RouteUri.IsEmpty())
+            else
             {
-                route.RouteUri = getRouteUriByConvention(type);
+                route = new Route(getRouteUriByConvention(type));
             }
 
             route.RouteUri = addHandlerAreaToRouteUriIfRegistered(type, route.RouteUri);
@@ -58,15 +59,8 @@ namespace tinyweb.framework
             return route;
         }
 
-        private Route getExplicitRouteFromHandler(object handler)
+        private Route getExplicitRouteFromHandler(MemberInfo routeMember, object handler)
         {
-            var routeMember = handler.GetType().GetMember("Route", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.IgnoreCase).FirstOrDefault();
-
-            if (routeMember == null)
-            {
-                return null;
-            }
-
             Route route = null;
 
             if (routeMember is MethodInfo)

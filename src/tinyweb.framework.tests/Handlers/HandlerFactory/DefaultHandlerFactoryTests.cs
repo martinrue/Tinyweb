@@ -11,7 +11,7 @@ namespace tinyweb.framework.tests
         [SetUp]
         public void Setup()
         {
-            defaultHandlerFactory = new DefaultHandlerFactory();
+            defaultHandlerFactory = new StructureMapHandlerFactory();
         }
 
         [Test]

@@ -61,6 +61,7 @@
     <Compile Include="Filters\FilterInvoker\DefaultFilterInvoker.cs" />
     <Compile Include="Filters\FilterInvoker\FilterInvoker.cs" />
     <Compile Include="Filters\FilterInvoker\IFilterInvoker.cs" />
+    <Compile Include="Handlers\HandlerFactory\ActivatorHandlerFactory.cs" />
     <Compile Include="Handlers\HandlerInvoker\ExecutionResult.cs" />
     <Compile Include="Handlers\HandlerResult\Context\RouteValues.cs" />
     <Compile Include="Handlers\HandlerResult\Context\IRouteValues.cs" />
@@ -77,6 +78,8 @@
     <Compile Include="Handlers\HandlerResult\XmlResult.cs" />
     <Compile Include="Handlers\HandlerResult\RedirectResult.cs" />
     <Compile Include="Handlers\HandlerResult\Factory\Result.cs" />
+    <Compile Include="AssemblyScanner\AssemblyScanner.cs" />
+    <Compile Include="AssemblyScanner\ScanResult.cs" />
     <Compile Include="Helpers\FakeApplicationPathProvider.cs" />
     <Compile Include="Helpers\IApplicationPathProvider.cs" />
     <Compile Include="Helpers\RealApplicationPathProvider.cs" />
@@ -89,7 +92,7 @@
     <Compile Include="Init\Tinyweb.cs" />
     <Compile Include="Handlers\HandlerInvoker\HttpVerb.cs" />
     <Compile Include="Exceptions\NoParameterlessConstructor.cs" />
-    <Compile Include="Handlers\HandlerFactory\DefaultHandlerFactory.cs" />
+    <Compile Include="Handlers\HandlerFactory\StructureMapHandlerFactory.cs" />
     <Compile Include="Handlers\HandlerFactory\HandlerFactory.cs" />
     <Compile Include="Init\HttpHandler.cs" />
     <Compile Include="Init\RouteHandler.cs" />

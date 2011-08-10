@@ -8,13 +8,13 @@ namespace tinyweb.framework.tests
         [TearDown]
         public void TearDown()
         {
-            HandlerFactory.SetHandlerFactory(new DefaultHandlerFactory());
+            HandlerFactory.SetHandlerFactory(new StructureMapHandlerFactory());
         }
 
         [Test]
         public void Current_WhenRequested_ReturnsDefaultHandlerFactory()
         {
-            Assert.IsInstanceOf<DefaultHandlerFactory>(HandlerFactory.Current);
+            Assert.IsInstanceOf<ActivatorHandlerFactory>(HandlerFactory.Current);
         }
 
         [Test]

@@ -2,7 +2,7 @@
 
 namespace tinyweb.framework
 {
-    public class DefaultHandlerFactory : IHandlerFactory
+    public class StructureMapHandlerFactory : IHandlerFactory
     {
         public object Create(HandlerData handlerData)
         {
