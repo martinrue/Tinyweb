@@ -2,7 +2,7 @@
 {
     public static class HandlerFactory
     {
-        static IHandlerFactory factory = new DefaultHandlerFactory();
+        static IHandlerFactory factory = new ActivatorHandlerFactory();
 
         public static IHandlerFactory Current
         {

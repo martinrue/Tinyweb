@@ -8,24 +8,26 @@ namespace tinyweb.framework.tests
     public class DefaultFilterScannerTests
     {
         IFilterScanner defaultFilterScanner;
+        ScanResult scanResult;
 
         [SetUp]
         public void Setup()
         {
             defaultFilterScanner = new DefaultFilterScanner();
+            scanResult = AssemblyScanner.FindHandlersAndFilters(HandlerScanner.Current.GetSearcher(), FilterScanner.Current.GetSearcher());
         }
 
         [Test]
         public void FindAll_WhenCalled_FindsAllFilters()
         {
-            var filters = defaultFilterScanner.FindAll();
+            var filters = defaultFilterScanner.FindAll(scanResult.Filters);
             Assert.That(filters.Count(), Is.EqualTo(7));
         }
 
         [Test]
         public void FindAll_WhenCalled_CorrectlyMarksAfterFilter()
         {
-            var filter = defaultFilterScanner.FindAll().Single(f => f.Type == typeof(AfterFilter));
+            var filter = defaultFilterScanner.FindAll(scanResult.Filters).Single(f => f.Type == typeof(AfterFilter));
             Assert.That(filter.BeforeFilter, Is.False);
             Assert.That(filter.AfterFilter, Is.True);
         }
@@ -33,7 +35,7 @@ namespace tinyweb.framework.tests
         [Test]
         public void FindAll_WhenCalled_CorrectlyMarksBeforeFilter()
         {
-            var filter = defaultFilterScanner.FindAll().Single(f => f.Type == typeof(BeforeFilter));
+            var filter = defaultFilterScanner.FindAll(scanResult.Filters).Single(f => f.Type == typeof(BeforeFilter));
             Assert.That(filter.BeforeFilter, Is.True);
             Assert.That(filter.AfterFilter, Is.False);
         }
@@ -41,7 +43,7 @@ namespace tinyweb.framework.tests
         [Test]
         public void FindAll_WhenCalled_CorrectlyMarksBeforeAndAfterFilter()
         {
-            var filter = defaultFilterScanner.FindAll().Single(f => f.Type == typeof(BeforeAndAfterFilter));
+            var filter = defaultFilterScanner.FindAll(scanResult.Filters).Single(f => f.Type == typeof(BeforeAndAfterFilter));
             Assert.That(filter.BeforeFilter, Is.True);
             Assert.That(filter.AfterFilter, Is.True);
         }
@@ -49,7 +51,7 @@ namespace tinyweb.framework.tests
         [Test]
         public void FindAll_WhenCalled_IncludesExpectedFilters()
         {
-            var filters = defaultFilterScanner.FindAll();
+            var filters = defaultFilterScanner.FindAll(scanResult.Filters);
             Assert.That(filters.Any(f => f.Type == typeof(BeforeFilter)));
             Assert.That(filters.Any(f => f.Type == typeof(BeforeAndAfterFilter)));
             Assert.That(filters.Any(f => f.Type == typeof(AfterFilter)));
@@ -59,7 +61,7 @@ namespace tinyweb.framework.tests
         [Test]
         public void FindAll_WhenCalled_FindsCorrectFilterPriorities()
         {
-            var filters = defaultFilterScanner.FindAll();
+            var filters = defaultFilterScanner.FindAll(scanResult.Filters);
             Assert.That(filters.Single(f => f.Type == typeof(BeforeFilter)).Priority, Is.EqualTo(3));
             Assert.That(filters.Single(f => f.Type == typeof(BeforeAndAfterFilter)).Priority, Is.EqualTo(2));
             Assert.That(filters.Single(f => f.Type == typeof(AfterFilter)).Priority, Is.EqualTo(1));

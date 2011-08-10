@@ -6,20 +6,18 @@ namespace tinyweb.framework
 {
     public class DefaultFilterScanner : IFilterScanner
     {
-        public IEnumerable<FilterData> FindAll()
+        public IEnumerable<FilterData> FindAll(IEnumerable<Type> types)
         {
-            return findFilters();
+            return findFilters(types);
         }
 
-        private IEnumerable<FilterData> findFilters()
+        public Func<Type, bool> GetSearcher()
         {
-            var types = new List<Type>();
+            return t => t.Name.ToLower().EndsWith("filter");
+        }
 
-            AppDomain.CurrentDomain.GetAssemblies().ForEach(assembly =>
-            {
-                types.AddRange(assembly.GetTypes().Where(t => t.Name.ToLower().EndsWith("filter")));
-            });
-
+        private IEnumerable<FilterData> findFilters(IEnumerable<Type> types)
+        {
             var filters = new List<FilterData>();
 
             foreach (var type in types)
