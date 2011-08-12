@@ -64,6 +64,8 @@ Links to blogs and other resources about Tinyweb:
 
 [Micro Web Frameworks in .NET 101: Tinyweb](http://yobriefca.se/blog/2011/07/18/micro-web-frameworks-101-tinyweb/)
 
+[Tinyweb and HttpListener](http://uoe.dk/blog/2011/08/09/TinywebAndHttpListener.aspx)
+
 ## Applications
 
 The following full applications have been built with Tinyweb:
@@ -83,6 +85,8 @@ The easiest way to get started with Tinyweb is to [NuGet it](http://nuget.org/Li
 You can see the live build status (and grab the binary releases) from the [build server.](http://ci.thunder.invalidcast.com)
 
 ## Versions
+
+2.2.4 Area support for a less duplicative way of defining multiple handlers using the handler namespace (thanks Matt Burton) and bootstrap performance enhancements
 
 2.2.3 Made all result types testable by making their input public, allowing test inspection before rendering
 
