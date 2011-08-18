@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Configuration;
 using System.IO;
+using System.Web;
 using Spark;
 using Spark.FileSystem;
 
@@ -29,7 +30,7 @@ namespace tinyweb.viewengine.spark
             var output = new StringWriter();
             view.RenderView(output);
             sparkEngine.ReleaseInstance(view);
-            
+
             return output.ToString();
         }
 
@@ -74,7 +75,11 @@ namespace tinyweb.viewengine.spark
             if (!cache.ContainsKey(key))
             {
                 entry = sparkEngine.CreateEntry(descriptor);
-                cache[key] = entry;
+
+                if (cachingIsEnabled())
+                {
+                    cache[key] = entry;
+                }
             }
             else
             {
@@ -82,6 +87,11 @@ namespace tinyweb.viewengine.spark
             }
 
             return entry;
+        }
+
+        private static bool cachingIsEnabled()
+        {
+            return !HttpContext.Current.IsDebuggingEnabled;
         }
     }
 }
