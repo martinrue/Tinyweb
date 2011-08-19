@@ -5,6 +5,7 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Configuration;
 using System.Web.Razor;
 using System.Web.Razor.Generator;
@@ -54,12 +55,21 @@ namespace tinyweb.viewengine.razor
             if (!cache.TryGetValue(key, out type))
             {
                 type = GetCompiledType<T>(File.ReadAllText(path));
-                cache[key] = type;
+
+                if (CachingIsEnabled())
+                {
+                    cache[key] = type;
+                }
             }
 
             var instance = (TemplateBase<T>)Activator.CreateInstance(type);
             instance.Path = path;
             return instance;
+        }
+
+        private static bool CachingIsEnabled()
+        {
+            return !HttpContext.Current.IsDebuggingEnabled;
         }
 
         //used to render the master
