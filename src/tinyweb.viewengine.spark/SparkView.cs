@@ -10,7 +10,12 @@ namespace tinyweb.viewengine.spark
         public string H(object value)
         {
             return HttpUtility.HtmlEncode(value.ToString());
-        } 
+        }
+
+        public string HTML(object value)
+        {
+            return value.ToString();
+        }
     }
 
     public abstract class SparkView : AbstractSparkView
