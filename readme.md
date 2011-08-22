@@ -80,11 +80,9 @@ The easiest way to get started with Tinyweb is to [NuGet it](http://nuget.org/Li
 
     Install-Package Tinyweb
 
-## Build Server
-
-You can see the live build status (and grab the binary releases) from the [build server.](http://ci.thunder.invalidcast.com)
-
 ## Versions
+
+2.2.5 Bug fixes for Spark and view caching courtesy of Matt Burton
 
 2.2.4 Area support for a less duplicative way of defining multiple handlers using the handler namespace (thanks Matt Burton) and bootstrap performance enhancements
 
