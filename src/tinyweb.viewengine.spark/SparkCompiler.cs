@@ -91,7 +91,7 @@ namespace tinyweb.viewengine.spark
 
         private static bool cachingIsEnabled()
         {
-            return !HttpContext.Current.IsDebuggingEnabled;
+            return HttpContext.Current != null && !HttpContext.Current.IsDebuggingEnabled;
         }
     }
 }

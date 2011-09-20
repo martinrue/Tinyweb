@@ -69,7 +69,7 @@ namespace tinyweb.viewengine.razor
 
         private static bool CachingIsEnabled()
         {
-            return !HttpContext.Current.IsDebuggingEnabled;
+            return HttpContext.Current != null && !HttpContext.Current.IsDebuggingEnabled;
         }
 
         //used to render the master

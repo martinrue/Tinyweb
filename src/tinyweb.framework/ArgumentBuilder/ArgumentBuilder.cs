@@ -191,6 +191,11 @@ namespace tinyweb.framework
                 conversionType = Nullable.GetUnderlyingType(conversionType);
             }
 
+            if (conversionType.IsEnum)
+            {
+                return Enum.Parse(conversionType, value.ToString());
+            }
+
             return Convert.ChangeType(value, conversionType);
         }
     }
