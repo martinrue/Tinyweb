@@ -82,6 +82,8 @@ The easiest way to get started with Tinyweb is to [NuGet it](http://nuget.org/Li
 
 ## Versions
 
+2.2.6 Bug fix for accept header parsing when the system culture is different
+
 2.2.5 Bug fixes for Spark and view caching courtesy of Matt Burton
 
 2.2.4 Area support for a less duplicative way of defining multiple handlers using the handler namespace (thanks Matt Burton) and bootstrap performance enhancements

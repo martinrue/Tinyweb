@@ -1,4 +1,6 @@
 ﻿using System.Collections.Specialized;
+using System.Globalization;
+using System.Threading;
 using System.Web.Routing;
 using NUnit.Framework;
 
@@ -70,6 +72,9 @@ namespace tinyweb.framework.tests
         [Test]
         public void HttpPOST_WithAllParameterSources_CallsHandlerPostMethodAndReturnsCorrectData()
         {
+            var oldCulture = Thread.CurrentThread.CurrentCulture;
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+
             requestContext.HttpContext = MvcMockHelpers.FakeHttpContext(queryString: new NameValueCollection { { "param1", "42" } }, formData: new NameValueCollection { {"param2", "1.141"} });
             requestContext.RouteData.Values.Add("param3", "true");
             requestContext.HttpContext.Request.SetHttpMethodResult("POST");
@@ -82,6 +87,8 @@ namespace tinyweb.framework.tests
             Assert.That(result.Result, Is.InstanceOf<StringResult>());
             Assert.That(response.ContentType, Is.EqualTo("text/html"));
             Assert.That(response.Response, Is.EqualTo("421.141True"));
+
+            Thread.CurrentThread.CurrentCulture = oldCulture;
         }
 
         [Test]

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -74,7 +75,7 @@ namespace tinyweb.framework
                 if (token.Contains(";"))
                 {
                     var preferenceParts = token.Split(';').Select(x => x.Trim());
-                    mimeTypes.Add(preferenceParts.ElementAt(0), Convert.ToDouble(preferenceParts.ElementAt(1).Substring(2)));
+                    mimeTypes.Add(preferenceParts.ElementAt(0), Convert.ToDouble(preferenceParts.ElementAt(1).Substring(2), CultureInfo.InvariantCulture));
                 }
                 else
                 {

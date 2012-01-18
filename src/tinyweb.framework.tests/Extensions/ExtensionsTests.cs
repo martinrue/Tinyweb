@@ -149,14 +149,14 @@ namespace tinyweb.framework.tests
         [Test]
         public void ParseAcceptHeader_SingleTypeAndPriority_FindsCorrectTypeAndPriority()
         {
-            var headers = "application/xml; p=0.9".ParseAcceptHeader();
+            var headers = "application/xml; q=0.9".ParseAcceptHeader();
             Assert.That(headers["application/xml"], Is.EqualTo(0.9));
         }
 
         [Test]
         public void ParseAcceptHeader_MultipleTypesAndPriorities_FindsCorrectTypesAndPriorities()
         {
-            var headers = "application/xml,application/json,text/html;p=0.8,text/plain; p=0.7".ParseAcceptHeader();
+            var headers = "application/xml,application/json,text/html;q=0.8,text/plain; q=0.7".ParseAcceptHeader();
             Assert.That(headers["application/xml"], Is.EqualTo(1));
             Assert.That(headers["application/json"], Is.EqualTo(1));
             Assert.That(headers["text/html"], Is.EqualTo(0.8));
